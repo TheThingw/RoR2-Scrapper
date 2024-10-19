@@ -5,9 +5,9 @@ REM call with ./weave.bat $(ConfigurationName)
 echo "seting"
 set Target=Scrapper.dll
 set Output=bin\%1\netstandard2.1
-set Libs=.\Weaver\libs
+set Libs=Weaver\libs
 
-xcopy %Output%\%Target% %Output%\%Target%.prepatch /Y
+xcopy %Output%\%Target% %Output%\%Target%.prepatch /i /y
 
 REM le epic networking patch
 .\Weaver\Unity.UNetWeaver.exe %Libs%\UnityEngine.CoreModule.dll %Libs%\com.unity.multiplayer-hlapi.Runtime.dll %Output% %Output%\%Target% %Libs%
@@ -17,3 +17,9 @@ REM del %Output%\%Target%.prepatch
 
 REM that's it. This is meant to pretend we just built a dll like any other time except this one is networked
 REM add your postbuilds in vs like it's any other project
+set Zip=..\Thunderstore\Release.zip
+xcopy %Output%\%Target% ..\Thunderstore\ /y
+
+if exist %Zip% Del %Zip%
+
+powershell Compress-Archive -Path '..\Thunderstore\*.*' -DestinationPath '%Zip%' -Force
