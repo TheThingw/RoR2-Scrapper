@@ -19,6 +19,7 @@ REM that's it. This is meant to pretend we just built a dll like any other time 
 REM add your postbuilds in vs like it's any other project
 set Zip=..\Thunderstore\Release.zip
 xcopy %Output%\%Target% ..\Thunderstore\ /y
+xcopy ..\Thunderstore\README.md ..\README.md /y
 
 if exist %Zip% Del %Zip%
 
