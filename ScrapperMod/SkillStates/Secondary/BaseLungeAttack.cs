@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class FocusedAssaultDash : BasicMeleeAttack
+    public class BaseLungeAttack : BasicMeleeAttack
     {
         [SerializeField]
         public float speedCoefficientOnExit;

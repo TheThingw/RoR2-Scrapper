@@ -1,13 +1,11 @@
-﻿// RoR2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// EntityStates.FalseSon.StepBrothers
-using EntityStates;
+﻿using EntityStates;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class SideStep : BaseState
+    public class QuickStep : BaseSideStep
     {
         private Transform modelTransform;
 

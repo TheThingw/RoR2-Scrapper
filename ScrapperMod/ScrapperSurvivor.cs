@@ -269,7 +269,7 @@ namespace Scrapper
                 skillDescriptionToken = SCRAPPER_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SideStep)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(QuickStep)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
