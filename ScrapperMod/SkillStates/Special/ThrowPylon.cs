@@ -1,19 +1,19 @@
 using EntityStates;
 using RoR2;
 using RoR2.Projectile;
+using Scrapper.Content;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Scrapper.SkillStates.Special
 {
     public class ThrowPylon : BaseState
     {
-        public static GameObject projectilePrefab;
+        public static GameObject projectilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderPylon.prefab").WaitForCompletion();
 
-        public static float baseDuration;
+        public static float baseDuration = 1f;
 
-        public static float damageCoefficient;
-
-        public static string muzzleString;
+        public static float damageCoefficient = 1f;
 
         public static GameObject muzzleflashObject;
 
@@ -43,15 +43,15 @@ namespace Scrapper.SkillStates.Special
                 };
                 ProjectileManager.instance.FireProjectile(fireProjectileInfo);
             }
-            EffectManager.SimpleMuzzleFlash(ThrowPylon.muzzleflashObject, base.gameObject, ThrowPylon.muzzleString, transmit: false);
+            EffectManager.SimpleMuzzleFlash(EntityStates.Loader.ThrowPylon.muzzleflashObject, base.gameObject, StaticValues.MUZZLE, transmit: false);
             Util.PlaySound(ThrowPylon.soundString, base.gameObject);
         }
 
         public override void FixedUpdate()
         {
-            if (this.inputBank.skill4.justPressed)
-                base.FixedUpdate();
-            if (base.isAuthority && this.duration <= base.age)
+            base.FixedUpdate();
+
+            if (base.isAuthority && base.fixedAge > this.duration)
             {
                 base.outer.SetNextStateToMain();
             }

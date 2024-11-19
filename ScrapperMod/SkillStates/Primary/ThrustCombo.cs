@@ -1,11 +1,13 @@
+
 using EntityStates;
 using RoR2.Skills;
+using Scrapper.Content;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Primary
 {
-    public class SwingComboFist : BasicScrapperMeleeAttack, SteppedSkillDef.IStepSetter
+    public class ThrustCombo : BasicScrapperMeleeAttack, SteppedSkillDef.IStepSetter
     {
         public int gauntlet;
 
@@ -16,15 +18,16 @@ namespace Scrapper.SkillStates.Primary
 
         public override void PlayAnimation()
         {
-            string animationStateName = gauntlet == 0 ? "SwingFistRight" : "SwingFistLeft";
+            string animationStateName = gauntlet == 0 ? StaticValues.PRIMARY1 : StaticValues.PRIMARY2;
             float num = Mathf.Max(duration, 0.2f);
-            PlayCrossfade("Gesture, Additive", animationStateName, "SwingFist.playbackRate", num, 0.1f);
-            PlayCrossfade("Gesture, Override", animationStateName, "SwingFist.playbackRate", num, 0.1f);
+
+            PlayCrossfade(StaticValues.GESTURE_ADD, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
+            PlayCrossfade(StaticValues.GESTURE_OVERRIDE, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
         }
 
         public override void BeginMeleeAttackEffect()
         {
-            swingEffectMuzzleString = gauntlet == 0 ? "SwingRight" : "SwingLeft";
+            swingEffectMuzzleString = gauntlet == 0 ? StaticValues.PRIMARY1_MUZZLE : StaticValues.PRIMARY2_MUZZLE;
             base.BeginMeleeAttackEffect();
         }
 

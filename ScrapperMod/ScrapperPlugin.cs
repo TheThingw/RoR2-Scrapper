@@ -12,20 +12,20 @@ using System.Security.Permissions;
 //rename this namespace
 namespace Scrapper
 {
-    //[BepInDependency("com.rune580.riskofoptions", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.HardDependency)]
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(MODUID, MODNAME, MODVERSION)]
     public class ScrapperPlugin : BaseUnityPlugin
     {
         public const string MODUID = "com.thingw.ScrapperMod";
         public const string MODNAME = "ScrapperMod";
-        public const string MODVERSION = "1.0.0";
+        public const string MODVERSION = "0.0.1";
 
-        public const string DEVELOPER_PREFIX = "THINGW";
+        public const string DEVELOPER_PREFIX = "ThingW";
 
         public static ScrapperPlugin instance;
 
-        void Awake()
+        private void Awake()
         {
             instance = this;
 

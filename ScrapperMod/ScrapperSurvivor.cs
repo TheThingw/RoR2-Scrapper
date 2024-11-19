@@ -6,7 +6,6 @@ using Scrapper.Modules.BaseContent.Characters;
 using Scrapper.Modules;
 using Scrapper.Components;
 using Scrapper.Content;
-using Scrapper.SkillStates.Secondary;
 
 namespace Scrapper
 {
@@ -34,11 +33,42 @@ namespace Scrapper
             crosshair = Asset.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
-            maxHealth = 110f,
-            healthRegen = 1.5f,
-            armor = 0f,
+            //main stats
+            maxHealth = 160f,
+            healthRegen = 2.5f,
+            armor = 20f,
+            shield = 0f, // base shield is a thing apparently. neat
 
             jumpCount = 1,
+
+            //conventional base stats, consistent for all survivors
+            damage = 12f,
+            attackSpeed = 1f,
+            crit = 1f,
+
+            //misc stats
+            moveSpeed = 7f,
+            acceleration = 80f,
+            jumpPower = 15f,
+
+            //stat growth
+            /// <summary>
+            /// Leave this alone, and you don't need to worry about setting any of the stat growth values. They'll be set at the consistent ratio that all vanilla survivors have.
+            /// <para>If You do, healthGrowth should be maxHealth * 0.3f, regenGrowth should be healthRegen * 0.2f, damageGrowth should be damage * 0.2f</para>
+            /// </summary>
+            autoCalculateLevelStats = true,
+
+            healthGrowth = 100f * 0.3f,
+            regenGrowth = 1f * 0.2f,
+            armorGrowth = 0f,
+            shieldGrowth = 0f,
+
+            damageGrowth = 12f * 0.2f,
+            attackSpeedGrowth = 0f,
+            critGrowth = 0f,
+
+            moveSpeedGrowth = 0f,
+            jumpPowerGrowth = 0f,// jump power per level exists for some reason
         };
 
         public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
@@ -87,6 +117,7 @@ namespace Scrapper
 
             Content.Assets.Init(assetBundle);
             Buffs.Init(assetBundle);
+            DamageTypes.Init(assetBundle);
 
             InitializeEntityStateMachines();
             InitializeSkills();
@@ -133,10 +164,10 @@ namespace Scrapper
             //remove the genericskills from the commando body we cloned
             Skills.ClearGenericSkills(bodyPrefab);
             //add our own
-            //AddPassiveSkill();
+            AddPassiveSkill();
             AddPrimarySkills();
             AddSecondarySkills();
-            AddUtiitySkills();
+            AddUtilitySkills();
             AddSpecialSkills();
         }
 
@@ -153,7 +184,7 @@ namespace Scrapper
                 keywordToken = "KEYWORD_STUNNING",
                 icon = assetBundle.LoadAsset<Sprite>("texPassiveIcon"),
             };
-
+            /*
             //option 2. a new SkillFamily for a passive, used if you want multiple selectable passives
             var passiveGenericSkill = Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, "PassiveSkill");
             var passiveSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
@@ -190,7 +221,7 @@ namespace Scrapper
                 //forceSprintDuringState = false,
 
             });
-            Skills.AddSkillsToFamily(passiveGenericSkill.skillFamily, passiveSkillDef1);
+            Skills.AddSkillsToFamily(passiveGenericSkill.skillFamily, passiveSkillDef1);*/
         }
 
         //if this is your first look at skilldef creation, take a look at Secondary first
@@ -206,7 +237,7 @@ namespace Scrapper
                     SCRAPPER_PREFIX + "PRIMARY_SLASH_NAME",
                     SCRAPPER_PREFIX + "PRIMARY_SLASH_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("texPrimaryIcon"),
-                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.Primary.SwingComboFist)),
+                    new EntityStates.SerializableEntityStateType(typeof(SkillStates.Primary.ThrustCombo)),
                     "Weapon",
                     true
                 ));
@@ -230,7 +261,7 @@ namespace Scrapper
                 keywordTokens = new string[] { "KEYWORD_AGILE" },
                 skillIcon = assetBundle.LoadAsset<Sprite>("texSecondaryIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Primary.SwingComboFist)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Secondary.QuickStep)),
                 activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
@@ -257,7 +288,7 @@ namespace Scrapper
             Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1);
         }
 
-        private void AddUtiitySkills()
+        private void AddUtilitySkills()
         {
             Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
 
@@ -269,7 +300,7 @@ namespace Scrapper
                 skillDescriptionToken = SCRAPPER_PREFIX + "UTILITY_ROLL_DESCRIPTION",
                 skillIcon = assetBundle.LoadAsset<Sprite>("texUtilityIcon"),
 
-                activationState = new EntityStates.SerializableEntityStateType(typeof(QuickStep)),
+                activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeSkewer)),
                 activationStateMachineName = "Body",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
@@ -411,11 +442,6 @@ namespace Scrapper
         }
 
         private void AddHooks()
-        {
-            R2API.RecalculateStatsAPI.GetStatCoefficients += RecalculateStatsAPI_GetStatCoefficients;
-        }
-
-        private void RecalculateStatsAPI_GetStatCoefficients(CharacterBody sender, R2API.RecalculateStatsAPI.StatHookEventArgs args)
         {
         }
     }

@@ -2,6 +2,7 @@
 using RoR2;
 using RoR2.Networking;
 using RoR2.Orbs;
+using Scrapper.Content;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,58 +10,30 @@ namespace Scrapper.SkillStates.Secondary
 {
     public class BaseLungeAttack : BasicMeleeAttack
     {
-        [SerializeField]
         public float speedCoefficientOnExit;
 
-        [SerializeField]
         public float speedCoefficient;
 
-        [SerializeField]
         public string endSoundString;
 
-        [SerializeField]
         public float exitSmallHop;
 
-        [SerializeField]
         public float delayedDamageCoefficient;
 
-        [SerializeField]
         public float delayedProcCoefficient;
 
-        [SerializeField]
         public float delay;
 
-        [SerializeField]
-        public string enterAnimationLayerName = "FullBody, Override";
-
-        [SerializeField]
-        public string enterAnimationStateName = "AssaulterLoop";
-
-        [SerializeField]
-        public float enterAnimationCrossfadeDuration = 0.1f;
-
-        [SerializeField]
-        public string exitAnimationLayerName = "FullBody, Override";
-
-        [SerializeField]
-        public string exitAnimationStateName = "EvisLoopExit";
-
-        [SerializeField]
         public Material enterOverlayMaterial;
 
-        [SerializeField]
         public float enterOverlayDuration = 0.7f;
 
-        [SerializeField]
         public GameObject delayedEffectPrefab;
 
-        [SerializeField]
         public GameObject orbEffect;
 
-        [SerializeField]
         public float delayPerHit;
 
-        [SerializeField]
         public GameObject selfOnHitOverlayEffectPrefab;
 
         private Transform modelTransform;
@@ -76,12 +49,18 @@ namespace Scrapper.SkillStates.Secondary
         public override void OnEnter()
         {
             base.OnEnter();
-            dashVector = inputBank.aimDirection;
+
+            dashVector = inputBank.moveVector == Vector3.zero ? inputBank.aimDirection : inputBank.moveVector;
+            dashVector.y = 0;
+            dashVector.Normalize();
+
             originalLayer = gameObject.layer;
             gameObject.layer = LayerIndex.GetAppropriateFakeLayerForTeam(teamComponent.teamIndex).intVal;
             characterMotor.Motor.RebuildCollidableLayers();
+
             characterMotor.Motor.ForceUnground();
             characterMotor.velocity = Vector3.zero;
+
             modelTransform = GetModelTransform();
             if ((bool)modelTransform)
             {
@@ -93,7 +72,9 @@ namespace Scrapper.SkillStates.Secondary
                 temporaryOverlayInstance.originalMaterial = enterOverlayMaterial;
                 temporaryOverlayInstance.AddToCharacterModel(modelTransform.GetComponent<CharacterModel>());
             }
-            PlayCrossfade(enterAnimationLayerName, enterAnimationStateName, enterAnimationCrossfadeDuration);
+
+            PlayCrossfade(StaticValues.FULLBODY, StaticValues.SECONDARY1, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
+
             characterDirection.forward = characterMotor.velocity.normalized;
             if (NetworkServer.active)
             {
@@ -107,10 +88,12 @@ namespace Scrapper.SkillStates.Secondary
             {
                 characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility);
             }
+
             characterMotor.velocity *= speedCoefficientOnExit;
             SmallHop(characterMotor, exitSmallHop);
+
             Util.PlaySound(endSoundString, gameObject);
-            PlayAnimation(exitAnimationLayerName, exitAnimationStateName);
+
             gameObject.layer = originalLayer;
             characterMotor.Motor.RebuildCollidableLayers();
             base.OnExit();
@@ -119,7 +102,8 @@ namespace Scrapper.SkillStates.Secondary
         public override void PlayAnimation()
         {
             base.PlayAnimation();
-            PlayCrossfade(enterAnimationLayerName, enterAnimationStateName, enterAnimationCrossfadeDuration);
+
+            PlayCrossfade(StaticValues.FULLBODY, StaticValues.SECONDARY1, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
         }
 
         public override void AuthorityFixedUpdate()
@@ -202,12 +186,5 @@ namespace Scrapper.SkillStates.Secondary
                 });
             }
         }
-
-        [NetworkMessageHandler(msgType = 77, client = false, server = true)]
-        private static void HandleReportMercFocusedAssaultHitReplaceMeLater(NetworkMessage netMsg)
-        {
-            HandleHit(netMsg.reader.ReadGameObject(), netMsg.reader.ReadHurtBoxReference().ResolveHurtBox(), netMsg.reader.ReadSingle(), netMsg.reader.ReadSingle(), netMsg.reader.ReadBoolean(), netMsg.reader.ReadSingle(), EffectCatalog.GetEffectDef(netMsg.reader.ReadEffectIndex())?.prefab ?? null, EffectCatalog.GetEffectDef(netMsg.reader.ReadEffectIndex())?.prefab ?? null);
-        }
     }
-
 }
