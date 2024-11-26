@@ -1,100 +1,94 @@
 ﻿using EntityStates;
 using RoR2;
+using Scrapper.Content;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public abstract class BaseSideStep : BaseState
+    public abstract class BaseSideStep : BaseScrapperSkillState
     {
-        public static GameObject dashPrefab;
-
-        public static float smallHopVelocity;
-
-        public static float dashPrepDuration;
-
-        public static float dashDuration = 0.3f;
-
-        public static float speedCoefficient = 25f;
-
-        public static string beginSoundString;
-
-        private float stopwatch;
-
-        private Vector3 dashVector = Vector3.zero;
-
-        private ChildLocator childLocator;
-
-        private bool isDashing;
-
-        private CameraTargetParams.AimRequest aimRequest;
-
-        private int originalLayer;
+        protected Vector3 slipVector = Vector3.zero;
+        public float duration = 0.3f;
+        public float speedCoefficient = 7f;
+        private Vector3 cachedForward;
 
         public override void OnEnter()
         {
             base.OnEnter();
-            Util.PlaySound(beginSoundString, gameObject);
-            PlayAnimation("FullBody, Override", "StepBrothersPrep", "StepBrothersPrep.playbackRate", dashPrepDuration);
-            dashVector = inputBank.aimDirection;
-            if (NetworkServer.active)
-            {
-                characterBody.AddBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex);
-            }
+            this.slipVector = ((base.inputBank.moveVector == Vector3.zero) ? base.characterDirection.forward : base.inputBank.moveVector).normalized;
+            this.cachedForward = this.characterDirection.forward;
+
+            Animator anim = this.GetModelAnimator();
+            Vector3 rhs = base.characterDirection ? base.characterDirection.forward : this.slipVector;
+            Vector3 rhs2 = Vector3.Cross(Vector3.up, rhs);
+            
+            float num = Vector3.Dot(this.slipVector, rhs);
+            float num2 = Vector3.Dot(this.slipVector, rhs2);
+
+            anim.SetFloat(StaticValues.DASH_F, num);
+            anim.SetFloat(StaticValues.DASH_R, num2);
+
+            base.PlayBodyCrossfade(StaticValues.DASH, StaticValues.DASH_RATE, this.duration * 1.5f, 0.05f);
+            base.PlayGestureDefault();
+
+            Util.PlaySound("sfx_driver_dash", this.gameObject);
+
+            this.ApplyBuff();
+            this.CreateDashEffect();
         }
 
-        protected virtual void CreateDashEffect()
+        public virtual void ApplyBuff()
         {
-            Transform transform = childLocator.FindChild("DashCenter");
-            if ((bool)transform && (bool)dashPrefab)
-            {
-                Object.Instantiate(dashPrefab, transform.position, Util.QuaternionSafeLookRotation(dashVector), transform);
-            }
+            if (this.scrapCtrl)
+                this.scrapCtrl.Prepare();
+        }
+
+        public virtual void CreateDashEffect()
+        {/*
+            EffectData effectData = new EffectData();
+            effectData.rotation = Util.QuaternionSafeLookRotation(this.slipVector);
+            effectData.origin = base.characterBody.corePosition;
+
+            EffectManager.SpawnEffect(Assets.dashFX, effectData, false);*/
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-            characterDirection.forward = dashVector;
-            if (stopwatch > dashPrepDuration / attackSpeedStat && !isDashing)
+            base.characterMotor.velocity = Vector3.zero;
+            base.characterMotor.rootMotion = this.slipVector * (this.moveSpeedStat * this.speedCoefficient * Time.fixedDeltaTime) * Mathf.Cos(base.fixedAge / this.duration * 1.57079637f);
+
+            if (base.isAuthority)
             {
-                isDashing = true;
-                dashVector = inputBank.aimDirection;
-                CreateDashEffect();
-                PlayCrossfade("FullBody, Override", "StepBrothersLoop", 0.1f);
-                originalLayer = gameObject.layer;
-                gameObject.layer = LayerIndex.GetAppropriateFakeLayerForTeam(teamComponent.teamIndex).intVal;
-                characterMotor.Motor.RebuildCollidableLayers();
+                if (base.characterDirection)
+                {
+                    base.characterDirection.forward = this.cachedForward;
+                }
             }
-            if (!isDashing)
+
+            if (base.isAuthority && base.fixedAge >= this.duration)
             {
-                stopwatch += GetDeltaTime();
+                this.outer.SetNextStateToMain();
             }
-            else if (isAuthority)
-            {
-                characterMotor.velocity = Vector3.zero;
-            }
-            if (stopwatch >= dashDuration + dashPrepDuration / attackSpeedStat && isAuthority)
-            {
-                outer.SetNextStateToMain();
-            }
+        }
+
+        public virtual void DampenVelocity()
+        {
+            base.characterMotor.velocity *= 0.8f;
         }
 
         public override void OnExit()
         {
-            gameObject.layer = originalLayer;
-            characterMotor.Motor.RebuildCollidableLayers();
-            PlayAnimation("FullBody, Override", "StepBrothersLoopExit");
-            if (NetworkServer.active)
-            {
-                characterBody.RemoveBuff(RoR2Content.Buffs.HiddenInvincibility.buffIndex);
-            }
+            this.DampenVelocity();
+            //base.PlayAnimation("FullBody, Override", "BufferEmpty");
+
             base.OnExit();
         }
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.PrioritySkill;
+            return InterruptPriority.Frozen;
         }
     }
 }

@@ -16,7 +16,9 @@ namespace Scrapper.SkillStates
         public override void OnEnter()
         {
             base.OnEnter();
-            if (!scrapCtrl) scrapCtrl = GetComponent<ScrapCtrl>();
+
+            if (!scrapCtrl)
+                scrapCtrl = GetComponent<ScrapCtrl>();
             animator = modelAnimator;
             FindLocalUser();
         }
@@ -28,12 +30,15 @@ namespace Scrapper.SkillStates
             if (animator)
             {
                 bool cock = false;
-                if (!characterBody.outOfDanger || !characterBody.outOfCombat) cock = true;
+                if (!characterBody.outOfDanger || !characterBody.outOfCombat)
+                    cock = true;
 
                 animator.SetBool("inCombat", cock);
 
-                if (isGrounded) animator.SetFloat("airBlend", 0f);
-                else animator.SetFloat("airBlend", 1f);
+                if (isGrounded) 
+                    animator.SetFloat("airBlend", 0f);
+                else
+                    animator.SetFloat("airBlend", 1f);
             }
             /* //emotes
              if (isAuthority && characterMotor.isGrounzded)
@@ -173,29 +178,28 @@ namespace Scrapper.SkillStates
                     // set up double jump anim
                     if (animator)
                     {
-                        float x = animatorWalkParamCalculator.animatorWalkSpeed.y;
-                        float y = animatorWalkParamCalculator.animatorWalkSpeed.x;
+                        float x = animatorWalkParamCalculator.animatorWalkSpeed.x;
+                        float y = animatorWalkParamCalculator.animatorWalkSpeed.y;
+                        float absX = Mathf.Abs(x);
+                        float absY = Mathf.Abs(y);
 
-                        // neutral jump
-                        if (Mathf.Abs(x) <= 0.45f && Mathf.Abs(y) <= 0.45f || inputBank.moveVector == Vector3.zero)
+                        if ((absX <= 0.45f && absY <= 0.45f) || inputBank.moveVector == Vector3.zero)
                         {
+                            // neutral jump
                             x = 0f;
                             y = 0f;
                         }
-
-                        if (Mathf.Abs(x) > Mathf.Abs(y))
+                        else if (absX > absY)
                         {
                             // side flip
-                            if (x > 0f) x = 1f;
-                            else x = -1f;
+                            x = Mathf.Sign(x);
                             y = 0f;
                         }
-                        else if (Mathf.Abs(x) < Mathf.Abs(y))
+                        else
                         {
                             // forward/backflips
-                            if (y > 0f) y = 1f;
-                            else y = -1f;
                             x = 0f;
+                            y = Mathf.Sign(y);
                         }
                         // eh this feels less dynamic. ignore the slight anim clipping issues ig and just blend them
                         //  actualyl don't because the clipping issues are nightmarish

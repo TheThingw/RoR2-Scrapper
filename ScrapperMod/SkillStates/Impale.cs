@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Scrapper.SkillStates
 {
-    internal class Impale
+    public class Impale
     {
     }
 }

@@ -73,5 +73,10 @@ namespace Scrapper.Components
         {
 
         }
+
+        public void Prepare()
+        {
+
+        }
     }
 }
