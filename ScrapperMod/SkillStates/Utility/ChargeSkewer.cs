@@ -99,7 +99,7 @@ namespace Scrapper.SkillStates.Utility
 
         private Transform chargeVfxInstanceTransform;
 
-        private int gauntlet;
+        //private int gauntlet;
 
         private uint soundID;
 

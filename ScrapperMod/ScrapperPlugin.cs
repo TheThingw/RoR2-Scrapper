@@ -1,5 +1,6 @@
 ﻿using BepInEx;
 using R2API.Utils;
+using Scrapper.Components;
 using System.Security;
 using System.Security.Permissions;
 
@@ -34,6 +35,7 @@ namespace Scrapper
             Modules.Language.Init();
             new ScrapperSurvivor().Initialize();
             new Modules.ContentPacks().Initialize();
+            ScrapAssistManager.Init();
         }
     }
 }

@@ -68,7 +68,7 @@ namespace Scrapper.Modules.BaseContent.BaseStates.oLD
             RecalculateRollSpeed();
 
             if (characterDirection) characterDirection.forward = forwardDirection;
-            if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
+            //if (cameraTargetParams) cameraTargetParams.fovOverride = Mathf.Lerp(dodgeFOV, 60f, fixedAge / duration);
 
             Vector3 normalized = (transform.position - previousPosition).normalized;
             if (characterMotor && characterDirection && normalized != Vector3.zero)
@@ -91,7 +91,7 @@ namespace Scrapper.Modules.BaseContent.BaseStates.oLD
 
         public override void OnExit()
         {
-            if (cameraTargetParams) cameraTargetParams.fovOverride = -1f;
+            //if (cameraTargetParams) cameraTargetParams.fovOverride = -1f;
             base.OnExit();
 
             characterMotor.disableAirControlUntilCollision = false;

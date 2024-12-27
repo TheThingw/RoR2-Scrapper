@@ -43,12 +43,9 @@ public class Reposte : LoaderMeleeAttack
 
 	private static int ChargePunchParamHash = Animator.StringToHash("ChargePunch.playbackRate");
 
-	[CompilerGenerated]
-	private static Action<Reposte> m_onHitAuthorityGlobal;
 
 	public float punchSpeed { get; private set; }
 
-    public static event Action<Reposte> onHitAuthorityGlobal;
 
 	public override void OnEnter()
 	{
@@ -106,7 +103,6 @@ public class Reposte : LoaderMeleeAttack
 	public override void OnMeleeHitAuthority()
 	{
 		base.OnMeleeHitAuthority();
-		Reposte.onHitAuthorityGlobal?.Invoke(this);
 	}
 
 	public override void OnExit()

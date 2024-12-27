@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Scrapper.SkillStates.Special
 {
-    public class ThrowPylon : BaseState
+    public class ThrowPylon : BaseScrapperSkillState
     {
         public static GameObject projectilePrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Loader/LoaderPylon.prefab").WaitForCompletion();
 

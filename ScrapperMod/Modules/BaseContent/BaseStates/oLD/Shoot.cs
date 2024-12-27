@@ -7,7 +7,7 @@ namespace Scrapper.Modules.BaseContent.BaseStates.oLD
 {
     public class Shoot : BaseSkillState
     {
-        public static float damageCoefficient = StaticValues.gunDamageCoefficient;
+        public static float damageCoefficient = 1f;
         public static float procCoefficient = 1f;
         public static float baseDuration = 0.6f;
         //delay on firing is usually ass-feeling. only set this if you know what you're doing

@@ -18,11 +18,11 @@ namespace Scrapper.SkillStates.Primary
 
         public override void PlayAnimation()
         {
-            string animationStateName = gauntlet == 0 ? StaticValues.PRIMARY1 : StaticValues.PRIMARY2;
+            string animationStateName = gauntlet == 0 ? StaticValues.PRIMARY_1 : StaticValues.PRIMARY_2;
             float num = Mathf.Max(duration, 0.2f);
 
             PlayCrossfade(StaticValues.GESTURE_ADD, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
-            PlayCrossfade(StaticValues.GESTURE_OVERRIDE, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
+            PlayCrossfade(StaticValues.GESTURE_OVER, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
         }
 
         public override void BeginMeleeAttackEffect()

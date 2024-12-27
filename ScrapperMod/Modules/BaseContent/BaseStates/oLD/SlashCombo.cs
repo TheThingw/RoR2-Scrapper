@@ -11,7 +11,7 @@ namespace Scrapper.Modules.BaseContent.BaseStates.oLD
             hitboxGroupName = "SwordGroup";
 
             damageType = DamageType.Generic;
-            damageCoefficient = StaticValues.swordDamageCoefficient;
+            damageCoefficient = 1;
             procCoefficient = 1f;
             pushForce = 300f;
             bonusForce = Vector3.zero;
