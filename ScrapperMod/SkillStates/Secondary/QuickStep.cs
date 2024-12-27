@@ -17,7 +17,7 @@ namespace Scrapper.SkillStates.Secondary
 
         public static float dashDuration = 0.3f;
 
-        public static float speedCoefficient = 25f;
+        public static new float speedCoefficient = 25f;
 
         public static string beginSoundString;
 
@@ -90,7 +90,7 @@ namespace Scrapper.SkillStates.Secondary
             }
         }
 
-        private void CreateDashEffect()
+        public override void CreateDashEffect()
         {
             Transform transform = childLocator.FindChild("DashCenter");
             if ((bool)transform && (bool)dashPrefab)

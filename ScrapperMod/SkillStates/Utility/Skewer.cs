@@ -1,13 +1,12 @@
-// RoR2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// EntityStates.Loader.BaseSwingChargedFist
 using System;
 using System.Runtime.CompilerServices;
 using EntityStates;
 using EntityStates.Loader;
 using RoR2;
+using Scrapper.SkillStates;
 using UnityEngine;
 
-public class Skewer : LoaderMeleeAttack
+public class Skewer : BasicScrapperMeleeAttack
 {
 	public float charge;
 
@@ -43,12 +42,7 @@ public class Skewer : LoaderMeleeAttack
 
 	private static int ChargePunchParamHash = Animator.StringToHash("ChargePunch.playbackRate");
 
-	[CompilerGenerated]
-	private static Action<Skewer> m_onHitAuthorityGlobal;
-
 	public float punchSpeed { get; private set; }
-
-    public static event Action<Skewer> onHitAuthorityGlobal;
 
 	public override void OnEnter()
 	{
@@ -106,7 +100,6 @@ public class Skewer : LoaderMeleeAttack
 	public override void OnMeleeHitAuthority()
 	{
 		base.OnMeleeHitAuthority();
-		Skewer.onHitAuthorityGlobal?.Invoke(this);
 	}
 
 	public override void OnExit()

@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class BaseLungeAttack : BasicMeleeAttack
+    public class BaseLungeAttack : BasicScrapperMeleeAttack
     {
         public float speedCoefficientOnExit;
 
@@ -73,7 +73,7 @@ namespace Scrapper.SkillStates.Secondary
                 temporaryOverlayInstance.AddToCharacterModel(modelTransform.GetComponent<CharacterModel>());
             }
 
-            PlayCrossfade(StaticValues.FULLBODY, StaticValues.SECONDARY1, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
+            PlayCrossfade(StaticValues.BODY_OVER, StaticValues.STAB_START, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
 
             characterDirection.forward = characterMotor.velocity.normalized;
             if (NetworkServer.active)
@@ -103,7 +103,7 @@ namespace Scrapper.SkillStates.Secondary
         {
             base.PlayAnimation();
 
-            PlayCrossfade(StaticValues.FULLBODY, StaticValues.SECONDARY1, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
+            PlayCrossfade(StaticValues.BODY_OVER, StaticValues.STAB_HOLD, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
         }
 
         public override void AuthorityFixedUpdate()
