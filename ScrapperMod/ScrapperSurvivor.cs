@@ -13,11 +13,11 @@ namespace Scrapper
     {
         public const string SCRAPPER_PREFIX = ScrapperPlugin.DEVELOPER_PREFIX + "_SCRAPPER_";
 
-        public override string assetBundleName => "myassetbundle";
+        public override string assetBundleName => "scrapperassetbundle";
         public override string bodyName => "ScrapperBody";
         public override string masterName => "ScrapperMonsterMaster";
         public override string modelPrefabName => "mdlScrapper";
-        public override string displayPrefabName => "ScrapperDisplay";
+        public override string displayPrefabName => "mdlScrapperMenu";
         public override string survivorTokenPrefix => SCRAPPER_PREFIX;
 
         public override BodyInfo bodyInfo => new BodyInfo

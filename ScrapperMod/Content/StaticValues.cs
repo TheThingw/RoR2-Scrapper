@@ -5,6 +5,67 @@ namespace Scrapper.Content
 {
     public static class StaticValues
     {
+        public enum ChildNames
+        {
+            MainHurtbox,
+            BodySling,
+            Belt,
+            Harness,
+            ArmWireR,
+            ArmWireL,
+            ArmLight,
+            SuitShoulderR,
+            ConnectorR,
+            SuitHand,
+            WristWire,
+            SuitShoulderL,
+            Girder,
+            Handle,
+            Body,
+            Scarf,
+            Shoulders,
+            Head,
+            ExoSuit,
+            Sling,
+            Chestplate,
+            Scarf1,
+            SuitArmR,
+            Kneepads,
+            Scarf2,
+            HandWire1,
+            HandWire2
+        }
+
+        #region Layers
+        public static string LAYER_BODY = "Body";
+        public static string LAYER_IMPACT = "Impact";
+        public static string LAYER_GESTURE = "Gesture, Override";
+        public static string LAYER_FULLBODY = "FullBody, Override";
+        public static string LAYER_AIM_PITCH = "AimPitch";
+        public static string LAYER_AIM_YAW = "AimYaw";
+        public static string LAYER_FLINCH = "Flinch";
+        public static string LAYER_IDLE = "Idle, Additive";
+        #endregion
+
+        #region Parameters
+        public static string PARAM_FORWARD_SPEED = "";
+        public static string PARAM_RIGHT_SPEED = "";
+        public static string PARAM_UP_SPEED = "";
+        public static string PARAM_WALK_SPEED = "";
+        public static string PARAM_IS_MOVING = "";
+        public static string PARAM_IS_SPRINTING = "";
+        public static string PARAM_IS_GROUNDED = "";
+        public static string PARAM_IS_COMBAT = "";
+        public static string PARAM_IS_BAZOOKA = "";
+        public static string PARAM_AIM_YAW = "";
+        public static string PARAM_AIM_PITCH = "";
+        public static string PARAM_EMOTE_RATE = "";
+        public static string PARAM_SLASH_RATE = "";
+        public static string PARAM_SHOOT_RATE = "";
+        public static string PARAM_THROW_RATE = "";
+        public static string PARAM_FLINCH_INDEX = "";
+        #endregion
+
         public const string NAME = "Scrapper";
         #region Skill Values
         public const float OPPORTUNIST_DMG_MULT = 0.25f;
