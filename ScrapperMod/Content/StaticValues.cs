@@ -35,18 +35,20 @@ namespace Scrapper.Content
             Kneepads,
             Scarf2,
             HandWire1,
-            HandWire2
+            HandWire2,
+            
         }
 
         #region Layers
+        public const string LAYER_FULLBODY = "FullBody, Override";
+        public const string LAYER_GESTURE = "Gesture, Override";
+        public const string LAYER_IDLE = "Idle, Additive";
+
         public const string LAYER_BODY = "Body";
         public const string LAYER_IMPACT = "Impact";
-        public const string LAYER_GESTURE = "Gesture, Override";
-        public const string LAYER_FULLBODY = "FullBody, Override";
         public const string LAYER_AIM_PITCH = "AimPitch";
         public const string LAYER_AIM_YAW = "AimYaw";
         public const string LAYER_FLINCH = "Flinch";
-        public const string LAYER_IDLE = "Idle, Additive";
         #endregion
 
         #region Parameters
@@ -75,74 +77,36 @@ namespace Scrapper.Content
         public const string EMPTY = "BufferEmpty";
         #endregion
 
-        #region Movement
-        // Jump
-        public const string JUMP = NAME + "Jump";
-        public const string ASCEND = NAME + "Ascend";
-        public const string DESCEND = NAME + "Descend";
-        public const string DESCEND_FAST = NAME + "DescendFast";
-
-        // Idle
-        public const string IDLE = NAME + "Idle";
-        public const string IDLE_IN = NAME + "IdleIn";  // Transition between Running and idle
-        public const string IDLE_LONG = NAME + "IdleLong";
-        public const string IDLE_LONG_START = NAME + "IdleLongStart";  // Transition between Idle and Long Idle
-
-
-        // Walk
-        public const string WALK_F = NAME + "WalkF";
-        public const string WALK_B = NAME + "WalkB";
-        public const string WALK_L = NAME + "WalkL";
-        public const string WALK_R = NAME + "WalkR";
-
-        // Run
-        public const string RUN = NAME + "RunF";
-        public const string RUN_L = NAME + "RunL";
-        public const string RUN_R = NAME + "RunR";
-
-        // Lobby
-        public const string SELECT = NAME + "Select"; // Lobby Intro
-        public const string SELECT_IDLE = NAME + "SelectIdle"; // Lobby Idle
-
-        // Spawn
-        public const string SPAWN = NAME + "Spawn";     // Plays when you press any button to start playing, just like Acrid Wake up anim
-        public const string SPAWN_IDLE = NAME + "spawnIdle"; // Similar to Acrid Sleeping Idle.
-        #endregion
-
         #region Skill Anims
         //Primary
-        public const string PRIMARY_1 = NAME + "Primary1";
-        public const string PRIMARY_2 = NAME + "Primary2";
+        public const string PRIMARY_1 = "Primary1";
+        public const string PRIMARY_2 = "Primary2";
 
         // Default Secondary
-        public const string DASH = NAME + "Dash"; // 1st half of secondary
-        public const string DASH_F = NAME + "DashF"; // 1st half of secondary
-        public const string DASH_B = NAME + "DashB";
-        public const string DASH_L = NAME + "DashL";
-        public const string DASH_R = NAME + "DashR";
+        public const string DASH = "Dash"; // 1st half of secondary
 
         // On Kill Impale
-        public const string IMPALE = NAME + "Impale"; // on kill impale, and for second half of secondary
+        public const string IMPALE = "Impale"; // on kill impale, and for second half of secondary
 
         // Alt Secondary - Not Made Yet
-        public const string BLAST = NAME + "Blast"; // Alt special Jump
+        //public const string BLAST = "Blast"; // Alt special Jump
 
         // Default Utility
-        public const string STAB_START = NAME + "StabStart"; // Start charging
-        public const string STAB_HOLD = NAME + "StabHold"; // Hold charge
-        public const string STAB_END = NAME + "StabEnd"; // Release key
+        public const string STAB_START = "StabStart"; // Start charging
+        public const string STAB_HOLD = "StabHold"; // Hold charge
+        public const string STAB_END = "StabEnd"; // Release key
 
         // Alt Utility - Not Made Yet
-        public const string BLOCK_START = NAME + "BlockStart"; // Start block
-        public const string BLOCK_HOLD = NAME + "BlockHold"; // Hold block
-        public const string BLOCK_END = NAME + "BlockEnd"; // On key release, or when held to long
+        //public const string BLOCK_START = "BlockStart"; // Start block
+        //public const string BLOCK_HOLD = "BlockHold"; // Hold block
+        //public const string BLOCK_END = "BlockEnd"; // On key release, or when held to long
 
         // Default Special
-        public const string THROW = NAME + "Throw"; // Default special
+        public const string THROW = "Throw"; // Default special
 
         // Alt Special - Not Made Yet
-        public const string AIM = NAME + "SpecAim"; // Aim for alt special
-        public const string THROW2 = NAME + "SpecStab"; // Attack / primary replacement for Alt special
+        //public const string AIM = "SpecAim"; // Aim for alt special
+        //public const string THROW2 = "SpecStab"; // Attack / primary replacement for Alt special
         #endregion
     }
 }

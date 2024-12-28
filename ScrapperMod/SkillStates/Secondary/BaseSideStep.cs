@@ -8,9 +8,9 @@ namespace Scrapper.SkillStates.Secondary
 {
     public abstract class BaseSideStep : BaseScrapperSkillState
     {
-        protected Vector3 slipVector = Vector3.zero;
+        protected Vector3 slipVector;
         public float duration = 0.3f;
-        public float fullDuration = 1.5f;
+        public float fullDuration = 1f;
         public float speedCoefficient = 7f;
         private Vector3 cachedForward;
         private bool isHolding;
@@ -28,10 +28,10 @@ namespace Scrapper.SkillStates.Secondary
             float num = Vector3.Dot(this.slipVector, rhs);
             float num2 = Vector3.Dot(this.slipVector, rhs2);
 
-            anim.SetFloat(StaticValues.DASH_F, num);
-            anim.SetFloat(StaticValues.DASH_R, num2);
+            anim.SetFloat(StaticValues.PARAM_FORWARD_SPEED, num);
+            anim.SetFloat(StaticValues.PARAM_RIGHT_SPEED, num2);
 
-            PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_START, 0.1f);
+            PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.DASH, 0.1f);
 
             Util.PlaySound("sfx_driver_dash", this.gameObject);
 
@@ -58,7 +58,8 @@ namespace Scrapper.SkillStates.Secondary
         {
             base.FixedUpdate();
             base.characterMotor.velocity = Vector3.zero;
-            base.characterMotor.rootMotion = this.slipVector * (this.moveSpeedStat * this.speedCoefficient * Time.fixedDeltaTime) * Mathf.Cos(base.fixedAge / this.duration * 1.57079637f);
+            base.characterMotor.rootMotion = Vector3.Lerp(this.slipVector * (this.moveSpeedStat * this.speedCoefficient * Time.fixedDeltaTime), Vector3.zero, this.fullDuration - this.fixedAge);
+                //this.slipVector * (this.moveSpeedStat * this.speedCoefficient * Time.fixedDeltaTime) * Mathf.Cos(base.fixedAge / this.duration * 1.57079637f);
 
             if (base.isAuthority)
             {
@@ -66,34 +67,14 @@ namespace Scrapper.SkillStates.Secondary
                 {
                     base.characterDirection.forward = this.cachedForward;
                 }
+
+                if (!base.IsKeyDownAuthority() || this.fixedAge > this.fullDuration)
+                    this.outer.SetNextState(new QuickLunge());
             }
-
-            if (base.fixedAge >= this.duration)
-            {
-                this.DampenVelocity();
-                if (!isHolding)
-                {
-                    isHolding = true;
-                    PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_HOLD, 0.1f);
-                }
-
-                if (base.isAuthority)
-                {
-                    if (!base.IsKeyDownAuthority() || this.fixedAge > this.fullDuration)
-                        this.outer.SetNextState(new QuickLunge());
-                }
-            }
-        }
-
-        public virtual void DampenVelocity()
-        {
-            base.characterMotor.velocity *= 0.8f;
         }
 
         public override void OnExit()
         {
-            this.DampenVelocity();
-
             base.OnExit();
         }
 

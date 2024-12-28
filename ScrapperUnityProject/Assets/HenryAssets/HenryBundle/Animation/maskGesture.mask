@@ -20,25 +20,25 @@ AvatarMask:
   - m_Path: Armature/ROOT/base/stomach
     m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaL
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaL/BandanaL.002
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaL/BandanaL.002/BandanaL.001
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaL/BandanaL.002/BandanaL.001/BandanaL.003
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaR.001
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaR.001/BandanaR.003
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaR.001/BandanaR.003/BandanaR.002
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/head/BandanaR.001/BandanaR.003/BandanaR.002/BandanaR.004
-    m_Weight: 1
+    m_Weight: 0
   - m_Path: Armature/ROOT/base/stomach/chest/upper_arm.l
     m_Weight: 1
   - m_Path: Armature/ROOT/base/stomach/chest/upper_arm.l/lower_arm.l
@@ -102,8 +102,6 @@ AvatarMask:
   - m_Path: Armature/ROOT/KneeIK.r
     m_Weight: 0
   - m_Path: meshHenry
-    m_Weight: 0
-  - m_Path: meshHenry.001
     m_Weight: 0
   - m_Path: MeshHenryGun
     m_Weight: 0

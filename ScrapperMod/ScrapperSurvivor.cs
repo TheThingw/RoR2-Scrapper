@@ -6,6 +6,8 @@ using Scrapper.Modules.BaseContent.Characters;
 using Scrapper.Modules;
 using Scrapper.Components;
 using Scrapper.Content;
+using EntityStates;
+using Scrapper.SkillStates;
 
 namespace Scrapper
 {
@@ -143,7 +145,7 @@ namespace Scrapper
             Prefabs.ClearEntityStateMachines(bodyPrefab);
 
             //the main "Body" state machine has some special properties
-            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(SkillStates.MainState), typeof(EntityStates.SpawnTeleporterState));
+            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(MainState), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
             //don't forget to register custom entitystates in your ScrapperStates.cs
 
@@ -325,7 +327,7 @@ namespace Scrapper
                 skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_utility_1"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeSkewer)),
-                activationStateMachineName = "Body",
+                activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 4f,
@@ -355,7 +357,7 @@ namespace Scrapper
                 skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_utility_2"),
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeRiposte)),
-                activationStateMachineName = "Body",
+                activationStateMachineName = "Weapon2",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 4f,

@@ -50,8 +50,7 @@ namespace Scrapper.SkillStates.Secondary
         {
             base.OnEnter();
 
-            dashVector = inputBank.moveVector == Vector3.zero ? inputBank.aimDirection : inputBank.moveVector;
-            dashVector.y = 0;
+            dashVector = inputBank.aimDirection;
             dashVector.Normalize();
 
             originalLayer = gameObject.layer;
@@ -96,12 +95,13 @@ namespace Scrapper.SkillStates.Secondary
 
             gameObject.layer = originalLayer;
             characterMotor.Motor.RebuildCollidableLayers();
+            PlayCrossfade(StaticValues.LAYER_FULLBODY, StaticValues.STAB_END, 0.1f);
             base.OnExit();
         }
 
         public override void PlayAnimation()
         {
-            PlayCrossfade(StaticValues.LAYER_FULLBODY, StaticValues.STAB_END, 0.1f);
+            PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_START, 0.1f);
         }
 
         public override void AuthorityFixedUpdate()

@@ -1,5 +1,5 @@
-
 using EntityStates;
+using RoR2;
 using RoR2.Skills;
 using Scrapper.Content;
 using UnityEngine;
@@ -11,6 +11,11 @@ namespace Scrapper.SkillStates.Primary
     {
         public int gauntlet;
 
+        public override void OnEnter()
+        {
+            base.OnEnter();
+        }
+
         void SteppedSkillDef.IStepSetter.SetStep(int i)
         {
             gauntlet = i;
@@ -18,11 +23,9 @@ namespace Scrapper.SkillStates.Primary
 
         public override void PlayAnimation()
         {
-            string animationStateName = gauntlet == 0 ? StaticValues.PRIMARY_1 : StaticValues.PRIMARY_2;
-            float num = Mathf.Max(duration, 0.2f);
-
-            PlayCrossfade(StaticValues.LAYER_GESTURE, animationStateName, StaticValues.PARAM_SLASH_RATE, num, 0.1f);
-            PlayCrossfade(StaticValues.LAYER_GESTURE, animationStateName, StaticValues.PARAM_SLASH_RATE, num, 0.1f);
+            string animationStateName = gauntlet % 2 == 0 ? StaticValues.PRIMARY_1 : StaticValues.PRIMARY_2;
+            //float num = Mathf.Max(duration, 0.2f);
+            PlayAnimation(StaticValues.LAYER_GESTURE, animationStateName, StaticValues.PARAM_SLASH_RATE, duration);
         }
 
         public override void BeginMeleeAttackEffect()
@@ -45,7 +48,7 @@ namespace Scrapper.SkillStates.Primary
 
         public override InterruptPriority GetMinimumInterruptPriority()
         {
-            return InterruptPriority.Skill;
+            return InterruptPriority.PrioritySkill;
         }
     }
 }

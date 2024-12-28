@@ -2,6 +2,7 @@
 using EntityStates;
 using RoR2;
 using Scrapper.Components;
+using Scrapper.Content;
 using Scrapper.Modules;
 using UnityEngine;
 
@@ -33,12 +34,12 @@ namespace Scrapper.SkillStates
                 if (!characterBody.outOfDanger || !characterBody.outOfCombat)
                     cock = true;
 
-                animator.SetBool("inCombat", cock);
-
+                animator.SetBool(StaticValues.PARAM_IN_COMBAT, cock);
+                /*
                 if (isGrounded) 
                     animator.SetFloat("airBlend", 0f);
                 else
-                    animator.SetFloat("airBlend", 1f);
+                    animator.SetFloat("airBlend", 1f);*/
             }
             /* //emotes
              if (isAuthority && characterMotor.isGrounzded)
@@ -59,7 +60,7 @@ namespace Scrapper.SkillStates
                 }
             }
         }
-
+        /*
         private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new()
         {
             if (Config.GetKeyPressed(keybind.Value))
@@ -71,7 +72,7 @@ namespace Scrapper.SkillStates
                     outer.SetInterruptState(new T(), InterruptPriority.Any);
                 }
             }
-        }
+        }*/
 
         private void FindLocalUser()
         {
@@ -127,9 +128,9 @@ namespace Scrapper.SkillStates
 
                     if (hasModelAnimator)
                     {
-                        int layerIndex = modelAnimator.GetLayerIndex("Body");
+                        int layerIndex = modelAnimator.GetLayerIndex(StaticValues.LAYER_BODY);
                         if (layerIndex >= 0)
-                        {
+                        {/*
                             if (characterBody.isSprinting)
                             {
                                 modelAnimator.CrossFadeInFixedTime("SprintJump", smoothingParameters.intoJumpTransitionTime, layerIndex);
@@ -141,10 +142,10 @@ namespace Scrapper.SkillStates
                                     modelAnimator.CrossFadeInFixedTime("BonusJump", smoothingParameters.intoJumpTransitionTime, layerIndex);
                                 }
                                 else
-                                {
+                                {*/
                                     modelAnimator.CrossFadeInFixedTime("Jump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                                }
-                            }
+                                //}
+                           //}
                         }
                     }
 
@@ -205,8 +206,8 @@ namespace Scrapper.SkillStates
                         //  actualyl don't because the clipping issues are nightmarish
 
                         // have to cache it at time of jump otherwise you can fuck up the jump anim in weird ways by turning during it
-                        animator.SetFloat("forwardSpeedCached", y);
-                        animator.SetFloat("rightSpeedCached", x);
+                        animator.SetFloat(StaticValues.PARAM_FORWARD_SPEED, y);
+                        animator.SetFloat(StaticValues.PARAM_RIGHT_SPEED, x);
                         // turns out this wasn't even used in the end. the animation didn't break at all in practice, only in theory
                         // Fuck You rob you fucking moron
 

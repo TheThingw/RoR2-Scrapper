@@ -17,6 +17,9 @@ namespace Scrapper.SkillStates
 
         public override void OnEnter()
         {
+            this.baseDuration = 1f;
+            this.duration = 1f;
+            hitBoxGroupName = "StabHitboxGroup";
             base.OnEnter();
 
             RefreshState();
