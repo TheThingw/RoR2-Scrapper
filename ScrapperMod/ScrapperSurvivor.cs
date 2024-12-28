@@ -458,8 +458,8 @@ namespace Scrapper
             SkinDef masterySkin = Modules.Skins.CreateSkinDef(SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"),
                 defaultRendererinfos,
-                prefabCharacterModel.gameObject,
-                Unlockables.masterySkinUnlockableDef);
+                prefabCharacterModel.gameObject);
+                //Unlockables.masterySkinUnlockableDef);
 
             ////adding the mesh replacements as above. 
             ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
