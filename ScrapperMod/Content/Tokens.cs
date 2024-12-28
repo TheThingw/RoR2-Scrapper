@@ -27,8 +27,8 @@ namespace Scrapper.Content
             var outro = "..and so he left, with dreams finally fulfilled.";
             var outroFailure = "..and so he vanished, leaving more than just his dreams behind.";
 
-            Add("KEYWORD_PREPARE", "Prepare yourself.");
-            Add("KEYWORD_IMPALE", "Impale your enemies.");
+            Add("KEYWORD_PREPARE", Modules.Tokens.KeywordText("Prepare", "Prepare yourself."));
+            Add("KEYWORD_IMPALE", Modules.Tokens.KeywordText("Impale", "Impale your enemies."));
 
             Add("NAME", "Scrapper");
             Add("DESCRIPTION", desc);
@@ -53,10 +53,10 @@ namespace Scrapper.Content
             #endregion
 
             #region Secondary
-            Add("SECONDARY_QUICKSTEP_NAME", "Handgun");
+            Add("SECONDARY_QUICKSTEP_NAME", "Quick Step");
             Add("SECONDARY_QUICKSTEP_DESCRIPTION", Modules.Tokens.preparePrefix + $"Sidestep, Gaining invincibility, and adding 1 Passive stack. then Lunge forward towards your crosshair for 390% (1.0 Proc). On kill Impale forward for 500% damage (1.0 Proc).");
             
-            Add("SECONDARY_THUNDERSTEP_NAME", "Handgun");
+            Add("SECONDARY_THUNDERSTEP_NAME", "Thunder Step");
             Add("SECONDARY_THUNDERSTEP_DESCRIPTION", Modules.Tokens.preparePrefix + $"Blast upwards, Gaining invincibility, adding 1 Passive stack, and causing a small 300% (1.0 Proc) blast. Then lunge forward towards your crosshair for 390% (1.0 Proc)");
             #endregion
 
@@ -70,7 +70,7 @@ namespace Scrapper.Content
 
             #region Special
             Add("SPECIAL_PYLON_NAME", "G303 Compaction Pylon");
-            Add("SPECIAL_PYLON_DESCRIPTION", Modules.Tokens.agilePrefix + $"Toss out a \"Compaction Pylon\" which explodes nearby enemies Dealing 330% (1.0 Proc) and pulling all damaged enemies to the center of the Detonation area");
+            Add("SPECIAL_PYLON_DESCRIPTION", $"Toss out a \"Compaction Pylon\" which explodes nearby enemies Dealing 330% (1.0 Proc) and pulling all damaged enemies to the center of the Detonation area");
 
             Add("SPECIAL_EYES_NAME", "Go For The Eyes");
             Add("SPECIAL_EYES_DESCRIPTION", Modules.Tokens.impalePrefix + $"Ready your weapon, revealing critical spots on nearby enemies, and slowing your fall speed, then make up to 2 targeted strikes for 2x390%(maybe a bit higher). Critical hits reset secondary skill cooldown. additionally Critical Kills Reduce Special Skill cooldown by 2 seconds");

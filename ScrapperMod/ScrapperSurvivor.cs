@@ -27,8 +27,8 @@ namespace Scrapper
             subtitleNameToken = SCRAPPER_PREFIX + "SUBTITLE",
             bodyNameToClone = "Loader",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("texScrapperIcon"),
-            bodyColor = Color.white,
+            characterPortrait = assetBundle.LoadAsset<Texture>("Scrapper_portrait"),
+            bodyColor = new Color32(180, 115, 75, 255),
             sortPosition = 100,
 
             crosshair = Asset.LoadCrosshair("Standard"),
@@ -174,7 +174,7 @@ namespace Scrapper
                 enabled = true,
                 skillNameToken = SCRAPPER_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "PASSIVE_DESCRIPTION",
-                keywordToken = SCRAPPER_PREFIX + "KEYWORD_PREPARE",
+                keywordToken = SCRAPPER_PREFIX + "KEYWORD_IMPALE",
                 icon = assetBundle.LoadAsset<Sprite>("Scrapper_passive"),
             };
             /*
@@ -226,9 +226,9 @@ namespace Scrapper
             //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
             var primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
                 (
-                    "ScrapperStab",
-                    SCRAPPER_PREFIX + "PRIMARY_STAB_NAME",
-                    SCRAPPER_PREFIX + "PRIMARY_STAB_DESCRIPTION",
+                    "ScrapperThrustCombo",
+                    SCRAPPER_PREFIX + "PRIMARY_THRUST_NAME",
+                    SCRAPPER_PREFIX + "PRIMARY_THRUST_DESCRIPTION",
                     assetBundle.LoadAsset<Sprite>("Scrapper_primary"),
                     new EntityStates.SerializableEntityStateType(typeof(SkillStates.Primary.ThrustCombo)),
                     "Weapon",
