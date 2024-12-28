@@ -27,7 +27,7 @@ namespace Scrapper
             subtitleNameToken = SCRAPPER_PREFIX + "SUBTITLE",
             bodyNameToClone = "Loader",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("Scrapper_portrait"),
+            characterPortrait = assetBundle.LoadAsset<Texture>("ScrapperPortrait"),
             bodyColor = new Color32(180, 115, 75, 255),
             sortPosition = 100,
 
