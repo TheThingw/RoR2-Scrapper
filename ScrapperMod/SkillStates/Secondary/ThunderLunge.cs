@@ -7,7 +7,8 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class ThunderLunge : BasicMeleeAttack
+    public class ThunderLunge : BaseLungeAttack { }
+    public class ThunderLungeOld : BasicMeleeAttack
     {
         public float speedCoefficientOnExit;
 

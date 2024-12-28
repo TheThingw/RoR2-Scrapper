@@ -43,7 +43,7 @@ namespace Scrapper.SkillStates.Special
                 };
                 ProjectileManager.instance.FireProjectile(fireProjectileInfo);
             }
-            EffectManager.SimpleMuzzleFlash(EntityStates.Loader.ThrowPylon.muzzleflashObject, base.gameObject, StaticValues.MUZZLE, transmit: false);
+            //EffectManager.SimpleMuzzleFlash(EntityStates.Loader.ThrowPylon.muzzleflashObject, base.gameObject, StaticValues.MUZZLE, transmit: false);
             Util.PlaySound(ThrowPylon.soundString, base.gameObject);
         }
 

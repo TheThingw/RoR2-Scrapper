@@ -74,7 +74,6 @@ namespace Scrapper.SkillStates.Secondary
                 temporaryOverlayInstance.AddToCharacterModel(modelTransform.GetComponent<CharacterModel>());
             }*/
 
-            PlayCrossfade(StaticValues.BODY_OVER, StaticValues.STAB_START, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
 
             characterDirection.forward = characterMotor.velocity.normalized;
             if (NetworkServer.active)
@@ -102,9 +101,7 @@ namespace Scrapper.SkillStates.Secondary
 
         public override void PlayAnimation()
         {
-            base.PlayAnimation();
-
-            PlayCrossfade(StaticValues.BODY_OVER, StaticValues.STAB_HOLD, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
+            PlayCrossfade(StaticValues.LAYER_FULLBODY, StaticValues.STAB_END, 0.1f);
         }
 
         public override void AuthorityFixedUpdate()

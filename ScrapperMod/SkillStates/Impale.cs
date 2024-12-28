@@ -66,7 +66,7 @@ namespace Scrapper.SkillStates
         public override void PlayAnimation()
         {
             base.PlayAnimation();
-            base.PlayAnimation(StaticValues.BODY_OVER, StaticValues.IMPALE,"", base.duration);
+            base.PlayAnimation(StaticValues.LAYER_FULLBODY, StaticValues.IMPALE);
         }
 
         public override void AuthorityFixedUpdate()

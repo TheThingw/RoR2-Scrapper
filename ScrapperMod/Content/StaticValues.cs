@@ -1,10 +1,12 @@
-﻿using UnityEngine;
-using static UnityEngine.UI.Selectable;
+﻿using System;
+using UnityEngine;
 
 namespace Scrapper.Content
 {
     public static class StaticValues
     {
+        public static string GetName(ChildNames name) => Enum.GetName(typeof(ChildNames), name);
+
         public enum ChildNames
         {
             MainHurtbox,
@@ -37,33 +39,31 @@ namespace Scrapper.Content
         }
 
         #region Layers
-        public static string LAYER_BODY = "Body";
-        public static string LAYER_IMPACT = "Impact";
-        public static string LAYER_GESTURE = "Gesture, Override";
-        public static string LAYER_FULLBODY = "FullBody, Override";
-        public static string LAYER_AIM_PITCH = "AimPitch";
-        public static string LAYER_AIM_YAW = "AimYaw";
-        public static string LAYER_FLINCH = "Flinch";
-        public static string LAYER_IDLE = "Idle, Additive";
+        public const string LAYER_BODY = "Body";
+        public const string LAYER_IMPACT = "Impact";
+        public const string LAYER_GESTURE = "Gesture, Override";
+        public const string LAYER_FULLBODY = "FullBody, Override";
+        public const string LAYER_AIM_PITCH = "AimPitch";
+        public const string LAYER_AIM_YAW = "AimYaw";
+        public const string LAYER_FLINCH = "Flinch";
+        public const string LAYER_IDLE = "Idle, Additive";
         #endregion
 
         #region Parameters
-        public static string PARAM_FORWARD_SPEED = "";
-        public static string PARAM_RIGHT_SPEED = "";
-        public static string PARAM_UP_SPEED = "";
-        public static string PARAM_WALK_SPEED = "";
-        public static string PARAM_IS_MOVING = "";
-        public static string PARAM_IS_SPRINTING = "";
-        public static string PARAM_IS_GROUNDED = "";
-        public static string PARAM_IS_COMBAT = "";
-        public static string PARAM_IS_BAZOOKA = "";
-        public static string PARAM_AIM_YAW = "";
-        public static string PARAM_AIM_PITCH = "";
-        public static string PARAM_EMOTE_RATE = "";
-        public static string PARAM_SLASH_RATE = "";
-        public static string PARAM_SHOOT_RATE = "";
-        public static string PARAM_THROW_RATE = "";
-        public static string PARAM_FLINCH_INDEX = "";
+        public const string PARAM_FORWARD_SPEED = "forwardSpeed";
+        public const string PARAM_RIGHT_SPEED = "rightSpeed";
+        public const string PARAM_UP_SPEED = "upSpeed";
+        public const string PARAM_WALK_SPEED = "walkSpeed";
+        public const string PARAM_IS_MOVING = "isMoving";
+        public const string PARAM_IS_SPRINTING = "isSprinting";
+        public const string PARAM_IS_GROUNDED = "isGrounded";
+        public const string PARAM_IN_COMBAT = "inCombat";
+        public const string PARAM_AIM_YAW = "aimYawCycle";
+        public const string PARAM_AIM_PITCH = "aimPitchCycle";
+        public const string PARAM_EMOTE_RATE = "Emote.playbackRate";
+        public const string PARAM_SLASH_RATE = "Slash.playbackRate";
+        public const string PARAM_THROW_RATE = "ThrowBomb.playbackRate";
+        public const string PARAM_FLINCH_INDEX = "flinchIndex";
         #endregion
 
         public const string NAME = "Scrapper";
@@ -72,11 +72,6 @@ namespace Scrapper.Content
         #endregion
 
         #region Anim Control
-        public const string GESTURE_ADD = "Gesture, Additive";
-        public const string GESTURE_OVER = "Gesture, Override";
-        public const string FULLBODY_ADD = "Fullbody, Additive";
-        public const string BODY_OVER = "Fullbody, Override";
-
         public const string EMPTY = "BufferEmpty";
         #endregion
 
@@ -148,21 +143,6 @@ namespace Scrapper.Content
         // Alt Special - Not Made Yet
         public const string AIM = NAME + "SpecAim"; // Aim for alt special
         public const string THROW2 = NAME + "SpecStab"; // Attack / primary replacement for Alt special
-        #endregion
-
-        #region Anim Params
-        public const string DASH_RATE = "";
-        public const string PRIMARY_RATE = "";
-        public const string SECONDARY_RATE = "";
-        public const string UTILITY_RATE = "";
-        public const string SPECIAL_RATE = "";
-        #endregion
-
-        #region ChildLocator
-        public const string PRIMARY1_MUZZLE = "";
-        public const string PRIMARY2_MUZZLE = "";
-
-        public const string MUZZLE = "";
         #endregion
     }
 }

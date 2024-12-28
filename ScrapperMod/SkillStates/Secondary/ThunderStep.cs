@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class ThunderStep : BaseSideStep
+    public class ThunderStep : BaseSideStep { }
+    public class ThunderStepOld : BaseSideStep
     {
         private Transform modelTransform;
 

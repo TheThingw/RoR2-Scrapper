@@ -21,13 +21,13 @@ namespace Scrapper.SkillStates.Primary
             string animationStateName = gauntlet == 0 ? StaticValues.PRIMARY_1 : StaticValues.PRIMARY_2;
             float num = Mathf.Max(duration, 0.2f);
 
-            PlayCrossfade(StaticValues.GESTURE_ADD, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
-            PlayCrossfade(StaticValues.GESTURE_OVER, animationStateName, StaticValues.PRIMARY_RATE, num, 0.1f);
+            PlayCrossfade(StaticValues.LAYER_GESTURE, animationStateName, StaticValues.PARAM_SLASH_RATE, num, 0.1f);
+            PlayCrossfade(StaticValues.LAYER_GESTURE, animationStateName, StaticValues.PARAM_SLASH_RATE, num, 0.1f);
         }
 
         public override void BeginMeleeAttackEffect()
         {
-            swingEffectMuzzleString = gauntlet == 0 ? StaticValues.PRIMARY1_MUZZLE : StaticValues.PRIMARY2_MUZZLE;
+            swingEffectMuzzleString = StaticValues.GetName(StaticValues.ChildNames.Girder);
             base.BeginMeleeAttackEffect();
         }
 

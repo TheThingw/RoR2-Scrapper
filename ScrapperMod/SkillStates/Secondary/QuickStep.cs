@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class QuickStep : BaseSideStep
+    public class QuickStep : BaseSideStep { }
+    public class QuickStepOld : BaseSideStep
     {
         private Transform modelTransform;
 

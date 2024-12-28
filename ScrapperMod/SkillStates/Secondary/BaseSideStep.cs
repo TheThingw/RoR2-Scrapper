@@ -10,8 +10,10 @@ namespace Scrapper.SkillStates.Secondary
     {
         protected Vector3 slipVector = Vector3.zero;
         public float duration = 0.3f;
+        public float fullDuration = 1.5f;
         public float speedCoefficient = 7f;
         private Vector3 cachedForward;
+        private bool isHolding;
 
         public override void OnEnter()
         {
@@ -29,8 +31,7 @@ namespace Scrapper.SkillStates.Secondary
             anim.SetFloat(StaticValues.DASH_F, num);
             anim.SetFloat(StaticValues.DASH_R, num2);
 
-            base.PlayBodyCrossfade(StaticValues.DASH, StaticValues.DASH_RATE, this.duration * 1.5f, 0.05f);
-            base.PlayGestureDefault();
+            PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_START, 0.1f);
 
             Util.PlaySound("sfx_driver_dash", this.gameObject);
 
@@ -67,9 +68,20 @@ namespace Scrapper.SkillStates.Secondary
                 }
             }
 
-            if (base.isAuthority && base.fixedAge >= this.duration)
+            if (base.fixedAge >= this.duration)
             {
-                this.outer.SetNextStateToMain();
+                this.DampenVelocity();
+                if (!isHolding)
+                {
+                    isHolding = true;
+                    PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_HOLD, 0.1f);
+                }
+
+                if (base.isAuthority)
+                {
+                    if (!base.IsKeyDownAuthority() || this.fixedAge > this.fullDuration)
+                        this.outer.SetNextState(new QuickLunge());
+                }
             }
         }
 
@@ -81,7 +93,6 @@ namespace Scrapper.SkillStates.Secondary
         public override void OnExit()
         {
             this.DampenVelocity();
-            //base.PlayAnimation("FullBody, Override", "BufferEmpty");
 
             base.OnExit();
         }

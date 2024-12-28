@@ -7,7 +7,9 @@ using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Secondary
 {
-    public class QuickLunge : BasicMeleeAttack
+    public class QuickLunge : BaseLungeAttack { }
+
+    public class QuickLungeOld : BasicMeleeAttack
     {
         [SerializeField]
         public float speedCoefficientOnExit;
