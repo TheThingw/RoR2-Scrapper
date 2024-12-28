@@ -62,6 +62,7 @@ namespace Scrapper.SkillStates.Secondary
             characterMotor.velocity = Vector3.zero;
 
             modelTransform = GetModelTransform();
+            /*
             if ((bool)modelTransform)
             {
                 TemporaryOverlayInstance temporaryOverlayInstance = TemporaryOverlayManager.AddOverlay(modelTransform.gameObject);
@@ -71,7 +72,7 @@ namespace Scrapper.SkillStates.Secondary
                 temporaryOverlayInstance.destroyComponentOnEnd = true;
                 temporaryOverlayInstance.originalMaterial = enterOverlayMaterial;
                 temporaryOverlayInstance.AddToCharacterModel(modelTransform.GetComponent<CharacterModel>());
-            }
+            }*/
 
             PlayCrossfade(StaticValues.BODY_OVER, StaticValues.STAB_START, StaticValues.SECONDARY_RATE, this.duration, 0.1f);
 

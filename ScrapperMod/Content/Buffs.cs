@@ -5,18 +5,10 @@ namespace Scrapper.Content
 {
     public static class Buffs
     {
-        // armor buff gained during roll
-        public static BuffDef armorBuff;
         public static BuffDef opportunistBuff;
 
         public static void Init(AssetBundle assetBundle)
         {
-            armorBuff = Modules.Content.CreateAndAddBuff("HenryArmorBuff",
-                LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
-                Color.white,
-                false,
-                false);
-
             opportunistBuff = Modules.Content.CreateAndAddBuff("ScrapperOpportunistBuff",
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                 Color.white,

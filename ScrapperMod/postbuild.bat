@@ -29,4 +29,4 @@ robocopy ..\        %Store% README.md                   /log+:%Log%
 
 if exist %Zip% Del %Zip%
 
-powershell Compress-Archive -Path '%Store%\*.*' -DestinationPath '%Zip%' -Force
+powershell Compress-Archive -Path '%Store%\*' -DestinationPath '%Zip%' -Force

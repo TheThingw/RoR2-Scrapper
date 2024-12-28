@@ -3,6 +3,8 @@
     internal static class Tokens
     {
         public const string agilePrefix = "<style=cIsUtility>Agile.</style>";
+        public const string preparePrefix = "<style=cIsUtility>Prepare.</style>";
+        public const string impalePrefix = "<style=cIsDamage>Impale.</style>";
 
         public static string DamageText(string text)
         {

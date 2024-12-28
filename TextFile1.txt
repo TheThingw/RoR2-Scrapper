@@ -1,0 +1,45 @@
+Keyword Prepare
+ 
+Reduce Special skill cooldown by 1 second(test out)
+
+Passive Opportunist
+ 
+Gain stacks from Primary and Secondary up to 5 Stacks. Each stack Increases "Impale" damage by 25%, armor by 5, and attack speed by 7.5%. Lose stacks while out of combat.(1  Stack every 3?-10? seconds out of combat. will experiment with this one)
+
+Primary Thrust
+ 
+Stab forward for 240% damage (1.0 Proc), Cycles between two stab animations. On kill Impale forward for 500% damage (1.0 Proc). Evey 5 Hits Give 1 Passive Stack
+
+Secondary Quickstep
+ 
+4/s Cooldown - Prepare Sidestep, Gaining invincibility, and adding 1 Passive stack. then Lunge forward towards your crosshair for 390% (1.0 Proc). On kill Impale forward for 500% damage (1.0 Proc).
+
+Alt Secondary Thunderleap - Unlock Condition : Hit 15-20 ungrounded enemies in a single "Impale" attack
+ 
+4/s Cooldown - Prepare Blast upwards, Gaining invincibility, adding 1 Passive stack, and causing a small 300% (1.0 Proc) blast. Then lunge forward towards your crosshair for 390% (1.0 Proc)
+
+Utility Skewer
+ 
+5.5/s Cooldown - Charge up a Piercing Stab for 600%-2500% (72-288 Damage Base Level. 1.0 Proc). Damage increases by 25% Per enemy hit after the first 
+288 - 1, 294 - 3, 300 - 5, 306 - 7, 312 - 9, 318 - 11, 324 - 13. It would Take 13 Enemies To match "Riposte"'s Damage. Any more than than is a net buff
+
+Alt Utilty Riposte - Unlock Condition : Block 10 hits in 1 second
+ 
+6/s Cooldown - Briefly Guard while charging up a Piercing Stab for 700%-2800% (84-324 Damage Base Level. 1.0 Proc). Damage Scales based on how much damage you block, up to 70% of your HP blocked. Attack releases after 2-4? seconds of being held. (Will have to test timing)
+
+Special G303 Compaction Pylon
+ 
+5.5/s Cooldown - "Stunning". Toss out a "Compaction Pylon" which explodes nearby enemies Dealing 330% (1.0 Proc) and pulling all damaged enemies to the center of the Detonation area
+
+    Scepter - G404 Sub-Zero Pylon
+ 
+Lower cooldown, freezes enemies instead of stunning
+
+Alt Special Go for the Eyes
+ 
+5/s-6/s Cooldown - "Impaling". Ready your weapon, revealing critical spots on nearby enemies, and slowing your fall speed, then make up to 2 targeted strikes for 2x390%(maybe a bit higher). Critical hits reset secondary skill cooldown. additionally Critical Kills Reduce Special Skill cooldown by 2 seconds
+(Ready weapon -> hold girder up and do over the right shoulder zoom in camera, Targeted strike -> looks like a stab but is coded as a short range bullet attack so location damage )
+
+    Scepter - Percision Protocol
+ 
+1 extra strike, and makes critical kills fully reset special skill cooldown

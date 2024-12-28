@@ -14,7 +14,7 @@ namespace Scrapper.Content
             masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 ScrapperMasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(ScrapperMasteryAchievement.identifier),
-                ScrapperSurvivor.instance.assetBundle.LoadAsset<Sprite>("texMasteryAchievement"));
+                ScrapperSurvivor.instance.assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"));
         }
     }
 }

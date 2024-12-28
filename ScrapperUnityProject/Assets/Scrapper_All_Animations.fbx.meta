@@ -8,8 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Scrapper_Default_Skin
-    second: {fileID: -2110995604202384292, guid: a6d159162c5d6f74585fd62fa47b0a7c,
-      type: 3}
+    second: {fileID: 2100000, guid: 93d9e7dc32228194e9d254629e0f5642, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

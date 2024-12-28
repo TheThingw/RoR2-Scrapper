@@ -293,7 +293,7 @@ namespace Scrapper.Modules
         #endregion body setup
 
         #region ModelSetup
-        public static CharacterModel SetupCharacterModel(GameObject bodyPrefab, CustomRendererInfo[] customInfos = null)
+        public static CharacterModel SetupCharacterModel(GameObject bodyPrefab, Material mat)
         {
 
             var characterModel = bodyPrefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
@@ -308,7 +308,7 @@ namespace Scrapper.Modules
             characterModel.temporaryOverlays = new List<TemporaryOverlayInstance>();
 
             if (!preattached)
-                SetupCustomRendererInfos(characterModel, customInfos);
+                SetupCustomRendererInfos(characterModel, mat);
             else
             {
                 SetupPreAttachedRendererInfos(characterModel);
@@ -337,7 +337,6 @@ namespace Scrapper.Modules
 
         public static void SetupCustomRendererInfos(CharacterModel characterModel, CustomRendererInfo[] customInfos)
         {
-
             var childLocator = characterModel.GetComponent<ChildLocator>();
             if (!childLocator)
             {
@@ -377,6 +376,35 @@ namespace Scrapper.Modules
                             defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On
                         });
                     }
+                }
+            }
+
+            characterModel.baseRendererInfos = rendererInfos.ToArray();
+        }
+
+        public static void SetupCustomRendererInfos(CharacterModel characterModel, Material mat)
+        {
+            var childLocator = characterModel.GetComponent<ChildLocator>();
+            if (!childLocator)
+            {
+                Log.Error("Failed CharacterModel setup: ChildLocator component does not exist on the model");
+                return;
+            }
+
+            var rendererInfos = new List<CharacterModel.RendererInfo>();
+
+            for (var i = 0; i < childLocator.transformPairs.Length; i++)
+            {
+                var rend = childLocator.transformPairs[i].transform.GetComponent<Renderer>();
+                if (rend)
+                {
+                    rendererInfos.Add(new CharacterModel.RendererInfo
+                    {
+                        renderer = rend,
+                        defaultMaterial = mat,
+                        ignoreOverlays = false,
+                        defaultShadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On
+                    });
                 }
             }
 

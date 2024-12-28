@@ -47,7 +47,7 @@ namespace Scrapper.Modules.BaseContent.Characters
             bodyPrefab = Prefabs.CreateBodyPrefab(characterModelObject, bodyInfo);
             prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
 
-            prefabCharacterModel = Prefabs.SetupCharacterModel(bodyPrefab, customRendererInfos);
+            prefabCharacterModel = Prefabs.SetupCharacterModel(bodyPrefab, assetBundle.LoadMaterial("matScrapper"));
         }
 
         public virtual void InitializeItemDisplays()
