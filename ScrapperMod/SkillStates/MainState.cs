@@ -1,219 +1,210 @@
 ﻿using BepInEx.Configuration;
 using EntityStates;
+using Grumpy.UnitTest;
 using RoR2;
 using Scrapper.Components;
 using Scrapper.Content;
 using Scrapper.Modules;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates
 {
     public class MainState : GenericCharacterMain
     {
         private Animator animator;
+
         public LocalUser localUser;
+
         private ScrapCtrl scrapCtrl;
+
+        private float groundSprintTimer;
+
+        private bool wasSuperSprinting;
 
         public override void OnEnter()
         {
             base.OnEnter();
-
-            if (!scrapCtrl)
-                scrapCtrl = GetComponent<ScrapCtrl>();
-            animator = modelAnimator;
-            FindLocalUser();
+            this.animator = base.modelAnimator;
+            this.scrapCtrl = base.GetComponent<ScrapCtrl>();
+            this.FindLocalUser();
         }
 
         public override void FixedUpdate()
         {
             base.FixedUpdate();
 
-            if (animator)
+            if (this.animator)
             {
-                bool cock = false;
-                if (!characterBody.outOfDanger || !characterBody.outOfCombat)
-                    cock = true;
-
-                animator.SetBool(StaticValues.PARAM_IN_COMBAT, cock);
-                /*
-                if (isGrounded) 
-                    animator.SetFloat("airBlend", 0f);
+                bool inCombat = false;
+                if (!base.characterBody.outOfDanger || !base.characterBody.outOfCombat)
+                {
+                    inCombat = true;
+                }
+                this.animator.SetBool("inCombat", inCombat);
+                if (base.isGrounded)
+                {
+                    this.animator.SetFloat("airBlend", 0f);
+                }
                 else
-                    animator.SetFloat("airBlend", 1f);*/
+                {
+                    this.animator.SetFloat("airBlend", 1f);
+                }
+
+                this.animator.SetFloat("aimDir", base.inputBank.aimDirection.y);
             }
-            /* //emotes
-             if (isAuthority && characterMotor.isGrounzded)
-             {
-                 this.CheckEmote<Rest>(Config.restKey);
-                 this.CheckEmote<Taunt>(Config.tauntKey);
-                 this.CheckEmote<Dance>(Config.danceKey);
-             }*/
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            if (base.isAuthority && base.characterMotor.isGrounded)
+            {
+                //this.CheckEmote<Rest>(Config.restKey);
+                //this.CheckEmote<Taunt>(Config.tauntKey);
+                //this.CheckEmote<Dance>(Config.danceKey);
+            }
+        }
+
+        private bool HasItem(ItemDef itemDef)
+        {
+            if ((bool)base.characterBody && (bool)base.characterBody.inventory)
+            {
+                return base.characterBody.inventory.GetItemCount(itemDef) > 0;
+            }
+            return false;
         }
 
         private void CheckEmote(KeyCode keybind, EntityState state)
         {
-            if (Input.GetKeyDown(keybind))
+            if (Input.GetKeyDown(keybind) && !this.localUser.isUIFocused)
             {
-                if (!localUser.isUIFocused)
+                base.outer.SetInterruptState(state, InterruptPriority.Any);
+            }
+        }
+
+        private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new()
+        {
+            if (Modules.Config.GetKeyPressed(keybind.Value))
+            {
+                this.FindLocalUser();
+                if (this.localUser != null && !this.localUser.isUIFocused)
                 {
-                    outer.SetInterruptState(state, InterruptPriority.Any);
+                    base.outer.SetInterruptState(new T(), InterruptPriority.Any);
                 }
             }
         }
-        /*
-        private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new()
-        {
-            if (Config.GetKeyPressed(keybind.Value))
-            {
-                FindLocalUser();
-
-                if (localUser != null && !localUser.isUIFocused)
-                {
-                    outer.SetInterruptState(new T(), InterruptPriority.Any);
-                }
-            }
-        }*/
 
         private void FindLocalUser()
         {
-            if (localUser == null)
+            if (this.localUser != null || !base.characterBody)
             {
-                if (characterBody)
+                return;
+            }
+            foreach (LocalUser readOnlyLocalUsers in LocalUserManager.readOnlyLocalUsersList)
+            {
+                if (readOnlyLocalUsers.cachedBody == base.characterBody)
                 {
-                    foreach (LocalUser lu in LocalUserManager.readOnlyLocalUsersList)
-                    {
-                        if (lu.cachedBody == characterBody)
-                        {
-                            localUser = lu;
-                            break;
-                        }
-                    }
+                    this.localUser = readOnlyLocalUsers;
+                    break;
                 }
             }
         }
 
         public override void ProcessJump()
         {
-            if (hasCharacterMotor)
+            if (!base.hasCharacterMotor)
             {
-                bool hopooFeather = false;
-                bool waxQuail = false;
-
-                if (jumpInputReceived && characterBody && characterMotor.jumpCount < characterBody.maxJumpCount)
+                return;
+            }
+            bool flag = false;
+            bool flag2 = false;
+            if (!base.jumpInputReceived || !base.characterBody || base.characterMotor.jumpCount >= base.characterBody.maxJumpCount)
+            {
+                return;
+            }
+            Util.PlaySound("sfx_belmont_jump", base.gameObject);
+            int itemCount = base.characterBody.inventory.GetItemCount(RoR2Content.Items.JumpBoost);
+            float horizontalBonus = 1f;
+            float verticalBonus = 1f;
+            if (base.characterMotor.jumpCount >= base.characterBody.baseJumpCount)
+            {
+                flag = true;
+                horizontalBonus = 1.5f;
+                verticalBonus = 1.5f;
+            }
+            else if (itemCount > 0 && base.characterBody.isSprinting)
+            {
+                float num = base.characterBody.acceleration * base.characterMotor.airControl;
+                if (base.characterBody.moveSpeed > 0f && num > 0f)
                 {
-                    int waxQuailCount = characterBody.inventory.GetItemCount(RoR2Content.Items.JumpBoost);
-                    float horizontalBonus = 1f;
-                    float verticalBonus = 1f;
-
-                    if (characterMotor.jumpCount >= characterBody.baseJumpCount)
+                    flag2 = true;
+                    float num2 = Mathf.Sqrt(10f * (float)itemCount / num);
+                    float num3 = base.characterBody.moveSpeed / num;
+                    horizontalBonus = (num2 + num3) / num3;
+                }
+            }
+            GenericCharacterMain.ApplyJumpVelocity(base.characterMotor, base.characterBody, horizontalBonus, verticalBonus);
+            if (base.hasModelAnimator)
+            {
+                int layerIndex = base.modelAnimator.GetLayerIndex("Body");
+                if (layerIndex >= 0)
+                {
+                    if (base.characterBody.isSprinting && flag2)
                     {
-                        hopooFeather = true;
-                        horizontalBonus = 1.5f;
-                        verticalBonus = 1.5f;
+                        base.modelAnimator.CrossFadeInFixedTime("SprintJump", base.smoothingParameters.intoJumpTransitionTime, layerIndex);
                     }
-                    else if (waxQuailCount > 0 && characterBody.isSprinting)
+                    else
                     {
-                        float v = characterBody.acceleration * characterMotor.airControl;
-
-                        if (characterBody.moveSpeed > 0f && v > 0f)
-                        {
-                            waxQuail = true;
-                            float num2 = Mathf.Sqrt(10f * waxQuailCount / v);
-                            float num3 = characterBody.moveSpeed / v;
-                            horizontalBonus = (num2 + num3) / num3;
-                        }
-                    }
-
-                    ApplyJumpVelocity(characterMotor, characterBody, horizontalBonus, verticalBonus, false);
-
-                    if (hasModelAnimator)
-                    {
-                        int layerIndex = modelAnimator.GetLayerIndex(StaticValues.LAYER_BODY);
-                        if (layerIndex >= 0)
-                        {/*
-                            if (characterBody.isSprinting)
-                            {
-                                modelAnimator.CrossFadeInFixedTime("SprintJump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                            }
-                            else
-                            {
-                                if (hopooFeather)
-                                {
-                                    modelAnimator.CrossFadeInFixedTime("BonusJump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                                }
-                                else
-                                {*/
-                                    modelAnimator.CrossFadeInFixedTime("Jump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                                //}
-                           //}
-                        }
-                    }
-
-                    if (hopooFeather)
-                    {
-                        EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/FeatherEffect"), new EffectData
-                        {
-                            origin = characterBody.footPosition
-                        }, true);
-                    }
-                    else if (characterMotor.jumpCount > 0)
-                    {
-                        EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CharacterLandImpact"), new EffectData
-                        {
-                            origin = characterBody.footPosition,
-                            scale = characterBody.radius
-                        }, true);
-                    }
-
-                    if (waxQuail)
-                    {
-                        EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/BoostJumpEffect"), new EffectData
-                        {
-                            origin = characterBody.footPosition,
-                            rotation = Util.QuaternionSafeLookRotation(characterMotor.velocity)
-                        }, true);
-                    }
-
-                    characterMotor.jumpCount++;
-
-                    // set up double jump anim
-                    if (animator)
-                    {
-                        float x = animatorWalkParamCalculator.animatorWalkSpeed.x;
-                        float y = animatorWalkParamCalculator.animatorWalkSpeed.y;
-                        float absX = Mathf.Abs(x);
-                        float absY = Mathf.Abs(y);
-
-                        if ((absX <= 0.45f && absY <= 0.45f) || inputBank.moveVector == Vector3.zero)
-                        {
-                            // neutral jump
-                            x = 0f;
-                            y = 0f;
-                        }
-                        else if (absX > absY)
-                        {
-                            // side flip
-                            x = Mathf.Sign(x);
-                            y = 0f;
-                        }
-                        else
-                        {
-                            // forward/backflips
-                            x = 0f;
-                            y = Mathf.Sign(y);
-                        }
-                        // eh this feels less dynamic. ignore the slight anim clipping issues ig and just blend them
-                        //  actualyl don't because the clipping issues are nightmarish
-
-                        // have to cache it at time of jump otherwise you can fuck up the jump anim in weird ways by turning during it
-                        animator.SetFloat(StaticValues.PARAM_FORWARD_SPEED, y);
-                        animator.SetFloat(StaticValues.PARAM_RIGHT_SPEED, x);
-                        // turns out this wasn't even used in the end. the animation didn't break at all in practice, only in theory
-                        // Fuck You rob you fucking moron
-
-                        //  update: this was actually used. what the hell are you doing?
+                        base.modelAnimator.CrossFadeInFixedTime("Jump", base.smoothingParameters.intoJumpTransitionTime, layerIndex);
                     }
                 }
+            }
+            if (flag)
+            {
+                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/FeatherEffect"), new EffectData
+                {
+                    origin = base.characterBody.footPosition
+                }, transmit: true);
+            }
+            else if (base.characterMotor.jumpCount > 0)
+            {
+                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CharacterLandImpact"), new EffectData
+                {
+                    origin = base.characterBody.footPosition,
+                    scale = base.characterBody.radius
+                }, transmit: true);
+            }
+            if (flag2)
+            {
+                EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/BoostJumpEffect"), new EffectData
+                {
+                    origin = base.characterBody.footPosition,
+                    rotation = Util.QuaternionSafeLookRotation(base.characterMotor.velocity)
+                }, transmit: true);
+            }
+            base.characterMotor.jumpCount++;
+            if ((bool)this.animator)
+            {
+                float num4 = ((BaseCharacterMain)this).animatorWalkParamCalculator.animatorWalkSpeed.y;
+                float num5 = ((BaseCharacterMain)this).animatorWalkParamCalculator.animatorWalkSpeed.x;
+                if ((Mathf.Abs(num4) <= 0.45f && Mathf.Abs(num5) <= 0.45f) || base.inputBank.moveVector == Vector3.zero)
+                {
+                    num4 = 0f;
+                    num5 = 0f;
+                }
+                if (Mathf.Abs(num4) > Mathf.Abs(num5))
+                {
+                    num4 = ((!(num4 > 0f)) ? (-1f) : 1f);
+                    num5 = 0f;
+                }
+                else if (Mathf.Abs(num4) < Mathf.Abs(num5))
+                {
+                    num5 = ((!(num5 > 0f)) ? (-1f) : 1f);
+                    num4 = 0f;
+                }
+                this.animator.SetFloat("forwardSpeedCached", num5);
+                this.animator.SetFloat("rightSpeedCached", num4);
             }
         }
     }
