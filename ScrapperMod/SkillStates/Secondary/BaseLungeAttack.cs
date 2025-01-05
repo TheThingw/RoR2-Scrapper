@@ -2,7 +2,6 @@
 using RoR2;
 using RoR2.Networking;
 using RoR2.Orbs;
-using Scrapper.Content;
 using UnityEngine;
 using UnityEngine.Networking;
 

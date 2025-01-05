@@ -5,7 +5,6 @@ using System.Text;
 using EntityStates;
 using System.Threading;
 using UnityEngine;
-using Scrapper.Content;
 using RoR2;
 
 namespace Scrapper.SkillStates

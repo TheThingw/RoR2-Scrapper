@@ -1,0 +1,66 @@
+Keywords
+    
+    Prepare
+        Reduce Special skill cooldown by 1 second
+    Impaling
+        On kill, thrust forward for 500% damage
+
+Passive 
+    
+    Opportunist
+        Each stack Increases "Impale" damage by 25%, armor by 5, and attack speed by 7.5%.
+        Lose stacks while out of combat.
+
+    Impale
+        On kill, thrust forward for 500% damage
+
+Primary
+
+    Thrust - Impaling
+        Stab forward for 240% damage.
+        Evey 5 Hits Give 1 Opportunist Stack
+
+Secondary (4s)
+
+    Quickstep - Prepare
+        Sidestep
+            Gaining invincibility, and adding 1 Passive stack.
+        Lunge
+            Lunge forward towards your crosshair for 390%.
+
+    Thunderleap - Prepare. Unlock Condition : Hit 15-20 ungrounded enemies in a single "Impale" attack
+        Sidestep
+            Blast upwards, Gaining invincibility, adding 1 Passive stack, and causing a blast around you for 300%.
+        Lunge
+            Lunge forward towards your crosshair for 390%
+
+Utility (6s)
+
+    Skewer
+        Charge up a Piercing Stab for 600%-2500% (72-288 Damage Base Level. 1.0 Proc). Damage increases by 25% Per enemy hit after the first 
+    288 - 1, 294 - 3, 300 - 5, 306 - 7, 312 - 9, 318 - 11, 324 - 13. It would Take 13 Enemies To match "Riposte"'s Damage. Any more than than is a net buff
+
+    Riposte - Unlock Condition : Block 10 hits in 1 second
+   Briefly Guard while charging up a Piercing Stab for 700%-2800% (84-324 Damage Base Level. 1.0 Proc). Damage Scales based on how much damage you block, up to 70% of your HP blocked. Attack releases after 2-4? seconds of being held. (Will have to test timing)
+
+Special (6s)
+
+    G303 Compaction Pylon - Stunning
+        Toss out a "Compaction Pylon" which explodes nearby enemies, dealing 330% and pulling all damaged enemies to the center of the Detonation area
+    
+    G404 Sub-Zero Pylon (Scepter) - Freezing
+        Toss out a "Compaction Pylon" which freezes nearby enemies, dealing 330% and pulling all damaged enemies to the center of the Detonation area
+
+    Go for the Eyes - Impaling
+        Ready your weapon, revealing critical spots on nearby enemies, then make up to 2 targeted strikes for 2x400%
+            Hold girder up and do over the right shoulder zoom in camera, Targeted strike
+            Slows falling speed
+            Looks like a stab but is coded as a short range bullet attack so location damage
+        Critical hits reset secondary skill cooldown. additionally Critical Kills Reduce Special Skill cooldown by 2 seconds
+
+    Percision Protocol (Scepter) - Impaling
+        Ready your weapon, revealing critical spots on nearby enemies, then make up to 4 targeted strikes for 2x400%
+            Hold girder up and do over the right shoulder zoom in camera, Targeted strike
+            Slows falling speed
+            Looks like a stab but is coded as a short range bullet attack so location damage
+        Critical hits reset secondary skill cooldown. additionally Critical Kills reset Special Skill cooldown

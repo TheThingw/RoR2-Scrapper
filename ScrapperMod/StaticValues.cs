@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scrapper.Content
+namespace Scrapper
 {
-    public static class StaticValues
+    internal static class StaticValues
     {
         public static string GetName(ChildNames name) => Enum.GetName(typeof(ChildNames), name);
 
@@ -36,7 +36,7 @@ namespace Scrapper.Content
             Scarf2,
             HandWire1,
             HandWire2,
-            
+
         }
 
         #region Layers

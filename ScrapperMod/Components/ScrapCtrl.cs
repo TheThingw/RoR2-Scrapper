@@ -1,20 +1,24 @@
-﻿using RoR2;
+﻿using System.Linq;
+using RoR2;
 using Scrapper.Content;
+using Scrapper.SkillStates;
 using UnityEngine;
 
 namespace Scrapper.Components
 {
     public class ScrapCtrl : MonoBehaviour
     {
-        // amount of time till stacks decay after Out of Combat is true (5s)
         public const float MAX_COMBAT_TIMER = 3f;
         public const int MAX_OPPORTUNIST_BUFFS = 5;
 
-        public CharacterBody scrapBody;
-        public SkillLocator skillLoc;
+        #region Fields
+        private CharacterBody scrapBody;
+        private EntityStateMachine weaponStateMachine;
 
-        public float combatStopwatch;
+        private float combatStopwatch;
+        #endregion
 
+        #region Properties
         public int OpportunistStacks
         { 
             get => this.scrapBody ? this.scrapBody.GetBuffCount(Buffs.opportunistBuff.buffIndex) : 0;
@@ -27,30 +31,21 @@ namespace Scrapper.Components
                 }
             }
         }
+        #endregion
 
-        public bool impaleReady;
-
-        public static int GetScrapperCount() => RoR2.InstanceTracker.GetInstancesList<ScrapCtrl>().Count;
-        public static bool AnyScrappersGaming() => RoR2.InstanceTracker.Any<ScrapCtrl>();
-
-        public void Awake()
+        #region Unity Methods
+        private void Awake()
         {
             this.scrapBody = this.GetComponent<CharacterBody>();
-            this.skillLoc = this.GetComponent<SkillLocator>();
+            this.weaponStateMachine = this.GetComponents<EntityStateMachine>().First(esm => esm.customName == "Weapon");
         }
 
-        public void OnEnable()
+        private void Start()
         {
-            RoR2.InstanceTracker.Add(this);
 
-            this.combatStopwatch = MAX_COMBAT_TIMER;
-        }
-        public void OnDisable()
-        {
-            RoR2.InstanceTracker.Remove(this);
         }
 
-        public void FixedUpdate()
+        private void FixedUpdate()
         {
             if (this.scrapBody)
             {
@@ -69,9 +64,15 @@ namespace Scrapper.Components
             }
         }
 
-        public void TriggerImpale()
+        private void OnDestroy()
         {
 
+        }
+        #endregion
+
+        public void TriggerImpale()
+        {
+            weaponStateMachine?.SetNextState(new Impale());
         }
 
         public void Prepare()

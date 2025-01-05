@@ -1,7 +1,6 @@
 using EntityStates;
 using RoR2;
 using RoR2.Skills;
-using Scrapper.Content;
 using UnityEngine;
 using UnityEngine.Networking;
 

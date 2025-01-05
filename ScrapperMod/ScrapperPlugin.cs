@@ -1,8 +1,10 @@
 ﻿using BepInEx;
+using HotCompilerNamespace;
 using R2API.Utils;
 using Scrapper.Components;
 using System.Security;
 using System.Security.Permissions;
+using UnityEngine;
 
 [assembly: HG.Reflection.SearchableAttribute.OptIn]
 [module: UnverifiableCode]
@@ -36,6 +38,15 @@ namespace Scrapper
             new ScrapperSurvivor().Initialize();
             new Modules.ContentPacks().Initialize();
             ScrapAssistManager.Init();
+            HotCompilerNamespace.HotCompiler.CompileIt();
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.F5))
+            {
+                HotCompiler.CompileIt();
+            }
         }
     }
 }

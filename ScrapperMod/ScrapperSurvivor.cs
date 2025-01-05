@@ -127,9 +127,8 @@ namespace Scrapper
         private void AdditionalBodySetup()
         {
             AddHitboxes();
-            bodyPrefab.AddComponent<ScrapperWeaponComponent>();
+
             bodyPrefab.AddComponent<ScrapCtrl>();
-            //anything else here
         }
 
         public void AddHitboxes()
