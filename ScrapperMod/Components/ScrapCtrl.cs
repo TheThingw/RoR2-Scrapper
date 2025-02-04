@@ -13,6 +13,7 @@ namespace Scrapper.Components
 
         #region Fields
         private CharacterBody scrapBody;
+        private SkillLocator skillLoc;
         private EntityStateMachine weaponStateMachine;
 
         private float combatStopwatch;
@@ -37,6 +38,7 @@ namespace Scrapper.Components
         private void Awake()
         {
             this.scrapBody = this.GetComponent<CharacterBody>();
+            this.skillLoc = this.GetComponent<SkillLocator>();
             this.weaponStateMachine = this.GetComponents<EntityStateMachine>().First(esm => esm.customName == "Weapon");
         }
 
@@ -77,7 +79,11 @@ namespace Scrapper.Components
 
         public void Prepare()
         {
-
+            var genericSkill = this.skillLoc ? this.skillLoc.specialBonusStockSkill : null;
+            if (genericSkill && genericSkill.stock < genericSkill.maxStock)
+            {
+                genericSkill.rechargeStopwatch++;
+            }
         }
     }
 }

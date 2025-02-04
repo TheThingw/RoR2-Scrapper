@@ -139,13 +139,13 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: isSprinting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: isGrounded
     m_Type: 4
@@ -157,13 +157,13 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: inBazooka
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 0}
   - m_Name: aimYawCycle
     m_Type: 1
@@ -3645,16 +3645,16 @@ AnimatorStateMachine:
     m_Position: {x: 336, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102790625169191340}
-    m_Position: {x: 336, y: 228, z: 0}
+    m_Position: {x: 240, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102310543016731422}
-    m_Position: {x: 336, y: 24, z: 0}
+    m_Position: {x: 340, y: 20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102597265894953848}
     m_Position: {x: 576, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102785025685061036}
-    m_Position: {x: 336, y: 300, z: 0}
+    m_Position: {x: 480, y: 220, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:
@@ -3814,10 +3814,10 @@ AnimatorStateMachine:
     m_Position: {x: 530, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102117556514851194}
-    m_Position: {x: 240, y: 40, z: 0}
+    m_Position: {x: 240, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102960202541341604}
-    m_Position: {x: 240, y: 168, z: 0}
+    m_Position: {x: 240, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102409033394723910}
     m_Position: {x: -10, y: 170, z: 0}

@@ -18,10 +18,6 @@ namespace Scrapper.SkillStates
 
         private ScrapCtrl scrapCtrl;
 
-        private float groundSprintTimer;
-
-        private bool wasSuperSprinting;
-
         public override void OnEnter()
         {
             base.OnEnter();
@@ -42,6 +38,7 @@ namespace Scrapper.SkillStates
                     inCombat = true;
                 }
                 this.animator.SetBool("inCombat", inCombat);
+                this.animator.SetBool("isGrounded", base.isGrounded);
                 if (base.isGrounded)
                 {
                     this.animator.SetFloat("airBlend", 0f);
@@ -123,7 +120,7 @@ namespace Scrapper.SkillStates
             {
                 return;
             }
-            Util.PlaySound("sfx_belmont_jump", base.gameObject);
+            //Util.PlaySound("sfx_belmont_jump", base.gameObject);
             int itemCount = base.characterBody.inventory.GetItemCount(RoR2Content.Items.JumpBoost);
             float horizontalBonus = 1f;
             float verticalBonus = 1f;
@@ -152,7 +149,7 @@ namespace Scrapper.SkillStates
                 {
                     if (base.characterBody.isSprinting && flag2)
                     {
-                        base.modelAnimator.CrossFadeInFixedTime("SprintJump", base.smoothingParameters.intoJumpTransitionTime, layerIndex);
+                        base.modelAnimator.CrossFadeInFixedTime("Jump", base.smoothingParameters.intoJumpTransitionTime, layerIndex);
                     }
                     else
                     {
