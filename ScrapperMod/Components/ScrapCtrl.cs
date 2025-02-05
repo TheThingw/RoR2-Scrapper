@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using R2API;
 using RoR2;
 using Scrapper.Content;
 using Scrapper.SkillStates;
@@ -11,15 +12,13 @@ namespace Scrapper.Components
         public const float MAX_COMBAT_TIMER = 3f;
         public const int MAX_OPPORTUNIST_BUFFS = 5;
 
-        #region Fields
         private CharacterBody scrapBody;
         private SkillLocator skillLoc;
+        private ChildLocator childLoc;
+        private CharacterModel characterModel;
         private EntityStateMachine weaponStateMachine;
 
         private float combatStopwatch;
-        #endregion
-
-        #region Properties
         public int OpportunistStacks
         { 
             get => this.scrapBody ? this.scrapBody.GetBuffCount(Buffs.opportunistBuff.buffIndex) : 0;
@@ -32,19 +31,16 @@ namespace Scrapper.Components
                 }
             }
         }
-        #endregion
 
         #region Unity Methods
         private void Awake()
         {
             this.scrapBody = this.GetComponent<CharacterBody>();
             this.skillLoc = this.GetComponent<SkillLocator>();
+            this.characterModel = this.GetComponent<ModelLocator>().modelTransform.GetComponent<CharacterModel>();
+            this.childLoc = characterModel.GetComponent<ChildLocator>();
+
             this.weaponStateMachine = this.GetComponents<EntityStateMachine>().First(esm => esm.customName == "Weapon");
-        }
-
-        private void Start()
-        {
-
         }
 
         private void FixedUpdate()
@@ -64,11 +60,6 @@ namespace Scrapper.Components
                         this.OpportunistStacks--;
                 }
             }
-        }
-
-        private void OnDestroy()
-        {
-
         }
         #endregion
 

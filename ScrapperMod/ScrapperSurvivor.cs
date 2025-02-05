@@ -28,7 +28,7 @@ namespace Scrapper
             subtitleNameToken = SCRAPPER_PREFIX + "SUBTITLE",
             bodyNameToClone = "Loader",
 
-            characterPortrait = assetBundle.LoadAsset<Texture>("Scrapper_Portrait"),
+            characterPortrait = Content.Assets.iconPortrait.texture,
             bodyColor = new Color32(180, 115, 75, 255),
             sortPosition = 100,
 
@@ -175,7 +175,7 @@ namespace Scrapper
                 skillNameToken = SCRAPPER_PREFIX + "PASSIVE_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "PASSIVE_DESCRIPTION",
                 keywordToken = SCRAPPER_PREFIX + "KEYWORD_IMPALE",
-                icon = assetBundle.LoadAsset<Sprite>("Scrapper_Passive"),
+                icon = Content.Assets.iconPassive,
             };
             /*
             //option 2. a new SkillFamily for a passive, used if you want multiple selectable passives
@@ -229,7 +229,7 @@ namespace Scrapper
                     "ScrapperThrustCombo",
                     SCRAPPER_PREFIX + "PRIMARY_THRUST_NAME",
                     SCRAPPER_PREFIX + "PRIMARY_THRUST_DESCRIPTION",
-                    assetBundle.LoadAsset<Sprite>("Scrapper_Primary"),
+                    Content.Assets.iconPrimary,
                     new EntityStates.SerializableEntityStateType(typeof(SkillStates.Primary.ThrustCombo)),
                     "Weapon",
                     true
@@ -252,7 +252,7 @@ namespace Scrapper
                 skillNameToken = SCRAPPER_PREFIX + "SECONDARY_QUICKSTEP_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "SECONDARY_QUICKSTEP_DESCRIPTION",
                 keywordTokens = new string[] { SCRAPPER_PREFIX + "KEYWORD_PREPARE" },
-                skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_Secondary_2"),
+                skillIcon = Content.Assets.iconSecondary1,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Secondary.QuickStep)),
                 activationStateMachineName = "Weapon2",
@@ -283,7 +283,7 @@ namespace Scrapper
                 skillNameToken = SCRAPPER_PREFIX + "SECONDARY_THUNDERSTEP_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "SECONDARY_THUNDERSTEP_DESCRIPTION",
                 keywordTokens = new string[] { SCRAPPER_PREFIX + "KEYWORD_PREPARE" },
-                skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_Secondary_2"),
+                skillIcon = Content.Assets.iconSecondary2,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Secondary.ThunderStep)),
                 activationStateMachineName = "Weapon2",
@@ -322,7 +322,7 @@ namespace Scrapper
                 skillName = "ScrapperSkewer",
                 skillNameToken = SCRAPPER_PREFIX + "UTILITY_SKEWER_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "UTILITY_SKEWER_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_Utility_1"),
+                skillIcon = Content.Assets.iconUtility1,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeSkewer)),
                 activationStateMachineName = "Weapon2",
@@ -352,7 +352,7 @@ namespace Scrapper
                 skillName = "ScrapperReposte",
                 skillNameToken = SCRAPPER_PREFIX + "UTILITY_RIPOSTE_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "UTILITY_RIPOSTE_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_Utility_2"),
+                skillIcon = Content.Assets.iconUtility2,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeRiposte)),
                 activationStateMachineName = "Weapon2",
@@ -390,7 +390,7 @@ namespace Scrapper
                 skillName = "ScrapperPylon",
                 skillNameToken = SCRAPPER_PREFIX + "SPECIAL_PYLON_NAME",
                 skillDescriptionToken = SCRAPPER_PREFIX + "SPECIAL_PYLON_DESCRIPTION",
-                skillIcon = assetBundle.LoadAsset<Sprite>("Scrapper_Special"),
+                skillIcon = Content.Assets.iconSpecial,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Special.ThrowPylon)),
                 //setting this to the "weapon2" EntityStateMachine allows us to cast this skill at the same time primary, which is set to the "weapon" EntityStateMachine
@@ -413,95 +413,75 @@ namespace Scrapper
         {
             var skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();
             var childLocator = prefabCharacterModel.GetComponent<ChildLocator>();
-
             var defaultRendererinfos = prefabCharacterModel.baseRendererInfos;
 
-            var skins = new List<SkinDef>();
-
-            #region DefaultSkin
-            //this creates a SkinDef with all default fields
-            var defaultSkin = SkinManager.CreateSkinDef(SCRAPPER_PREFIX + "DEFAULT_SKIN_NAME",
-                assetBundle.LoadAsset<Sprite>("Scrapper_Base"),
-                defaultRendererinfos,
-                prefabCharacterModel.gameObject);
-
-            //these are your Mesh Replacements. The order here is based on your CustomRendererInfos from earlier
-            //pass in meshes as they are named in your assetbundle
-            //currently not needed as with only 1 skin they will simply take the default meshes
-            //uncomment this when you have another skin
-            /*defaultSkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-                "meshScrapperSword",
-                "meshScrapperGun",
-                "meshScrapper");
-            *//*
-            defaultSkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
+            var defaultSkin = SkinManager.CreateSkinDef(new SkinManager.SkinDefInfo
             {
-                new SkinDef.GameObjectActivation
+                RootObject = prefabCharacterModel.gameObject,
+                NameToken = ScrapperSurvivor.SCRAPPER_PREFIX + "BASE_SKIN_NAME",
+                Icon = assetBundle.LoadAsset<Sprite>("Scrapper_Base"),
+                UnlockableDef = null,
+                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, "matScrapper", "matScrapper", "matScrapper", "matMasterySword"),
+                MeshReplacements = SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos, "meshScrapperBody", "meshFrame", "meshGirder", "meshSword"),
+                GameObjectActivations = new SkinDef.GameObjectActivation[]
                 {
-                    gameObject = childLocator.FindChildGameObject("Girder"),
-                    shouldActivate = true,
-                },
-                new SkinDef.GameObjectActivation
-                {
-                    gameObject = childLocator.FindChildGameObject("MasterySword"),
-                    shouldActivate = false,
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Body"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Frame"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Girder"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Sword"),
+                        shouldActivate = false,
+                    }
                 }
-            };*/
-            //add new skindef to our list of skindefs. this is what we'll be passing to the SkinController
-            skins.Add(defaultSkin);
-            #endregion
-            /*
-            //uncomment this when you have a mastery skin
-            #region MasterySkin
+            });
 
-            ////creating a new skindef as we did before
-            SkinDef masterySkin = SkinManager.CreateSkinDef(SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
-                assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"),
-                defaultRendererinfos,
-                prefabCharacterModel.gameObject);
-                //Unlockables.masterySkinUnlockableDef);
-
-            ////adding the mesh replacements as above. 
-            ////if you don't want to replace the mesh (for example, you only want to replace the material), pass in null so the order is preserved
-            //masterySkin.meshReplacements = Modules.Skins.getMeshReplacements(assetBundle, defaultRendererinfos,
-            //    "meshScrapperSwordAlt",
-            //    null,//no gun mesh replacement. use same gun mesh
-            //    "meshScrapperAlt");
-
-            ////masterySkin has a new set of RendererInfos (based on default rendererinfos)
-            ////you can simply access the RendererInfos' materials and set them to the new materials for your skin.
-
-            var masteryMat = assetBundle.LoadMaterial("matMastery");
-            var swordTransform = childLocator.FindChild("MasterySword");
-            for (int i = 0; i < masterySkin.rendererInfos.Length; i++)
+            SkinDef masterySkin = SkinManager.CreateSkinDef(new SkinManager.SkinDefInfo
             {
-                if (masterySkin.rendererInfos[i].renderer.transform == swordTransform)
-                    masterySkin.rendererInfos[i].defaultMaterial = assetBundle.LoadMaterial("matMasterySword");
-                else
-                    masterySkin.rendererInfos[i].defaultMaterial = masteryMat;
-            }
-
-            ////here's a barebones example of using gameobjectactivations that could probably be streamlined or rewritten entirely, truthfully, but it works
-            masterySkin.gameObjectActivations = new SkinDef.GameObjectActivation[]
-            {
-                new SkinDef.GameObjectActivation
+                RootObject = prefabCharacterModel.gameObject,
+                NameToken = ScrapperSurvivor.SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
+                Icon = assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"),
+                UnlockableDef = Unlockables.masterySkinUnlockableDef,
+                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, "matScrapperMastery", "matScrapperMastery"),
+                MeshReplacements = SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos, "meshMasteryBody", "meshMasteryFrame"),
+                GameObjectActivations = new SkinDef.GameObjectActivation[]
                 {
-                    gameObject = childLocator.FindChildGameObject("Girder"),
-                    shouldActivate = false,
-                },
-                new SkinDef.GameObjectActivation
-                {
-                    gameObject = childLocator.FindChildGameObject("MasterySword"),
-                    shouldActivate = true,
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Body"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Frame"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Girder"),
+                        shouldActivate = true,
+                    },
+                    new SkinDef.GameObjectActivation
+                    {
+                        gameObject = childLocator.FindChildGameObject("Sword"),
+                        shouldActivate = false,
+                    }
                 }
-            };
-            ////simply find an object on your child locator you want to activate/deactivate and set if you want to activate/deacitvate it with this skin
+            });
 
-            skins.Add(masterySkin);
-
-            #endregion
-            */
-            skinController.skins = skins.ToArray();
+            skinController.skins = [defaultSkin, masterySkin];
         }
         #endregion
 

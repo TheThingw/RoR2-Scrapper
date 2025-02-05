@@ -2007,6 +2007,8 @@ MonoBehaviour:
     transform: {fileID: 6363462637940441706}
   - name: Frame
     transform: {fileID: 8615920860913748283}
+  - name: Frame
+    transform: {fileID: 8615920860913748283}
 --- !u!1 &3036240649140210089
 GameObject:
   m_ObjectHideFlags: 0
