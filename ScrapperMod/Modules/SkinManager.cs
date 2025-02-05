@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Scrapper.Modules
 {
-    internal static class Skins
+    internal static class SkinManager
     {
         internal static SkinDef CreateSkinDef(string skinName, Sprite skinIcon, CharacterModel.RendererInfo[] defaultRendererInfos, GameObject root, UnlockableDef unlockableDef = null)
         {
@@ -64,7 +64,7 @@ namespace Scrapper.Modules
             internal string Name;
         }
 
-        private static CharacterModel.RendererInfo[] getRendererMaterials(CharacterModel.RendererInfo[] defaultRenderers, params Material[] materials)
+        private static CharacterModel.RendererInfo[] GetRendererMaterials(CharacterModel.RendererInfo[] defaultRenderers, params Material[] materials)
         {
             var newRendererInfos = new CharacterModel.RendererInfo[defaultRenderers.Length];
             defaultRenderers.CopyTo(newRendererInfos, 0);
@@ -96,7 +96,7 @@ namespace Scrapper.Modules
         /// <param name="defaultRendererInfos">your skindef's rendererinfos to access the renderers</param>
         /// <param name="meshes">name of the mesh assets in your project</param>
         /// <returns></returns>
-        internal static SkinDef.MeshReplacement[] getMeshReplacements(AssetBundle assetBundle, CharacterModel.RendererInfo[] defaultRendererInfos, params string[] meshes)
+        internal static SkinDef.MeshReplacement[] GetMeshReplacements(AssetBundle assetBundle, CharacterModel.RendererInfo[] defaultRendererInfos, params string[] meshes)
         {
 
             var meshReplacements = new List<SkinDef.MeshReplacement>();

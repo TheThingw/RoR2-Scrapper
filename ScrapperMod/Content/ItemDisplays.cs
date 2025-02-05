@@ -1,6 +1,6 @@
 ﻿using RoR2;
 using System.Collections.Generic;
-using Scrapper.Modules.BaseContent.Characters;
+using Scrapper.Content.BaseContent;
 
 /* for custom copy format in keb's helper
 {childName},
@@ -15,7 +15,7 @@ namespace Scrapper.Content
     {
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)
         {
-            
+
         }
         /*
         protected override void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules)

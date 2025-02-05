@@ -56,10 +56,10 @@ namespace Scrapper.Modules
             foreach (var keyAsset in missingKeyAssets)
             {
                 var thing = $"";
-                if (ItemDisplays.KeyAssetDisplayPrefabs.ContainsKey(keyAsset))
+                if (ItemDisplayManager.KeyAssetDisplayPrefabs.ContainsKey(keyAsset))
                     //if we have a displayprefab for it (Populated in ItemDisplays.PopulateDisplays),
                     //generate a rule formatted to the code in this project
-                    thing += SpitOutNewRule(keyAsset, firstCompatibleChild, ItemDisplays.KeyAssetDisplayPrefabs[keyAsset]);
+                    thing += SpitOutNewRule(keyAsset, firstCompatibleChild, ItemDisplayManager.KeyAssetDisplayPrefabs[keyAsset]);
                 else
                 {
                     Log.Error($"COULD NOT FIND DISPLAY PREFABS FOR KEYASSET {keyAsset}");
@@ -72,7 +72,7 @@ namespace Scrapper.Modules
 
         private static void LazyGatherAllItems()
         {
-            allDisplayedItems = new List<Object>(ItemDisplays.KeyAssetDisplayPrefabs.Keys);
+            allDisplayedItems = new List<Object>(ItemDisplayManager.KeyAssetDisplayPrefabs.Keys);
 
             allDisplayedItems.Sort((item1, item2) =>
             {

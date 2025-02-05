@@ -1,7 +1,4 @@
-using System;
-using System.Runtime.CompilerServices;
 using EntityStates;
-using EntityStates.Loader;
 using RoR2;
 using Scrapper.SkillStates;
 using UnityEngine;

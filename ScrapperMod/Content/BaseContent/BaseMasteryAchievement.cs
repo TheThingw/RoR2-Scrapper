@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using RoR2.Achievements;
 
-namespace Scrapper.Modules.BaseContent.Achievements
+namespace Scrapper.Content.BaseContent
 {
     public abstract class BaseMasteryAchievement : BaseAchievement
     {

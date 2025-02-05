@@ -1,7 +1,5 @@
 // RoR2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // EntityStates.Loader.BaseSwingChargedFist
-using System;
-using System.Runtime.CompilerServices;
 using EntityStates;
 using EntityStates.Loader;
 using RoR2;

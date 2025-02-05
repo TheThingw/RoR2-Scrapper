@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using RoR2.CharacterAI;
+using Scrapper.Modules;
 using UnityEngine;
 
 namespace Scrapper.Content
@@ -8,7 +9,7 @@ namespace Scrapper.Content
     {
         public static void Init(GameObject bodyPrefab, string masterName)
         {
-            GameObject master = Modules.Prefabs.CreateBlankMasterPrefab(bodyPrefab, masterName);
+            var master = PrefabManager.CreateBlankMasterPrefab(bodyPrefab, masterName);
 
             var baseAI = master.GetComponent<BaseAI>();
             baseAI.aimVectorDampTime = 0.1f;

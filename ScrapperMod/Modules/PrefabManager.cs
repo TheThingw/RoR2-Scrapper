@@ -5,14 +5,14 @@ using UnityEngine;
 using RoR2.CharacterAI;
 using System;
 using System.Linq;
-using Scrapper.Modules.BaseContent.Characters;
+using Scrapper.Content.BaseContent;
 
 namespace Scrapper.Modules
 {
     // module for creating body prefabs and whatnot
     // recommended to simply avoid touching this unless you REALLY need to
 
-    internal static class Prefabs
+    internal static class PrefabManager
     {
         // cache this just to give our ragdolls the same physic material as vanilla stuff
         private static PhysicMaterial ragdollMaterial;
@@ -31,7 +31,7 @@ namespace Scrapper.Modules
                 characterModel = display.AddComponent<CharacterModel>();
             characterModel.baseRendererInfos = prefab.GetComponentInChildren<CharacterModel>().baseRendererInfos;
 
-            Asset.ConvertAllRenderersToHopooShader(display);
+            AssetManager.ConvertAllRenderersToHopooShader(display);
 
             return display;
         }
@@ -128,7 +128,7 @@ namespace Scrapper.Modules
             //SetupRigidbody(newPrefab);
             SetupCapsuleCollider(newBodyPrefab);
 
-            Content.AddCharacterBodyPrefab(newBodyPrefab);
+            ContentManagement.AddCharacterBodyPrefab(newBodyPrefab);
 
             return newBodyPrefab;
         }
@@ -565,7 +565,7 @@ namespace Scrapper.Modules
             var newMaster = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/" + masterToCopy + "MonsterMaster").InstantiateClone(masterName, true);
             newMaster.GetComponent<CharacterMaster>().bodyPrefab = bodyPrefab;
 
-            Content.AddMasterPrefab(newMaster);
+            ContentManagement.AddMasterPrefab(newMaster);
             return newMaster;
         }
 
@@ -573,7 +573,7 @@ namespace Scrapper.Modules
         {
             var masterObject = LegacyResourcesAPI.Load<GameObject>("Prefabs/CharacterMasters/CommandoMonsterMaster").InstantiateClone(masterName, true);
             //should the user call this themselves?
-            ContentPacks.masterPrefabs.Add(masterObject);
+            ContentPackProvider.masterPrefabs.Add(masterObject);
 
             var characterMaster = masterObject.GetComponent<CharacterMaster>();
             characterMaster.bodyPrefab = bodyPrefab;
@@ -612,7 +612,7 @@ namespace Scrapper.Modules
             characterMaster.bodyPrefab = bodyPrefab;
             characterMaster.teamIndex = TeamIndex.Monster;
 
-            Content.AddMasterPrefab(newMaster);
+            ContentManagement.AddMasterPrefab(newMaster);
             return newMaster;
         }
         #endregion master

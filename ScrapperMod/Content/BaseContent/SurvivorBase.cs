@@ -2,8 +2,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using RoR2.Skills;
+using Scrapper.Modules;
 
-namespace Scrapper.Modules.BaseContent.Characters
+namespace Scrapper.Content.BaseContent
 {
     public abstract class SurvivorBase<T> : CharacterBase<T> where T : SurvivorBase<T>, new()
     {
@@ -28,7 +29,7 @@ namespace Scrapper.Modules.BaseContent.Characters
 
         protected virtual void InitializeDisplayPrefab()
         {
-            displayPrefab = Prefabs.CreateDisplayPrefab(assetBundle, displayPrefabName, bodyPrefab);
+            displayPrefab = PrefabManager.CreateDisplayPrefab(assetBundle, displayPrefabName, bodyPrefab);
         }
 
         protected virtual void InitializeSurvivor()
@@ -38,7 +39,7 @@ namespace Scrapper.Modules.BaseContent.Characters
 
         public static void RegisterNewSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, UnlockableDef unlockableDef, float sortPosition)
         {
-            Content.CreateSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, unlockableDef, sortPosition);
+            ContentManagement.CreateSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, unlockableDef, sortPosition);
         }
 
         #region CharacterSelectSurvivorPreviewDisplayController

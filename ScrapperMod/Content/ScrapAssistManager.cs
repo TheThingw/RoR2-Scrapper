@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RoR2;
+﻿using RoR2;
 using UnityEngine.Networking;
 using UnityEngine;
 using AM = AssistManager;
-using Scrapper.Content;
 using R2API;
+using Scrapper.Components;
 
-namespace Scrapper.Components
+namespace Scrapper.Content
 {
     public static class ScrapAssistManager
     {
@@ -22,8 +19,8 @@ namespace Scrapper.Components
         {
             if (NetworkServer.active && AM.AssistManager.instance && victim && damageInfo.attacker && !damageInfo.rejected && damageInfo.HasModdedDamageType(DamageTypes.ImpaleDamageType))
             {
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
+                var attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                var victimBody = victim.GetComponent<CharacterBody>();
 
                 var assist = new AM.AssistManager.Assist(attackerBody, victimBody, AM.AssistManager.GetDirectAssistDurationForAttacker(damageInfo.attacker));
                 assist.moddedDamageTypes.Add(DamageTypes.ImpaleDamageType);
@@ -37,9 +34,7 @@ namespace Scrapper.Components
         private static void HandleScrapperAssists(AM.AssistManager.Assist assist, CharacterBody killerBody, DamageInfo damageInfo)
         {
             if (assist.moddedDamageTypes.Contains(DamageTypes.ImpaleDamageType) && assist.attackerBody && assist.attackerBody.TryGetComponent<ScrapCtrl>(out var scrapCtrl))
-            {
                 scrapCtrl.TriggerImpale();
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using RoR2;
-using Scrapper.Modules.BaseContent.Achievements;
+using Scrapper.Content.BaseContent;
 
 namespace Scrapper.Achievements
 {

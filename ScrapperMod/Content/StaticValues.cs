@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace Scrapper
+namespace Scrapper.Content
 {
     internal static class StaticValues
     {

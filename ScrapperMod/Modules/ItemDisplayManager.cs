@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Scrapper.Modules
 {
-    internal static class ItemDisplays
+    internal static class ItemDisplayManager
     {
         private static Dictionary<string, GameObject> itemDisplayPrefabs = new Dictionary<string, GameObject>();
         public static Dictionary<Object, ItemDisplayRule[]> KeyAssetDisplayPrefabs = new Dictionary<Object, ItemDisplayRule[]>();

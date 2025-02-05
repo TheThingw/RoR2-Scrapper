@@ -1,10 +1,9 @@
 ﻿using BepInEx;
-using HotCompilerNamespace;
 using R2API.Utils;
-using Scrapper.Components;
+using Scrapper.Content;
+using Scrapper.Modules;
 using System.Security;
 using System.Security.Permissions;
-using UnityEngine;
 
 [assembly: HG.Reflection.SearchableAttribute.OptIn]
 [module: UnverifiableCode]
@@ -24,7 +23,7 @@ namespace Scrapper
         public const string MODNAME = "ScrapperMod";
         public const string MODVERSION = "0.0.1";
 
-        public const string DEVELOPER_PREFIX = "ThingW";
+        public const string DEVELOPER_PREFIX = "THINGW";
 
         public static ScrapperPlugin instance;
 
@@ -34,19 +33,20 @@ namespace Scrapper
 
             Log.Init(Logger);
 
-            Modules.Language.Init();
+            LanguageManager.Init();
+            
             new ScrapperSurvivor().Initialize();
-            new Modules.ContentPacks().Initialize();
-            ScrapAssistManager.Init();
-            HotCompilerNamespace.HotCompiler.CompileIt();
-        }
+            new ContentPackProvider().Initialize();
 
+            //HotCompilerNamespace.HotCompiler.CompileIt();
+        }
+        /*
         public void Update()
         {
             if (Input.GetKeyUp(KeyCode.F5))
             {
                 HotCompiler.CompileIt();
             }
-        }
+        }*/
     }
 }

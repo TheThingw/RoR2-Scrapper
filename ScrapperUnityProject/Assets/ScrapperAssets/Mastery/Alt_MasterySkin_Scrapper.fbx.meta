@@ -3,12 +3,22 @@ guid: e4dbda5a8280cc344bfa7ca98bfb8525
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mastery_Skin_Weapon
+    second: {fileID: 2100000, guid: a36cde8599fea314b9839975ceb83299, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scrapper_Mastery_Skin
+    second: {fileID: 2100000, guid: 080367c6ba6166045812424de33a241d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

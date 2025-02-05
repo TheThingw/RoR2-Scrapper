@@ -1,12 +1,9 @@
 ﻿using BepInEx.Configuration;
 using EntityStates;
-using Grumpy.UnitTest;
 using RoR2;
 using Scrapper.Components;
 using Scrapper.Content;
-using Scrapper.Modules;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates
 {
@@ -82,7 +79,7 @@ namespace Scrapper.SkillStates
 
         private void CheckEmote<T>(ConfigEntry<KeyboardShortcut> keybind) where T : EntityState, new()
         {
-            if (Modules.Config.GetKeyPressed(keybind.Value))
+            if (Config.GetKeyPressed(keybind.Value))
             {
                 this.FindLocalUser();
                 if (this.localUser != null && !this.localUser.isUIFocused)

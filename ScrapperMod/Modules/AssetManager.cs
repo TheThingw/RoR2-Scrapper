@@ -1,14 +1,14 @@
-﻿using R2API;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 using RoR2;
 using System.Collections.Generic;
 using RoR2.Projectile;
 using Path = System.IO.Path;
+using R2API;
 
 namespace Scrapper.Modules
 {
-    internal static class Asset
+    internal static class AssetManager
     {
         //cache bundles if multiple characters use the same one
         internal static Dictionary<string, AssetBundle> loadedBundles = new Dictionary<string, AssetBundle>();
@@ -55,7 +55,7 @@ namespace Scrapper.Modules
             newTracer.GetComponent<Tracer>().speed = 250f;
             newTracer.GetComponent<Tracer>().length = 50f;
 
-            Content.CreateAndAddEffectDef(newTracer);
+            ContentManagement.CreateAndAddEffectDef(newTracer);
 
             return newTracer;
         }
@@ -117,7 +117,7 @@ namespace Scrapper.Modules
             effect.positionAtReferencedTransform = true;
             effect.soundName = soundName;
 
-            Content.CreateAndAddEffectDef(newEffect);
+            ContentManagement.CreateAndAddEffectDef(newEffect);
 
             return newEffect;
         }
@@ -150,7 +150,7 @@ namespace Scrapper.Modules
                 return null;
             }
 
-            Content.AddProjectilePrefab(newPrefab);
+            ContentManagement.AddProjectilePrefab(newPrefab);
             return newPrefab;
         }
     }

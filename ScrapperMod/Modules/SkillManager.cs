@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Scrapper.Modules
 {
-    internal static class Skills
+    internal static class SkillManager
     {
         #region genericskills
         public static void CreateSkillFamilies(GameObject targetPrefab) => CreateSkillFamilies(targetPrefab, SkillSlot.Primary, SkillSlot.Secondary, SkillSlot.Utility, SkillSlot.Special);
@@ -81,7 +81,7 @@ namespace Scrapper.Modules
 
             skill._skillFamily = newFamily;
 
-            Content.AddSkillFamily(newFamily);
+            ContentManagement.AddSkillFamily(newFamily);
             return skill;
         }
         #endregion
@@ -183,7 +183,7 @@ namespace Scrapper.Modules
 
             skillDef.keywordTokens = skillDefInfo.keywordTokens;
 
-            Content.AddSkillDef(skillDef);
+            ContentManagement.AddSkillDef(skillDef);
 
 
             return skillDef;

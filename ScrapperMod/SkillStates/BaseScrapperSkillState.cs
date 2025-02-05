@@ -1,6 +1,5 @@
 ﻿using EntityStates;
 using Scrapper.Components;
-using Scrapper.Content;
 
 namespace Scrapper.SkillStates
 {

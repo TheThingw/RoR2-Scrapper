@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scrapper.Modules
 {
-    internal class ContentPacks : IContentPackProvider
+    internal class ContentPackProvider : IContentPackProvider
     {
         internal ContentPack contentPack = new ContentPack();
         public string identifier => ScrapperPlugin.MODUID;
@@ -30,7 +30,7 @@ namespace Scrapper.Modules
 
         public void Initialize()
         {
-            ContentManager.collectContentPackProviders += ContentManager_collectContentPackProviders;
+            ContentManager.collectContentPackProviders += this.ContentManager_collectContentPackProviders;
         }
 
         private void ContentManager_collectContentPackProviders(ContentManager.AddContentPackProviderDelegate addContentPackProvider)
@@ -57,6 +57,24 @@ namespace Scrapper.Modules
             contentPack.effectDefs.Add(effectDefs.ToArray());
 
             contentPack.networkSoundEventDefs.Add(networkSoundEventDefs.ToArray());
+
+            // the remaining contentpack items
+            //src.gameModePrefabs.CopyTo(dest.gameModePrefabs);
+            //src.networkedObjectPrefabs.CopyTo(dest.networkedObjectPrefabs);
+            //src.sceneDefs.CopyTo(dest.sceneDefs);
+            //src.itemDefs.CopyTo(dest.itemDefs);
+            //src.itemTierDefs.CopyTo(dest.itemTierDefs);
+            //src.itemRelationshipProviders.CopyTo(dest.itemRelationshipProviders);
+            //src.equipmentDefs.CopyTo(dest.equipmentDefs);
+            //src.eliteDefs.CopyTo(dest.eliteDefs);
+            //src.artifactDefs.CopyTo(dest.artifactDefs);
+            //src.surfaceDefs.CopyTo(dest.surfaceDefs);
+            //src.musicTrackDefs.CopyTo(dest.musicTrackDefs);
+            //src.gameEndingDefs.CopyTo(dest.gameEndingDefs);
+            //src.entityStateConfigurations.CopyTo(dest.entityStateConfigurations);
+            //src.expansionDefs.CopyTo(dest.expansionDefs);
+            //src.entitlementDefs.CopyTo(dest.entitlementDefs);
+            //src.miscPickupDefs.CopyTo(dest.miscPickupDefs);
 
             args.ReportProgress(1f);
             yield break;

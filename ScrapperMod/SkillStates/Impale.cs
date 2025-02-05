@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using EntityStates;
-using System.Threading;
+﻿using EntityStates;
 using UnityEngine;
 using RoR2;
+using Scrapper.Content;
 
 namespace Scrapper.SkillStates
 {

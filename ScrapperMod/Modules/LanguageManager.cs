@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Scrapper.Modules
 {
-    internal static class Language
+    internal static class LanguageManager
     {
         public static string TokensOutput = "";
 

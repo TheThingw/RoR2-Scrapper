@@ -1,7 +1,8 @@
 ﻿using RoR2;
+using Scrapper.Modules;
 using System.Collections.Generic;
 
-namespace Scrapper.Modules.BaseContent.Characters
+namespace Scrapper.Content.BaseContent
 {
     public abstract class ItemDisplaysBase
     {
@@ -9,13 +10,13 @@ namespace Scrapper.Modules.BaseContent.Characters
         {
             var itemDisplayRules = new List<ItemDisplayRuleSet.KeyAssetRuleGroup>();
 
-            ItemDisplays.LazyInit();
+            ItemDisplayManager.LazyInit();
 
             SetItemDisplayRules(itemDisplayRules);
 
             itemDisplayRuleSet.keyAssetRuleGroups = itemDisplayRules.ToArray();
 
-            ItemDisplays.DisposeWhenDone();
+            ItemDisplayManager.DisposeWhenDone();
         }
 
         protected abstract void SetItemDisplayRules(List<ItemDisplayRuleSet.KeyAssetRuleGroup> itemDisplayRules);

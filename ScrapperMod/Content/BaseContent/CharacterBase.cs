@@ -1,7 +1,8 @@
 ﻿using RoR2;
+using Scrapper.Modules;
 using UnityEngine;
 
-namespace Scrapper.Modules.BaseContent.Characters
+namespace Scrapper.Content.BaseContent
 {
     public abstract class CharacterBase<T> where T : CharacterBase<T>, new()
     {
@@ -28,7 +29,7 @@ namespace Scrapper.Modules.BaseContent.Characters
         public virtual void Initialize()
         {
             instance = this as T;
-            assetBundle = Asset.LoadAssetBundle(assetBundleName);
+            assetBundle = AssetManager.LoadAssetBundle(assetBundleName);
 
             InitializeCharacter();
         }
@@ -42,12 +43,12 @@ namespace Scrapper.Modules.BaseContent.Characters
 
         protected virtual void InitializeCharacterBodyPrefab()
         {
-            characterModelObject = Prefabs.LoadCharacterModel(assetBundle, modelPrefabName);
+            characterModelObject = PrefabManager.LoadCharacterModel(assetBundle, modelPrefabName);
 
-            bodyPrefab = Prefabs.CreateBodyPrefab(characterModelObject, bodyInfo);
+            bodyPrefab = PrefabManager.CreateBodyPrefab(characterModelObject, bodyInfo);
             prefabCharacterBody = bodyPrefab.GetComponent<CharacterBody>();
 
-            prefabCharacterModel = Prefabs.SetupCharacterModel(bodyPrefab, assetBundle.LoadMaterial("matScrapper"));
+            prefabCharacterModel = PrefabManager.SetupCharacterModel(bodyPrefab, assetBundle.LoadMaterial("matScrapper"));
         }
 
         public virtual void InitializeItemDisplays()
@@ -59,7 +60,7 @@ namespace Scrapper.Modules.BaseContent.Characters
 
             if (itemDisplays != null)
             {
-                ItemDisplays.queuedDisplays++;
+                ItemDisplayManager.queuedDisplays++;
                 RoR2.ContentManagement.ContentManager.onContentPacksAssigned += SetItemDisplays;
             }
         }

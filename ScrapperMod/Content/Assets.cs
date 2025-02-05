@@ -1,17 +1,14 @@
-﻿using RoR2;
-using UnityEngine;
-using RoR2.Projectile;
-using Scrapper.Modules;
+﻿using UnityEngine;
 
 namespace Scrapper.Content
 {
     public static class Assets
     {
-        private static AssetBundle _assetBundle;
+        internal static AssetBundle AssetBundle { get; private set; }
 
         public static void Init(AssetBundle assetBundle)
         {
-            _assetBundle = assetBundle;
+            AssetBundle = assetBundle;
         }
     }
 }

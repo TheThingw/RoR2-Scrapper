@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Scrapper.Modules
 {
-    internal static class Materials
+    internal static class MaterialManager
     {
         private static List<Material> cachedMaterials = new List<Material>();
 

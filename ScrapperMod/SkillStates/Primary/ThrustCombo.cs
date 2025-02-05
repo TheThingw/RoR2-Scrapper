@@ -1,7 +1,6 @@
 using EntityStates;
-using RoR2;
 using RoR2.Skills;
-using UnityEngine;
+using Scrapper.Content;
 using UnityEngine.Networking;
 
 namespace Scrapper.SkillStates.Primary

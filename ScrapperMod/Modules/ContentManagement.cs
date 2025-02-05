@@ -6,27 +6,27 @@ using UnityEngine;
 namespace Scrapper.Modules
 {
     //consolidate contentaddition here in case something breaks and/or want to move to r2api
-    internal class Content
+    internal class ContentManagement
     {
         internal static void AddCharacterBodyPrefab(GameObject bprefab)
         {
-            ContentPacks.bodyPrefabs.Add(bprefab);
+            ContentPackProvider.bodyPrefabs.Add(bprefab);
         }
 
         internal static void AddMasterPrefab(GameObject prefab)
         {
-            ContentPacks.masterPrefabs.Add(prefab);
+            ContentPackProvider.masterPrefabs.Add(prefab);
         }
 
         internal static void AddProjectilePrefab(GameObject prefab)
         {
-            ContentPacks.projectilePrefabs.Add(prefab);
+            ContentPackProvider.projectilePrefabs.Add(prefab);
         }
 
         internal static void AddSurvivorDef(SurvivorDef survivorDef)
         {
 
-            ContentPacks.survivorDefs.Add(survivorDef);
+            ContentPackProvider.survivorDefs.Add(survivorDef);
         }
         internal static void CreateSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix) { CreateSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, 100f); }
         internal static void CreateSurvivor(GameObject bodyPrefab, GameObject displayPrefab, Color charColor, string tokenPrefix, float sortPosition) { CreateSurvivor(bodyPrefab, displayPrefab, charColor, tokenPrefix, null, sortPosition); }
@@ -52,7 +52,7 @@ namespace Scrapper.Modules
 
         internal static void AddUnlockableDef(UnlockableDef unlockableDef)
         {
-            ContentPacks.unlockableDefs.Add(unlockableDef);
+            ContentPackProvider.unlockableDefs.Add(unlockableDef);
         }
         internal static UnlockableDef CreateAndAddUnlockbleDef(string identifier, string nameToken, Sprite achievementIcon)
         {
@@ -68,22 +68,22 @@ namespace Scrapper.Modules
 
         internal static void AddSkillDef(SkillDef skillDef)
         {
-            ContentPacks.skillDefs.Add(skillDef);
+            ContentPackProvider.skillDefs.Add(skillDef);
         }
 
         internal static void AddSkillFamily(SkillFamily skillFamily)
         {
-            ContentPacks.skillFamilies.Add(skillFamily);
+            ContentPackProvider.skillFamilies.Add(skillFamily);
         }
 
         internal static void AddEntityState(Type entityState)
         {
-            ContentPacks.entityStates.Add(entityState);
+            ContentPackProvider.entityStates.Add(entityState);
         }
 
         internal static void AddBuffDef(BuffDef buffDef)
         {
-            ContentPacks.buffDefs.Add(buffDef);
+            ContentPackProvider.buffDefs.Add(buffDef);
         }
         internal static BuffDef CreateAndAddBuff(string buffName, Sprite buffIcon, Color buffColor, bool canStack, bool isDebuff)
         {
@@ -102,7 +102,7 @@ namespace Scrapper.Modules
 
         internal static void AddEffectDef(EffectDef effectDef)
         {
-            ContentPacks.effectDefs.Add(effectDef);
+            ContentPackProvider.effectDefs.Add(effectDef);
         }
         internal static EffectDef CreateAndAddEffectDef(GameObject effectPrefab)
         {
@@ -115,7 +115,7 @@ namespace Scrapper.Modules
 
         internal static void AddNetworkSoundEventDef(NetworkSoundEventDef networkSoundEventDef)
         {
-            ContentPacks.networkSoundEventDefs.Add(networkSoundEventDef);
+            ContentPackProvider.networkSoundEventDefs.Add(networkSoundEventDef);
         }
         internal static NetworkSoundEventDef CreateAndAddNetworkSoundEventDef(string eventName)
         {

@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using R2API;
-using UnityEngine;
+﻿using R2API;
 
 namespace Scrapper.Content
 {
     public static class DamageTypes
     {
-        public static DamageAPI.ModdedDamageType ImpaleDamageType;
-        public static void Init(AssetBundle assetBundle)
+        public static DamageAPI.ModdedDamageType ImpaleDamageType = DamageAPI.ReserveDamageType();
+
+        public static void Init()
         {
-            ImpaleDamageType = DamageAPI.ReserveDamageType();
+
         }
     }
 }

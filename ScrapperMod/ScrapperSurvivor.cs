@@ -2,12 +2,11 @@
 using RoR2.Skills;
 using System.Collections.Generic;
 using UnityEngine;
-using Scrapper.Modules.BaseContent.Characters;
-using Scrapper.Modules;
 using Scrapper.Components;
-using Scrapper.Content;
 using EntityStates;
-using Scrapper.SkillStates;
+using Scrapper.Content.BaseContent;
+using Scrapper.Content;
+using Scrapper.Modules;
 
 namespace Scrapper
 {
@@ -33,7 +32,7 @@ namespace Scrapper
             bodyColor = new Color32(180, 115, 75, 255),
             sortPosition = 100,
 
-            crosshair = Asset.LoadCrosshair("Standard"),
+            crosshair = AssetManager.LoadCrosshair("Standard"),
             podPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/SurvivorPod"),
 
             //main stats
@@ -73,13 +72,13 @@ namespace Scrapper
             moveSpeedGrowth = 0f,
             jumpPowerGrowth = 0f,// jump power per level exists for some reason
         };
-        /*
-        public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
+        
+        /*public override CustomRendererInfo[] customRendererInfos => new CustomRendererInfo[]
         {
                 new CustomRendererInfo
                 {
                     childName = "SwordModel",
-                    material = ,
+                    material = null,
                 }
         };*/
 
@@ -97,66 +96,66 @@ namespace Scrapper
 
         public override void Initialize()
         {
+            /*
+            instance = this as T;
+            assetBundle = Asset.LoadAssetBundle(assetBundleName);
+
+            InitializeCharacter();*/
             base.Initialize();
+
+            // static content
+            Config.Init();
+            Content.Assets.Init(assetBundle);
+            Buffs.Init();
+            DamageTypes.Init();
+            Unlockables.Init();
+            States.Init();
+            Tokens.Init();
+            ScrapAssistManager.Init();
+
+            // base
+            InitializeCharacterBodyPrefab();
+            InitializeItemDisplays();
+            InitializeDisplayPrefab();
+            InitializeSurvivor();
+
+            InitializeCharacter();
         }
 
         public override void InitializeCharacter()
         {
-            Unlockables.Init();
-
-            base.InitializeCharacter();
-
-            Content.Config.Init();
-            States.Init();
-            Content.Tokens.Init();
-
-            Content.Assets.Init(assetBundle);
-            Buffs.Init(assetBundle);
-            DamageTypes.Init(assetBundle);
-
+            // skills
             InitializeEntityStateMachines();
             InitializeSkills();
+
+            // skins
             InitializeSkins();
+
+            // misc
             InitializeCharacterMaster();
-
             AdditionalBodySetup();
-
-            AddHooks();
         }
 
-        private void AdditionalBodySetup()
-        {
-            AddHitboxes();
-
-            bodyPrefab.AddComponent<ScrapCtrl>();
-        }
-
-        public void AddHitboxes()
-        {
-            //example of how to create a HitBoxGroup. see summary for more details
-            Prefabs.SetupHitBoxGroup(characterModelObject, "StabHitboxGroup", "StabHitbox");
-        }
-
+        #region Skills
         public override void InitializeEntityStateMachines()
         {
             //clear existing state machines from your cloned body (probably commando)
             //omit all this if you want to just keep theirs
-            Prefabs.ClearEntityStateMachines(bodyPrefab);
+            PrefabManager.ClearEntityStateMachines(bodyPrefab);
 
             //the main "Body" state machine has some special properties
-            Prefabs.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(MainState), typeof(EntityStates.SpawnTeleporterState));
+            PrefabManager.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
             //don't forget to register custom entitystates in your ScrapperStates.cs
 
-            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon");
-            Prefabs.AddEntityStateMachine(bodyPrefab, "Weapon2");
+            PrefabManager.AddEntityStateMachine(bodyPrefab, "Weapon");
+            PrefabManager.AddEntityStateMachine(bodyPrefab, "Weapon2");
         }
 
-        #region skills
         public override void InitializeSkills()
         {
             //remove the genericskills from the commando body we cloned
-            Skills.ClearGenericSkills(bodyPrefab);
+            SkillManager.ClearGenericSkills(bodyPrefab);
             //add our own
             AddPassiveSkill();
             AddPrimarySkills();
@@ -221,11 +220,11 @@ namespace Scrapper
         //if this is your first look at skilldef creation, take a look at Secondary first
         private void AddPrimarySkills()
         {
-            Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Primary);
+            SkillManager.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Primary);
 
             //the primary skill is created using a constructor for a typical primary
             //it is also a SteppedSkillDef. Custom Skilldefs are very useful for custom behaviors related to casting a skill. see ror2's different skilldefs for reference
-            var primarySkillDef1 = Skills.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
+            var primarySkillDef1 = SkillManager.CreateSkillDef<SteppedSkillDef>(new SkillDefInfo
                 (
                     "ScrapperThrustCombo",
                     SCRAPPER_PREFIX + "PRIMARY_THRUST_NAME",
@@ -239,15 +238,15 @@ namespace Scrapper
             primarySkillDef1.stepCount = 2;
             primarySkillDef1.stepGraceDuration = 0.5f;
 
-            Skills.AddPrimarySkills(bodyPrefab, primarySkillDef1);
+            SkillManager.AddPrimarySkills(bodyPrefab, primarySkillDef1);
         }
 
         private void AddSecondarySkills()
         {
-            Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Secondary);
+            SkillManager.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Secondary);
 
             //here is a basic skill def with all fields accounted for
-            var secondarySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            var secondarySkillDef1 = SkillManager.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ScrapperQuickStep",
                 skillNameToken = SCRAPPER_PREFIX + "SECONDARY_QUICKSTEP_NAME",
@@ -278,7 +277,7 @@ namespace Scrapper
                 forceSprintDuringState = false,
 
             });
-            var secondarySkillDef2 = Skills.CreateSkillDef(new SkillDefInfo
+            var secondarySkillDef2 = SkillManager.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ScrapperThunderStep",
                 skillNameToken = SCRAPPER_PREFIX + "SECONDARY_THUNDERSTEP_NAME",
@@ -310,15 +309,15 @@ namespace Scrapper
 
             });
 
-            Skills.AddSecondarySkills(bodyPrefab, secondarySkillDef1, secondarySkillDef2);
+            SkillManager.AddSecondarySkills(bodyPrefab, secondarySkillDef1, secondarySkillDef2);
         }
 
         private void AddUtilitySkills()
         {
-            Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
+            SkillManager.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Utility);
 
             //here's a skilldef of a typical movement skill.
-            var utilitySkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            var utilitySkillDef1 = SkillManager.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ScrapperSkewer",
                 skillNameToken = SCRAPPER_PREFIX + "UTILITY_SKEWER_NAME",
@@ -348,7 +347,7 @@ namespace Scrapper
                 forceSprintDuringState = true,
             });
 
-            var utilitySkillDef2 = Skills.CreateSkillDef(new SkillDefInfo
+            var utilitySkillDef2 = SkillManager.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ScrapperReposte",
                 skillNameToken = SCRAPPER_PREFIX + "UTILITY_RIPOSTE_NAME",
@@ -378,15 +377,15 @@ namespace Scrapper
                 forceSprintDuringState = true,
             });
 
-            Skills.AddUtilitySkills(bodyPrefab, utilitySkillDef1, utilitySkillDef2);
+            SkillManager.AddUtilitySkills(bodyPrefab, utilitySkillDef1, utilitySkillDef2);
         }
 
         private void AddSpecialSkills()
         {
-            Skills.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Special);
+            SkillManager.CreateGenericSkillWithSkillFamily(bodyPrefab, SkillSlot.Special);
 
             //a basic skill. some fields are omitted and will just have default values
-            var specialSkillDef1 = Skills.CreateSkillDef(new SkillDefInfo
+            var specialSkillDef1 = SkillManager.CreateSkillDef(new SkillDefInfo
             {
                 skillName = "ScrapperPylon",
                 skillNameToken = SCRAPPER_PREFIX + "SPECIAL_PYLON_NAME",
@@ -405,11 +404,11 @@ namespace Scrapper
                 mustKeyPress = false,
             });
 
-            Skills.AddSpecialSkills(bodyPrefab, specialSkillDef1);
+            SkillManager.AddSpecialSkills(bodyPrefab, specialSkillDef1);
         }
-        #endregion skills
+        #endregion
 
-        #region skins
+        #region Skins
         public override void InitializeSkins()
         {
             var skinController = prefabCharacterModel.gameObject.AddComponent<ModelSkinController>();
@@ -421,7 +420,7 @@ namespace Scrapper
 
             #region DefaultSkin
             //this creates a SkinDef with all default fields
-            var defaultSkin = Skins.CreateSkinDef(SCRAPPER_PREFIX + "DEFAULT_SKIN_NAME",
+            var defaultSkin = SkinManager.CreateSkinDef(SCRAPPER_PREFIX + "DEFAULT_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("Scrapper_Base"),
                 defaultRendererinfos,
                 prefabCharacterModel.gameObject);
@@ -456,7 +455,7 @@ namespace Scrapper
             #region MasterySkin
 
             ////creating a new skindef as we did before
-            SkinDef masterySkin = Modules.Skins.CreateSkinDef(SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
+            SkinDef masterySkin = SkinManager.CreateSkinDef(SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
                 assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"),
                 defaultRendererinfos,
                 prefabCharacterModel.gameObject);
@@ -504,8 +503,9 @@ namespace Scrapper
 
             skinController.skins = skins.ToArray();
         }
-        #endregion skins
+        #endregion
 
+        #region Misc
         //Character Master is what governs the AI of your character when it is not controlled by a player (artifact of vengeance, goobo)
         public override void InitializeCharacterMaster()
         {
@@ -521,8 +521,13 @@ namespace Scrapper
             //assetBundle.LoadMaster(bodyPrefab, masterName);
         }
 
-        private void AddHooks()
+        private void AdditionalBodySetup()
         {
+            //example of how to create a HitBoxGroup. see summary for more details
+            PrefabManager.SetupHitBoxGroup(characterModelObject, "StabHitboxGroup", "StabHitbox");
+
+            bodyPrefab.AddComponent<ScrapCtrl>();
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using Scrapper.Modules;
 using UnityEngine;
 
 namespace Scrapper.Content
@@ -7,9 +8,9 @@ namespace Scrapper.Content
     {
         public static BuffDef opportunistBuff;
 
-        public static void Init(AssetBundle assetBundle)
+        public static void Init()
         {
-            opportunistBuff = Modules.Content.CreateAndAddBuff("ScrapperOpportunistBuff",
+            opportunistBuff = ContentManagement.CreateAndAddBuff("ScrapperOpportunistBuff",
                 LegacyResourcesAPI.Load<BuffDef>("BuffDefs/HiddenInvincibility").iconSprite,
                 Color.white,
                 true,

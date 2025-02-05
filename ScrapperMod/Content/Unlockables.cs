@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 using Scrapper.Achievements;
+using Scrapper.Modules;
 
 namespace Scrapper.Content
 {
@@ -11,9 +12,16 @@ namespace Scrapper.Content
 
         public static void Init()
         {
-            masterySkinUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
+            /* 
+            characterUnlockableDef = Modules.Content.CreateAndAddUnlockbleDef(
                 ScrapperMasteryAchievement.unlockableIdentifier,
                 Modules.Tokens.GetAchievementNameToken(ScrapperMasteryAchievement.identifier),
+                ScrapperSurvivor.instance.assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"));
+            */
+
+            masterySkinUnlockableDef = ContentManagement.CreateAndAddUnlockbleDef(
+                ScrapperMasteryAchievement.unlockableIdentifier,
+                Tokens.GetAchievementNameToken(ScrapperMasteryAchievement.identifier),
                 ScrapperSurvivor.instance.assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"));
         }
     }
