@@ -9,33 +9,9 @@ namespace Scrapper.Content
         public enum ChildNames
         {
             MainHurtbox,
-            BodySling,
-            Belt,
-            Harness,
-            ArmWireR,
-            ArmWireL,
-            ArmLight,
-            SuitShoulderR,
-            ConnectorR,
-            SuitHand,
-            WristWire,
-            SuitShoulderL,
-            Girder,
-            Handle,
             Body,
-            Scarf,
-            Shoulders,
-            Head,
-            ExoSuit,
-            Sling,
-            Chestplate,
-            Scarf1,
-            SuitArmR,
-            Kneepads,
-            Scarf2,
-            HandWire1,
-            HandWire2,
-
+            Girder,
+            Sword
         }
 
         #region Layers

@@ -9,6 +9,8 @@ namespace Scrapper.Content
         internal static Sprite iconPortrait, iconBase, iconMastery;
         internal static Sprite iconPrimary, iconSecondary1, iconSecondary2, iconUtility1, iconUtility2, iconSpecial, iconPassive;
 
+        internal static Material matScrapper, matMastery, matMasterySword;
+
 
         public static void Init(AssetBundle assetBundle)
         {
@@ -25,6 +27,10 @@ namespace Scrapper.Content
             iconUtility2 = assetBundle.LoadAsset<Sprite>("Scrapper_Utility_2");
             iconSpecial = assetBundle.LoadAsset<Sprite>("Scrapper_Special");
             iconPassive = assetBundle.LoadAsset<Sprite>("Scrapper_Passive");
+
+            matScrapper = assetBundle.LoadAsset<Material>("matScrapper");
+            matMastery = assetBundle.LoadAsset<Material>("matMastery");
+            matMasterySword = assetBundle.LoadAsset<Material>("matMasterySword");
         }
     }
 }

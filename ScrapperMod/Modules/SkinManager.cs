@@ -34,17 +34,17 @@ namespace Scrapper.Modules
             On.RoR2.SkinDef.Awake += DoNothing;
 
             var skinDef = ScriptableObject.CreateInstance<SkinDef>();
-            skinDef.baseSkins = skinDefInfo.BaseSkins;
             skinDef.icon = skinDefInfo.Icon;
+            skinDef.name = skinDefInfo.Name;
+            skinDef.nameToken = skinDefInfo.NameToken;
             skinDef.unlockableDef = skinDefInfo.UnlockableDef;
             skinDef.rootObject = skinDefInfo.RootObject;
             skinDef.rendererInfos = skinDefInfo.RendererInfos;
-            skinDef.gameObjectActivations = skinDefInfo.GameObjectActivations;
-            skinDef.meshReplacements = skinDefInfo.MeshReplacements;
-            skinDef.projectileGhostReplacements = skinDefInfo.ProjectileGhostReplacements;
-            skinDef.minionSkinReplacements = skinDefInfo.MinionSkinReplacements;
-            skinDef.nameToken = skinDefInfo.NameToken;
-            skinDef.name = skinDefInfo.Name;
+            skinDef.baseSkins = skinDefInfo.BaseSkins ?? [];
+            skinDef.gameObjectActivations = skinDefInfo.GameObjectActivations ?? [];
+            skinDef.meshReplacements = skinDefInfo.MeshReplacements ?? [];
+            skinDef.projectileGhostReplacements = skinDefInfo.ProjectileGhostReplacements ?? [];
+            skinDef.minionSkinReplacements = skinDefInfo.MinionSkinReplacements ?? [];
 
             On.RoR2.SkinDef.Awake -= DoNothing;
 
@@ -70,17 +70,17 @@ namespace Scrapper.Modules
             internal string Name;
         }
 
-        internal static CharacterModel.RendererInfo[] GetRendererMaterials(AssetBundle assetBundle, CharacterModel.RendererInfo[] defaultRenderers, params string[] materials)
+        internal static CharacterModel.RendererInfo[] GetRendererMaterials(AssetBundle assetBundle, CharacterModel.RendererInfo[] defaultRenderers, params Material[] materials)
         {
             var materialReplacements = new CharacterModel.RendererInfo[defaultRenderers.Length];
             defaultRenderers.CopyTo(materialReplacements, 0);
 
-            for (var i = 0; i < defaultRenderers.Length; i++)
+            for (var i = 0; i < materialReplacements.Length; i++)
             {
-                ref var info = ref defaultRenderers[i];
-                if (!string.IsNullOrEmpty(materials.ElementAtOrDefault(i)))
+                if (materials.ElementAtOrDefault(i) != null)
                 {
-                    info.defaultMaterial = assetBundle.LoadAsset<Material>(materials[i]);
+                    ref var info = ref materialReplacements[i];
+                    info.defaultMaterial = materials[i];
                 }
             }
 

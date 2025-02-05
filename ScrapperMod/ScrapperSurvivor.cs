@@ -415,14 +415,18 @@ namespace Scrapper
             var childLocator = prefabCharacterModel.GetComponent<ChildLocator>();
             var defaultRendererinfos = prefabCharacterModel.baseRendererInfos;
 
+            var matScrapper = Content.Assets.matScrapper;
+            var matMastery = Content.Assets.matMastery;
+            var matSword = Content.Assets.matMasterySword;
+
             var defaultSkin = SkinManager.CreateSkinDef(new SkinManager.SkinDefInfo
             {
                 RootObject = prefabCharacterModel.gameObject,
                 NameToken = ScrapperSurvivor.SCRAPPER_PREFIX + "BASE_SKIN_NAME",
-                Icon = assetBundle.LoadAsset<Sprite>("Scrapper_Base"),
+                Icon = Content.Assets.iconBase,
                 UnlockableDef = null,
-                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, "matScrapper", "matScrapper", "matScrapper", "matMasterySword"),
-                MeshReplacements = SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos, "meshScrapperBody", "meshFrame", "meshGirder", "meshSword"),
+                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, matScrapper, matScrapper, matScrapper, matSword),
+                MeshReplacements = [],//SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos, "meshScrapperBody", "meshFrame", "meshGirder", "meshSword"),
                 GameObjectActivations = new SkinDef.GameObjectActivation[]
                 {
                     new SkinDef.GameObjectActivation
@@ -452,10 +456,10 @@ namespace Scrapper
             {
                 RootObject = prefabCharacterModel.gameObject,
                 NameToken = ScrapperSurvivor.SCRAPPER_PREFIX + "MASTERY_SKIN_NAME",
-                Icon = assetBundle.LoadAsset<Sprite>("Scrapper_Mastery"),
+                Icon = Content.Assets.iconMastery,
                 UnlockableDef = Unlockables.masterySkinUnlockableDef,
-                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, "matScrapperMastery", "matScrapperMastery"),
-                MeshReplacements = SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos, "meshMasteryBody", "meshMasteryFrame"),
+                RendererInfos = SkinManager.GetRendererMaterials(assetBundle, defaultRendererinfos, matMastery, matMastery, matScrapper, matSword),
+                MeshReplacements = [],//SkinManager.GetMeshReplacements(assetBundle, defaultRendererinfos), //"meshMasteryBody", "meshMasteryFrame"),
                 GameObjectActivations = new SkinDef.GameObjectActivation[]
                 {
                     new SkinDef.GameObjectActivation
@@ -471,12 +475,12 @@ namespace Scrapper
                     new SkinDef.GameObjectActivation
                     {
                         gameObject = childLocator.FindChildGameObject("Girder"),
-                        shouldActivate = true,
+                        shouldActivate = false,
                     },
                     new SkinDef.GameObjectActivation
                     {
                         gameObject = childLocator.FindChildGameObject("Sword"),
-                        shouldActivate = false,
+                        shouldActivate = true,
                     }
                 }
             });
@@ -504,7 +508,7 @@ namespace Scrapper
         private void AdditionalBodySetup()
         {
             //example of how to create a HitBoxGroup. see summary for more details
-            //PrefabManager.SetupHitBoxGroup(characterModelObject, "StabHitboxGroup", "StabHitbox");
+            PrefabManager.SetupHitBoxGroup(characterModelObject, "StabHitboxGroup", "StabHitbox");
 
             bodyPrefab.AddComponent<ScrapCtrl>();
         }

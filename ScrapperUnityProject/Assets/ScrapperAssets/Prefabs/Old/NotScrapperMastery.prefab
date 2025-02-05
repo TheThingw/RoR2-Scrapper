@@ -5967,7 +5967,7 @@ GameObject:
   - component: {fileID: 363470376641425275}
   - component: {fileID: 1492292903}
   m_Layer: 0
-  m_Name: mdlScrapperMastery
+  m_Name: NotScrapperMastery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
