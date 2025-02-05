@@ -13,13 +13,16 @@ namespace Scrapper.SkillStates
 
         public static float barrierPercentagePerHit;
 
+        protected static string LAYER_FULLBODY => StaticValues.LAYER_FULLBODY;
+        protected static string LAYER_GESTURE => StaticValues.LAYER_GESTURE;
+
         protected ScrapCtrl scrapCtrl;
 
         public override void OnEnter()
         {
             this.baseDuration = 1f;
             this.duration = 1f;
-            hitBoxGroupName = "StabHitboxGroup";
+            hitBoxGroupName = ChildLocatorEntry.StabHitbox.GetName() + "Group";
             base.OnEnter();
 
             RefreshState();
@@ -66,9 +69,8 @@ namespace Scrapper.SkillStates
                 var stacks = scrapCtrl.OpportunistStacks;
 
                 overlapAttack.damage *= 1f + stacks * StaticValues.OPPORTUNIST_DMG_MULT;
-                overlapAttack.hitEffectPrefab = overchargeImpactEffectPrefab;
+                //overlapAttack.hitEffectPrefab = overchargeImpactEffectPrefab;
                 overlapAttack.damageType |= (DamageTypeCombo)DamageType.Stun1s;
-                overlapAttack.AddModdedDamageType(DamageTypes.ImpaleDamageType);
             }
         }
 

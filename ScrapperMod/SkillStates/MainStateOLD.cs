@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Scrapper.SkillStates
 {
-    public class MainState : GenericCharacterMain
+    public class MainStateOLD : GenericCharacterMain
     {
         private Animator animator;
 

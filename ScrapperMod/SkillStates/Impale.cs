@@ -61,7 +61,7 @@ namespace Scrapper.SkillStates
         public override void PlayAnimation()
         {
             base.PlayAnimation();
-            base.PlayAnimation(StaticValues.LAYER_FULLBODY, StaticValues.IMPALE);
+            base.PlayAnimation(LAYER_FULLBODY, AnimatorStates.Impale.GetName());
         }
 
         public override void AuthorityFixedUpdate()
@@ -82,7 +82,7 @@ namespace Scrapper.SkillStates
             overlapAttack.forceVector = base.characterMotor.velocity + base.GetAimRay().direction * Mathf.Lerp(this.minPunchForce, this.maxPunchForce, this.charge);
             if (base.fixedAge + base.GetDeltaTime() >= base.duration)
             {
-                HitBoxGroup hitBoxGroup = base.FindHitBoxGroup("PunchLollypop");
+                HitBoxGroup hitBoxGroup = base.FindHitBoxGroup(ChildLocatorEntry.StabHitbox.GetName() + "Group");
                 if ((bool)hitBoxGroup)
                 {
                     base.hitBoxGroup = hitBoxGroup;

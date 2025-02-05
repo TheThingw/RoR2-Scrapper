@@ -91,17 +91,17 @@ namespace Scrapper.SkillStates.Secondary
             characterMotor.velocity *= speedCoefficientOnExit;
             SmallHop(characterMotor, exitSmallHop);
 
-            Util.PlaySound(endSoundString, gameObject);
+            //Util.PlaySound(endSoundString, gameObject);
 
             gameObject.layer = originalLayer;
             characterMotor.Motor.RebuildCollidableLayers();
-            PlayCrossfade(StaticValues.LAYER_FULLBODY, StaticValues.STAB_END, 0.1f);
+            PlayCrossfade(LAYER_FULLBODY, AnimatorStates.StabEnd.GetName(), 0.1f);
             base.OnExit();
         }
 
         public override void PlayAnimation()
         {
-            PlayCrossfade(StaticValues.LAYER_GESTURE, StaticValues.STAB_START, 0.1f);
+            PlayCrossfade(LAYER_GESTURE, AnimatorStates.StabStart.GetName(), 0.1f);
         }
 
         public override void AuthorityFixedUpdate()
@@ -128,13 +128,13 @@ namespace Scrapper.SkillStates.Secondary
             float num = hitPauseDuration / attackSpeedStat;
             if ((bool)selfOnHitOverlayEffectPrefab && num > 1f / 30f)
             {
-                EffectData effectData = new EffectData
+                /*EffectData effectData = new EffectData
                 {
                     origin = transform.position,
                     genericFloat = hitPauseDuration / attackSpeedStat
                 };
                 effectData.SetNetworkedObjectReference(gameObject);
-                EffectManager.SpawnEffect(selfOnHitOverlayEffectPrefab, effectData, transmit: true);
+                EffectManager.SpawnEffect(selfOnHitOverlayEffectPrefab, effectData, transmit: true);*/
             }
             foreach (HurtBox hitResult in hitResults)
             {
