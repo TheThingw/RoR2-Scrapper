@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Scrapper_Mastery_Skin
-    second: {fileID: 2100000, guid: 080367c6ba6166045812424de33a241d, type: 2}
+    second: {fileID: 2100000, guid: 93d9e7dc32228194e9d254629e0f5642, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -42,7 +42,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

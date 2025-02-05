@@ -6047,66 +6047,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6386300094770802619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -226763392, guid: 951ce57ad999ac1f040a4dceb5f8b763, type: 3}
+  m_Script: {fileID: 11500000, guid: 261c50d8a80898e4ebf2e8e415ea6766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformPairs:
-  - name: MainHurtbox
-    transform: {fileID: 289869678}
-  - name: BodySling
-    transform: {fileID: 9044245625355361835}
-  - name: Belt
-    transform: {fileID: 8050303282732017562}
-  - name: Harness
-    transform: {fileID: 8580868275668664271}
-  - name: ArmWireR
-    transform: {fileID: 8209525397129221175}
-  - name: ArmWireL
-    transform: {fileID: 8790057326572039378}
-  - name: ArmLight
-    transform: {fileID: 8045011014436519835}
-  - name: SuitShoulderR
-    transform: {fileID: 8110320326533916436}
-  - name: ConnectorR
-    transform: {fileID: 1129536748236227482}
-  - name: SuitHand
-    transform: {fileID: 4593133248089433705}
-  - name: WristWire
-    transform: {fileID: 351347423053314172}
-  - name: SuitShoulderL
-    transform: {fileID: 4218156546256765126}
-  - name: Girder
-    transform: {fileID: 6958696588287950860}
-  - name: Handle
-    transform: {fileID: 1844634366372109227}
-  - name: Body
-    transform: {fileID: 2642152156055712022}
-  - name: Scarf
-    transform: {fileID: 478120190056615199}
-  - name: Shoulders
-    transform: {fileID: 8745848793648939567}
-  - name: Head
-    transform: {fileID: 1320704420081573043}
-  - name: ExoSuit
-    transform: {fileID: 2591247139806050686}
-  - name: Sling
-    transform: {fileID: 7203472193845860285}
-  - name: Chestplate
-    transform: {fileID: 7373862470505996409}
-  - name: Scarf1
-    transform: {fileID: 7027538303801070343}
-  - name: SuitArmR
-    transform: {fileID: 2651746345880257269}
-  - name: Kneepads
-    transform: {fileID: 3422003889826605524}
-  - name: Scarf2
-    transform: {fileID: 5670737884223718076}
-  - name: HandWire1
-    transform: {fileID: 8464368715874122668}
-  - name: HandWire2
-    transform: {fileID: 4999552498625868174}
-  - name: StabHitbox
-    transform: {fileID: 3086931990576350800}
+  transformPairs: []
 --- !u!1 &6582849717221668771
 GameObject:
   m_ObjectHideFlags: 0
