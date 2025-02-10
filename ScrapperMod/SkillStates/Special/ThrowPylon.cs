@@ -45,7 +45,7 @@ namespace Scrapper.SkillStates.Special
             }
             //EffectManager.SimpleMuzzleFlash(EntityStates.Loader.ThrowPylon.muzzleflashObject, base.gameObject, StaticValues.MUZZLE, transmit: false);
             Util.PlaySound(ThrowPylon.soundString, base.gameObject);
-            PlayAnimation(StaticValues.LAYER_GESTURE, StaticValues.THROW, StaticValues.PARAM_THROW_RATE, duration);
+            PlayAnimation(StaticValues.LAYER_GESTURE, AnimatorStates.Throw.GetName(), AnimatorParams.Throw.GetName(), duration);
         }
 
         public override void FixedUpdate()

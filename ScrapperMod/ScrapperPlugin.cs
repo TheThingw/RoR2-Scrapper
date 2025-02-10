@@ -1,6 +1,5 @@
 ﻿using BepInEx;
 using R2API.Utils;
-using Scrapper.Content;
 using Scrapper.Modules;
 using System.Security;
 using System.Security.Permissions;
@@ -11,7 +10,6 @@ using System.Security.Permissions;
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 #pragma warning restore CS0618 // Type or member is obsolete
 
-//rename this namespace
 namespace Scrapper
 {
     [BepInDependency("com.Moffein.AssistManager", BepInDependency.DependencyFlags.HardDependency)]

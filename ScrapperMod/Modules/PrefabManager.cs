@@ -295,7 +295,6 @@ namespace Scrapper.Modules
         #region ModelSetup
         public static CharacterModel SetupCharacterModel(GameObject bodyPrefab, Material mat)
         {
-
             var characterModel = bodyPrefab.GetComponent<ModelLocator>().modelTransform.gameObject.GetComponent<CharacterModel>();
             var preattached = characterModel != null;
             if (!preattached)
@@ -310,9 +309,7 @@ namespace Scrapper.Modules
             if (!preattached)
                 SetupCustomRendererInfos(characterModel, mat);
             else
-            {
                 SetupPreAttachedRendererInfos(characterModel);
-            }
 
             SetupHurtboxGroup(bodyPrefab, characterModel.gameObject);
             SetupAimAnimator(bodyPrefab, characterModel.gameObject);

@@ -11,6 +11,10 @@ namespace Scrapper.Content
     {
         public static void Init()
         {
+
+            ContentManagement.AddEntityState(typeof(ScrapperMainState));
+
+            ContentManagement.AddEntityState(typeof(Impale));
             ContentManagement.AddEntityState(typeof(ThrustCombo));
 
             ContentManagement.AddEntityState(typeof(QuickStep));
@@ -20,12 +24,12 @@ namespace Scrapper.Content
             ContentManagement.AddEntityState(typeof(ThunderLunge));
 
             ContentManagement.AddEntityState(typeof(ChargeSkewer));
+            ContentManagement.AddEntityState(typeof(Skewer));
+
             ContentManagement.AddEntityState(typeof(ChargeRiposte));
+            ContentManagement.AddEntityState(typeof(Reposte));
 
             ContentManagement.AddEntityState(typeof(ThrowPylon));
-
-            ContentManagement.AddEntityState(typeof(Impale));
-            ContentManagement.AddEntityState(typeof(MainState));
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Scrapper.Content.BaseContent
             instance = this as T;
             assetBundle = AssetManager.LoadAssetBundle(assetBundleName);
 
-            InitializeCharacter();
+            //InitializeCharacter();
         }
 
         public virtual void InitializeCharacter()
