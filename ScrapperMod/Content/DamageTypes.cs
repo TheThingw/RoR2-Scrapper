@@ -1,6 +1,4 @@
-﻿using R2API;
-
-namespace Scrapper.Content
+﻿namespace Scrapper.Content
 {
     public static class DamageTypes
     {

@@ -23,12 +23,12 @@ namespace Scrapper.SkillStates.Primary
         {
             AnimatorStates animationState = gauntlet % 2 == 0 ? AnimatorStates.Primary1 : AnimatorStates.Primary2;
             //float num = Mathf.Max(duration, 0.2f);
-            PlayAnimation(LAYER_GESTURE, animationState.GetName(), AnimationParams.Stab.GetName(), duration);
+            PlayAnimation(LAYER_GESTURE, animationState.GetName(), AnimatorParams.Stab.GetName(), duration);
         }
 
         public override void BeginMeleeAttackEffect()
         {
-            swingEffectMuzzleString = ChildLocatorEntry.Girder.GetName();
+            //swingEffectMuzzleString = ChildLocatorEntry.Girder.GetName();
             base.BeginMeleeAttackEffect();
         }
 

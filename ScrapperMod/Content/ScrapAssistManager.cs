@@ -2,7 +2,6 @@
 using UnityEngine.Networking;
 using UnityEngine;
 using AM = AssistManager;
-using R2API;
 using Scrapper.Components;
 
 namespace Scrapper.Content

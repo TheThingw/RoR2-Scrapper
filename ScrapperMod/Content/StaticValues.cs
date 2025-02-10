@@ -15,33 +15,26 @@ namespace Scrapper.Content
     {
         BufferEmpty,
 
+        Throw,
+
         Primary1,
         Primary2,
 
         StabStart,
         StabHold,
+
+        // fullbody
         StabEnd,
-
-        Dash,
-        Impale,
-        Throw,
-
-        /*
-                    BlockStart,
-                    BlockHold,
-                    BlockEnd,
-
-                    Blast,
-                    Aim,
-                    AimStab*/
+        Sidestep,
+        Lunge,
+        Impale
     }
 
-    public enum AnimationParams
+    public enum AnimatorParams
     {
         Emote,
         Stab,
         Dash,
-        Impale,
         Throw
     }
 
@@ -51,7 +44,7 @@ namespace Scrapper.Content
         {
             var name = Enum.GetName(typeof(T), val);
             
-            if (typeof(T) == typeof(AnimationParams))
+            if (typeof(T) == typeof(AnimatorParams))
                 return name + ".playbackRate";
 
             return name;

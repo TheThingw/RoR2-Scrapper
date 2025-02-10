@@ -1,12 +1,11 @@
 ﻿using RoR2;
 using RoR2.Skills;
-using System.Collections.Generic;
 using UnityEngine;
 using Scrapper.Components;
-using EntityStates;
 using Scrapper.Content.BaseContent;
 using Scrapper.Content;
 using Scrapper.Modules;
+using Scrapper.SkillStates;
 
 namespace Scrapper
 {
@@ -98,9 +97,7 @@ namespace Scrapper
         {
             /*
             instance = this as T;
-            assetBundle = Asset.LoadAssetBundle(assetBundleName);
-
-            InitializeCharacter();*/
+            assetBundle = Asset.LoadAssetBundle(assetBundleName);*/
             base.Initialize();
 
             // static content
@@ -118,7 +115,6 @@ namespace Scrapper
             InitializeItemDisplays();
             InitializeDisplayPrefab();
             InitializeSurvivor();
-
             InitializeCharacter();
         }
 
@@ -144,7 +140,7 @@ namespace Scrapper
             PrefabManager.ClearEntityStateMachines(bodyPrefab);
 
             //the main "Body" state machine has some special properties
-            PrefabManager.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(GenericCharacterMain), typeof(EntityStates.SpawnTeleporterState));
+            PrefabManager.AddMainEntityStateMachine(bodyPrefab, "Body", typeof(ScrapperMainState), typeof(EntityStates.SpawnTeleporterState));
             //if you set up a custom main characterstate, set it up here
             //don't forget to register custom entitystates in your ScrapperStates.cs
 
@@ -255,7 +251,7 @@ namespace Scrapper
                 skillIcon = Content.Assets.iconSecondary1,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Secondary.QuickStep)),
-                activationStateMachineName = "Weapon2",
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 1f,
@@ -286,7 +282,7 @@ namespace Scrapper
                 skillIcon = Content.Assets.iconSecondary2,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Secondary.ThunderStep)),
-                activationStateMachineName = "Weapon2",
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.Skill,
 
                 baseRechargeInterval = 1f,
@@ -325,7 +321,7 @@ namespace Scrapper
                 skillIcon = Content.Assets.iconUtility1,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeSkewer)),
-                activationStateMachineName = "Weapon2",
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 4f,
@@ -355,7 +351,7 @@ namespace Scrapper
                 skillIcon = Content.Assets.iconUtility2,
 
                 activationState = new EntityStates.SerializableEntityStateType(typeof(SkillStates.Utility.ChargeRiposte)),
-                activationStateMachineName = "Weapon2",
+                activationStateMachineName = "Weapon",
                 interruptPriority = EntityStates.InterruptPriority.PrioritySkill,
 
                 baseRechargeInterval = 4f,

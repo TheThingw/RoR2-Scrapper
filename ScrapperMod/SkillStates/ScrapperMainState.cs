@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BepInEx.Configuration;
-using EntityStates;
+﻿using EntityStates;
 using RoR2;
 using Scrapper.Components;
-using Scrapper.Content;
 using UnityEngine;
 
 namespace Scrapper.SkillStates
