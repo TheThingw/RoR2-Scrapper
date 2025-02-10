@@ -1,0 +1,277 @@
+Scrapper Reference list
+
+
+Recent Notes
+Enhanced Primary animations
+
+- New Skill icons
+
+Passive  -                    Scrapper_Passive
+Primary -                     Scrapper_Primary
+Seconadry -                   Scrapper_Secondary_1
+Alt Secondary -               Scrapper_Secondary_2
+Utility -                     Scrapper_Utility_1
+Alt Utility -                 Scrapper_Utility_2
+Special -                     Scrapper_Special
+Special Scepter -             Scrapper_Special_Scepter
+Alt Special -                 Scrapper_Special_2
+Alt Special Scepter -         Scrapper_Special_2_Scepter
+Alt Special Primary -         Scrapper_Special_Primary
+Alt Special Primary Scepter - Scrapper_Special_Primary_Scepter 
+
+
+- Alt Util animtions
+- Alt Special Animations
+- Added Pitch and Yaw Anims
+- Enhanced both Primary animations 
+
+ Armature_ScrapperNewPrimary1
+ Armature_ScrapperNewPrimary2
+
+- New Skill descriptions
+- Special Skill renamed to "G303 Unstable Pylon" from "G303 Compaction Pylon"
+- Alt Special Completely Rewritten, including description and partial function
+
+
+Animations-
+
+	Jump
+    ScrapperJump  
+    ScrapperAscend
+    ScrapperDescend
+    ScrapperDescendFast
+
+	Idle
+    ScrapperIdle
+    ScrapperIdleIn  - Transition between Running and idle
+    ScrapperIdleLong
+    ScrapperIdleLongStart  - Transition between Idle and Long Idle
+    
+	Movement
+    ScrapperWalkF
+    ScrapperWalkB
+    ScrapperWalkL
+    ScrapperWalkR
+    
+    ScrapperRunF
+    ScrapperRunL
+    ScrapperRunR
+
+	Lobby
+    ScrapperSelect  - Lobby Anim
+    ScrapperSelectIdle  - Lobby Anim
+
+	Spawn
+    ScrapperSpawn     - Plays when you press any button to start playing, just like Acrid Wake up anim
+    ScrapperspawnIdle - Similar to Acrid Sleeping Idle.
+
+	Extra
+    ScrapperAimYaw
+    ScrapperAimPitch
+
+
+	Primary
+    ScrapperPirmary1
+    ScrapperPrimary2
+    
+	Default Secondary
+    ScrapperDashF - 1st half of secondary
+    ScrapperDashB 
+    ScrapperDashL
+    ScrapperDashR
+
+	On Kill Impale
+    ScrapperImaple - on kill impale, and for second half of secondary
+
+	Alt Secondary
+    ScrapperBlast - Alt special Jump
+
+        Default Utility
+    ScrapperStabStart - Start charging
+    ScrapperStabHold - Hold charge
+    ScrapperStabEnd - Release key
+
+        Alt Utility 
+    ScrapperBlockStart - Start block
+    ScrapperBlockHold - Hold block
+    ScrapperBlockEnd - On key release, or when held to long
+
+	Default Special
+    ScrapperThrow - Default special
+
+	Alt Special 
+    ScrapperAimStart - Aim for alt special
+    ScrapperAimIdle - Idle holding aim
+    ScrapperAimPrimary - Attack / primary replacement for Alt special
+
+`	Alt Speical Optional - - Not Made Yet
+    ScrapperAimWalkF? - IDK if i'll need these yet
+    ScrapperAimWalkB?
+    ScrapperAimWalkL?
+    ScrapperAimWalkR?
+
+
+
+Scrapper Character Info
+
+    **Scrapper**
+
+    Unlock Condition - As Loader Beat the Game with the Artifact of Glass, Or As Loader Beat the game with 4+ Shapes of glass
+
+    Mastery - "Dreamer" - Fencer skin, replaces girder with fencing sword, and helmet with fencers mask
+
+    Meridian - "abandoned" - Facial Light is off, armor is rusted and covered with vines, main weapon is rusted even more, and covered in foliage
+
+    Grandmastery -  "Safety First" - Holds alarge yeild sign, mask has a wistle where the mouth would be, Dressed like a crosswalk worker
+
+    Whirlwind - "Jousting" - Has a Lance instead of Girder, exosuit is made in to a more medieval appearance. body is leather color with a knights helmet mask
+
+    Inferno - "Survival" - exosuit replaced with Gup sludge eating the main body exosuit, and uneaten human body gets sky meadows color scheme
+
+    Bonus Skin - "Grand Return" - Revive as Scrapper - Gives Scrapper the Returns loader color pallete
+
+    Bonus Skin - "Distortion" - Beat a nemesis vistage as Scrapper - Gives Scrapper the Nemesis Loader Color pallete 
+   
+   **Stats**
+    Max Health: 160 (+48 Per Level)
+    Damage: 12 (+2.4 Per Level)
+    Health Regeneration: 2.5 (+0.5 Per Level)
+    Speed: 7
+    Armor: 20
+
+**Keyword** Prepare
+ - Reduce Special skill cooldown by 1 second
+    (test out on the secondaries)
+
+
+**Passive** Opportunist
+ - Gain stacks from **Primary** and **Secondary** skills up to 5 Stacks. Each stack Increases "Impale" damage by 25%, armor by 5, and attack speed by 7.5%. Lose stacks while out of combat.
+ (1  Stack every 3?-10? seconds out of combat. will experiment with this one)
+
+
+**Primary** Thrust
+ - Stab forward for 240% damage. On kill Impale forward for 500% damage. Evey 5 hits grant a stack of **Opportunist**
+        (Cycles between two stab animations)
+
+**Secondary** Quickstep
+ - 4/s Cooldown - **Prepare** Sidestep and gain a stack of **Opportunist**. then Lunge forward towards your crosshair for 450%. On kill Impale forward for 500% damage.
+        (Sidestep give invulnerability) (Sidestep also ignores gravity) (Lunge does not pierce, but causes you to lighlty bounce off simlar to Alt Utility / Thunder gauntlet from Loader)
+
+**Alt Secondary** Thunderleap - **Unlock Condition** : Hit 15-20 ungrounded enemies in a single "Impale" attack
+ - 4/s Cooldown - **Prepare** Blast upwards, gaining a stack of **Opportunist**, and causing a 350% (1.0 Proc) blast. Then lunge forward towards your crosshair for 450% (1.0 Proc)
+        (Blast up give invulnerability) (Blast is about 6-8 meters, will have to test size)
+
+**Utility** Skewer
+ - 5.5/s Cooldown - Charge up a **Piercing** Stab for 600%-2500%. Damage increases by 25% Per enemy hit after the first 
+
+**Alt Utilty** Riposte - **Unlock Condition** : Block 10 hits in 1 second via any means
+ - 6/s Cooldown - Briefly Guard while charging up a **Piercing** Stab for 700%-2800%. Damage Scales based on damaged blocked, up to 70% of your HP blocked.
+        (Attack releases after 2-4? seconds of being held. Will have to test timing)
+
+**Special** - G303 Unstable Pylon
+ - 5.5/s Cooldown - **Stunning**. Toss out a unstable pylon which explodes nearby enemies Dealing 360% and pulling all damaged enemies to the center of the blast.
+        (Detonation, and Blast radius will have to be tested)
+
+    **Scepter** - G404 Sub-Zero Pylon
+ - Lower cooldown to 4.5/s , freezes enemies instead of stunning
+
+**Alt Special** - Critical Overlaod
+ - 5/s-6/s Cooldown - Hold to overheat your suit for up to 5 seconds revealing critical weakpoints, heavily slowing your fall speed, and replacing your primary attack attack with **Exhaust**. Critical kills while overheated reduce secondary skill cooldown by 0.5/s - 1/s.
+
+    **Scepter** - Go for the Eyes
+ - Half of the cooldown, double the up time. 3/s cooldown, can stay overheated for 10 seconds
+
+**Alt Special Primary Replacement** - Exhaust
+ - Rapidly stab forward with residual flames for 240x3% damage, can hit critical weakpoints.
+    (Increases range to be either 1/2 or 2/3 seeker primary fire range)
+ 
+
+    Lore - 
+        Was actually another Crew member with a loader exsosuit aboard the contact light however his escape pod crash 
+        took off his Exosuit arm, and badly injured his own arm, because he wasn't confident in his survival skills without 
+        the suit fully functional he instead hid himself away avoiding conflict unless nesscasary that was until he saw the 
+        Contact light Take flight off the planet, leaving him behind. With that he felt abandoned but didnt give up hope, 
+        instead surviving on the planet by picking his fights carefully and scavenging what was left from the contact light,
+        fashioning a piece of scrap into a weapon and stealing from the inhabitants of Petrichor V. 
+        This is until the UES shows up where he realizes there is a new shot at getting off of the planet.
+
+    Logbook Entry -
+
+
+        Departure:                                  Destination:
+        UES Shipping Dock 5,                        UES Shipping Dock 0,
+        Review,                                     Redview,
+        Mars                                        Mars
+
+
+            Travel Id:3356657229958782784
+
+        Passenger Details:
+        [Employee Class]
+
+        Employee Details:
+        M I S S I N G
+        
+        A T T E M P T I N G   R E C O V E R Y
+
+        908358672976161695897489357938891826578745638756789129828475697436578237642879135961396593817569817367589017538097108573129857429856239786
+        217453189573897524098094538760990034578493572309860394864375734899834760902938125760983165981365907348651785641370896140789460176078912465
+        04587039580943903845098340657380457840385890348590384503495843905888903490538917503028975082375802758923759823758923758927777859237.......
+
+        1 # F I L E  S U C C S E S S F U L L Y  R E C O V E R E D
+
+        T H E R A P Y  L O G 
+        P A I T E N T #23 
+        E N T R Y #5
+
+            .
+            -"What did you want to see me about"
+            .
+            "Damm Doc I don't know......"
+            "It's something I havent really though about it since I joined onto the Contact Light you know?"
+            "But if I had to say anything, I guess im feeling regrets about my life. see always wanted to be a Fencer, and compete in those
+            old competitions, Hell I even got Training lessons, but uh....It didn't really work out"
+            .
+            -"My that is a tough thing to deal with, especially with your posistion in the company, what made you want to dream
+            of such a career in the first place?"
+            .
+            "Is that even really important doc?"
+            .
+            -"That is up to you, I just want to make sure you are hapy here aboard the contact light, and talking like this certainly
+            helps the others, but if you don't want to talk about it you don't have to.
+            .
+            "........Fine, but don't end up calling me a sissy or nothin got it."
+            .
+            -"This is a safe space, I wouldnt dream of such a thing."
+            .
+            "Sure whatever you say Doc."
+            "I guess I wanted to become a fencer when watching some old tapes with my Ma, the way they moved, so gracefully and 
+            carefully, then they went in for the kill so fluidly, It was beautiful yknow... wished I could be like that someday.
+            I always watched the videos wishing I could move around like that, but even at those practice classes I was never 
+            really that good, always beaten out by those more talented or dedicated, but still it was fun for a hobby I guess"
+            .
+            -"Was that class a fond memory of yours?"
+            .
+            "Heh, yeah it was a nice time, but the more I grew up the more muscle I put on, and the less viable it became for a job, 
+            so I settled down here I guess."
+            .
+            -"From what I hear there are still a handful of private competitions on Earth, we could give you some vacation time and you could
+            apply try it out once more?"
+            .
+            "Heh... I appriciate the offer, I really do, but just talking to you here has made me feel a whole lot better about it."
+            . 
+            "I do kinda regret not becoming a fencer but I think i've come to terms that it was never more than just a Dream"
+            .
+            .
+            .
+            "Just a stupid dream."
+
+        - E N D  O F  L O G
+
+    Umbra Title 
+        - Abandoned Survivor
+
+    Ending quotes 
+            Escaped - ..And so he left, with dreams finally fufilled
+            
+            Vanished - ..And so he vanished, leaving more than just his dreams behind
