@@ -6,6 +6,7 @@ namespace Scrapper.Content
     {
         MainHurtbox,
         StabHitbox,
+        StabHitboxGroup,
         Body,
         Girder,
         Sword

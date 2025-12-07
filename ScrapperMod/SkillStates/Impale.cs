@@ -7,34 +7,18 @@ namespace Scrapper.SkillStates
 {
     public class Impale : BasicScrapperMeleeAttack
     {
-        public float charge;
-
-        [SerializeField]
-        public float minLungeSpeed;
-
-        [SerializeField]
-        public float maxLungeSpeed;
-
-        [SerializeField]
-        public float minPunchForce;
-
-        [SerializeField]
-        public float maxPunchForce;
-
-        [SerializeField]
-        public float minDuration;
-
-        [SerializeField]
-        public float maxDuration;
-
+        public static float minLungeSpeed;
+        public static float maxLungeSpeed;
+        public static float minPunchForce;
+        public static float maxPunchForce;
+        public static float minDuration;
+        public static float maxDuration;
         public static bool disableAirControlUntilCollision;
-
         public static float speedCoefficientOnExit;
-
         public static float velocityDamageCoefficient;
 
+        public float charge;
         protected Vector3 punchVelocity;
-
         private float bonusDamage;
 
         public float punchSpeed { get; private set; }
@@ -45,7 +29,7 @@ namespace Scrapper.SkillStates
             {
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.disableAirControlUntilCollision |= disableAirControlUntilCollision;
-                this.punchVelocity = CalculateLungeVelocity(base.characterMotor.velocity, base.GetAimRay().direction, this.charge, this.minLungeSpeed, this.maxLungeSpeed);
+                this.punchVelocity = CalculateLungeVelocity(base.characterMotor.velocity, base.GetAimRay().direction, this.charge, minLungeSpeed, maxLungeSpeed);
                 base.characterMotor.velocity = this.punchVelocity;
                 base.characterDirection.forward = base.characterMotor.velocity.normalized;
                 this.punchSpeed = base.characterMotor.velocity.magnitude;
@@ -55,7 +39,7 @@ namespace Scrapper.SkillStates
 
         public override float CalcDuration()
         {
-            return Mathf.Lerp(this.minDuration, this.maxDuration, this.charge);
+            return Mathf.Lerp(minDuration, maxDuration, this.charge);
         }
 
         public override void PlayAnimation()
@@ -79,10 +63,10 @@ namespace Scrapper.SkillStates
         {
             base.AuthorityModifyOverlapAttack(overlapAttack);
             overlapAttack.damage = base.damageCoefficient * base.damageStat + this.bonusDamage;
-            overlapAttack.forceVector = base.characterMotor.velocity + base.GetAimRay().direction * Mathf.Lerp(this.minPunchForce, this.maxPunchForce, this.charge);
+            overlapAttack.forceVector = base.characterMotor.velocity + base.GetAimRay().direction * Mathf.Lerp(minPunchForce, maxPunchForce, this.charge);
             if (base.fixedAge + base.GetDeltaTime() >= base.duration)
             {
-                HitBoxGroup hitBoxGroup = base.FindHitBoxGroup(ChildLocatorEntry.StabHitbox.GetName() + "Group");
+                HitBoxGroup hitBoxGroup = base.FindHitBoxGroup(ChildLocatorEntry.StabHitboxGroup.GetName());
                 if ((bool)hitBoxGroup)
                 {
                     base.hitBoxGroup = hitBoxGroup;

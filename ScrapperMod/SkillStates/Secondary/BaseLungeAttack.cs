@@ -8,16 +8,12 @@ namespace Scrapper.SkillStates.Secondary
 {
     public class BaseLungeAttack : BasicScrapperMeleeAttack
     {
-        public float speedCoefficientOnExit = 0.2f;
-
-        public float speedCoefficient = 1f;
-
-        public float exitSmallHop = 0.5f;
-
-        public float enterOverlayDuration = 0.7f;
+        public static float speedCoefficientOnExit = 0.2f;
+        public static float speedCoefficient = 1f;
+        public static float exitSmallHop = 0.5f;
+        public static float enterOverlayDuration = 0.7f;
 
         private Vector3 dashVector;
-
         private int originalLayer;
 
         private Vector3 dashVelocity => dashVector * moveSpeedStat * speedCoefficient;

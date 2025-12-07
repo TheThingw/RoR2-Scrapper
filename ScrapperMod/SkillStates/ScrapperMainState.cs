@@ -136,16 +136,14 @@ namespace Scrapper.SkillStates
                 int layerIndex = base.modelAnimator.GetLayerIndex("Body");
                 if (layerIndex >= 0)
                 {
-                    base.modelAnimator.CrossFadeInFixedTime("Jump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                    /*
                     if (base.characterMotor.jumpCount == 0 || base.characterBody.baseJumpCount == 1)
                     {
                         base.modelAnimator.CrossFadeInFixedTime("Jump", smoothingParameters.intoJumpTransitionTime, layerIndex);
                     }
                     else
                     {
-                        base.modelAnimator.CrossFadeInFixedTime("BonusJump", smoothingParameters.intoJumpTransitionTime, layerIndex);
-                    }*/
+                        base.modelAnimator.CrossFadeInFixedTime("Jump"/*"BonusJump"*/, smoothingParameters.intoJumpTransitionTime, layerIndex);
+                    }
                 }
             }
 

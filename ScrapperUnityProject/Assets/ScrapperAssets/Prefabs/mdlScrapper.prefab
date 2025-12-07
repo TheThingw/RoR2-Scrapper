@@ -1964,7 +1964,7 @@ Transform:
   - {fileID: 6363462637940441706}
   - {fileID: 8615920860913748283}
   - {fileID: 1290949339853487622}
-  - {fileID: 9102685877745781329}
+  - {fileID: 7851132066891099891}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2877,6 +2877,38 @@ Transform:
   m_Father: {fileID: 2642787929118446211}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4636263906217687275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7851132066891099891}
+  m_Layer: 0
+  m_Name: MeleePivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7851132066891099891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636263906217687275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9102685877745781329}
+  m_Father: {fileID: 2491471964556135179}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4638829455069531853
 GameObject:
   m_ObjectHideFlags: 0
@@ -3063,13 +3095,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4686303036077986395}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.086, z: 1.578}
-  m_LocalScale: {x: 3.8360713, y: 2.6581, z: 4.4234}
+  m_LocalScale: {x: 3.8360713, y: 2.6580997, z: 4.4234}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2491471964556135179}
-  m_RootOrder: 5
+  m_Father: {fileID: 7851132066891099891}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4773704572088838674
 GameObject:

@@ -2,6 +2,7 @@ using EntityStates;
 using RoR2;
 using Scrapper.Components;
 using Scrapper.Content;
+using UnityEngine;
 
 namespace Scrapper.SkillStates
 {
@@ -28,8 +29,27 @@ namespace Scrapper.SkillStates
              */
 
             this.RefreshState();
-
-            this.baseDuration = 1f;
+            
+            // these are normally populated with entitystate configurations in vanilla
+            this.baseDuration = 0.4f;
+            this.damageCoefficient = 1f;
+            this.hitBoxGroupName = ChildLocatorEntry.StabHitboxGroup.GetName();
+            this.hitEffectPrefab = null;
+            this.procCoefficient = 1f;
+            this.pushAwayForce = 1000f;
+            this.forceVector = new Vector3(1200, 0, 0);
+            this.hitPauseDuration = 0.05f;
+            this.swingEffectPrefab = null;
+            this.swingEffectMuzzleString = "";
+            this.mecanimHitboxActiveParameter = "";
+            this.shorthopVelocityFromHit = 6f;
+            this.beginStateSoundString = "";
+            this.beginSwingSoundString = "";
+            this.impactSound = null;
+            this.forceForwardVelocity = true;
+            this.forwardVelocityCurve = null;
+            this.scaleHitPauseDurationAndVelocityWithAttackSpeed = true;
+            this.ignoreAttackSpeed = false;
 
             base.OnEnter();
         }
@@ -38,7 +58,7 @@ namespace Scrapper.SkillStates
 
         public override float CalcDuration() => base.CalcDuration();
 
-        public override string GetHitBoxGroupName() => ChildLocatorEntry.StabHitbox.GetName() + "Group";
+        public override string GetHitBoxGroupName() => ChildLocatorEntry.StabHitboxGroup.GetName();
 
         // Overlap attack created in OnEnter, if the hitboxgroup exists
 

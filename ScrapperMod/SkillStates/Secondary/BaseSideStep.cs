@@ -9,7 +9,13 @@ namespace Scrapper.SkillStates.Secondary
     public abstract class BaseSideStep : BaseScrapperSkillState
     {
         public Animator modelAnimator;
-        public float minimumDuration = 0.5f;
+
+        public static float minimumDuration = 0.5f;
+        public static float maxY = 0.2f;
+        public static float msMult = 1f;
+        public static float upMult = 1f;
+        public static float finalMult = 1f;
+
 
         public override void OnEnter()
         {
@@ -21,10 +27,10 @@ namespace Scrapper.SkillStates.Secondary
             if (base.isAuthority)
             {
                 base.characterBody.isSprinting = true;
-                direction.y = Mathf.Max(direction.y, 0.2f);
-                Vector3 vector = direction.normalized * 1f * base.moveSpeedStat;
-                Vector3 vector2 = Vector3.up * 1f;
-                Vector3 vector3 = new Vector3(direction.x, 0f, direction.z).normalized * 1f;
+                direction.y = Mathf.Max(direction.y, maxY);
+                Vector3 vector = direction.normalized * base.moveSpeedStat * msMult;
+                Vector3 vector2 = Vector3.up * upMult;
+                Vector3 vector3 = new Vector3(direction.x, 0f, direction.z).normalized * finalMult;
                 base.characterMotor.Motor.ForceUnground();
                 base.characterMotor.velocity = vector + vector2 + vector3;
             }
