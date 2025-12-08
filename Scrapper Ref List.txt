@@ -2,7 +2,8 @@ Scrapper Reference list
 
 
 Recent Notes
-Enhanced Primary animations
+
+N/a
 
 - New Skill icons
 
@@ -20,26 +21,23 @@ Alt Special Primary -         Scrapper_Special_Primary
 Alt Special Primary Scepter - Scrapper_Special_Primary_Scepter 
 
 
-- Alt Util animtions
-- Alt Special Animations
-- Added Pitch and Yaw Anims
-- Enhanced both Primary animations 
-
- Armature_ScrapperNewPrimary1
- Armature_ScrapperNewPrimary2
-
-- New Skill descriptions
-- Special Skill renamed to "G303 Unstable Pylon" from "G303 Compaction Pylon"
-- Alt Special Completely Rewritten, including description and partial function
-
-
 Animations-
+
+	Extra
+    ScrapperAimYaw
+    ScrapperAimPitch
+    ScrapperFlinch1
+    ScrapperFlinch2
+    ScrapperFlinch3
+    ScrapperImpact
 
 	Jump
     ScrapperJump  
     ScrapperAscend
     ScrapperDescend
     ScrapperDescendFast
+    ScrapperJumpAir
+    ScrapperRunJump
 
 	Idle
     ScrapperIdle
@@ -65,26 +63,24 @@ Animations-
     ScrapperSpawn     - Plays when you press any button to start playing, just like Acrid Wake up anim
     ScrapperspawnIdle - Similar to Acrid Sleeping Idle.
 
-	Extra
-    ScrapperAimYaw
-    ScrapperAimPitch
-
 
 	Primary
     ScrapperPirmary1
     ScrapperPrimary2
+    ScrapperPrimary3
+    ScrapperPrimary4
     
-	Default Secondary
-    ScrapperDashF - 1st half of secondary
+	Default Secondary -1st half uses unique anim, second half uses impale anim
+    ScrapperDashF
     ScrapperDashB 
     ScrapperDashL
     ScrapperDashR
 
 	On Kill Impale
-    ScrapperImaple - on kill impale, and for second half of secondary
+    ScrapperImaple - on kill impale
 
 	Alt Secondary
-    ScrapperBlast - Alt special Jump
+    ScrapperBlast - Alt special Jump -1st half uses unique anim, second half uses impale anim
 
         Default Utility
     ScrapperStabStart - Start charging
@@ -104,13 +100,6 @@ Animations-
     ScrapperAimIdle - Idle holding aim
     ScrapperAimPrimary - Attack / primary replacement for Alt special
 
-`	Alt Speical Optional - - Not Made Yet
-    ScrapperAimWalkF? - IDK if i'll need these yet
-    ScrapperAimWalkB?
-    ScrapperAimWalkL?
-    ScrapperAimWalkR?
-
-
 
 Scrapper Character Info
 
@@ -119,6 +108,8 @@ Scrapper Character Info
     Unlock Condition - As Loader Beat the Game with the Artifact of Glass, Or As Loader Beat the game with 4+ Shapes of glass
 
     Mastery - "Dreamer" - Fencer skin, replaces girder with fencing sword, and helmet with fencers mask
+
+	- Dont Worry about these for now
 
     Meridian - "abandoned" - Facial Light is off, armor is rusted and covered with vines, main weapon is rusted even more, and covered in foliage
 
@@ -139,51 +130,54 @@ Scrapper Character Info
     Speed: 7
     Armor: 20
 
-**Keyword** Prepare
- - Reduce Special skill cooldown by 1 second
-    (test out on the secondaries)
-
-
 **Passive** Opportunist
  - Gain stacks from **Primary** and **Secondary** skills up to 5 Stacks. Each stack Increases "Impale" damage by 25%, armor by 5, and attack speed by 7.5%. Lose stacks while out of combat.
- (1  Stack every 3?-10? seconds out of combat. will experiment with this one)
-
 
 **Primary** Thrust
- - Stab forward for 240% damage. On kill Impale forward for 500% damage. Evey 5 hits grant a stack of **Opportunist**
-        (Cycles between two stab animations)
+ - Stab forward for 240% damage. On kill Impale forward for 500% damage. the 4th hit grants a stack of **Opportunist**
+    (4 looping attack animations)
+    (Impale is like a level 1 Mercenary utility dash)
+    (Could make Impale on its own not kill enemies, that way you can impale chain multiple enemies? but idk if thats better for balance)
+    (The first part of this works almost identically to "Pathfider's" secondary skill)
 
 **Secondary** Quickstep
- - 4/s Cooldown - **Prepare** Sidestep and gain a stack of **Opportunist**. then Lunge forward towards your crosshair for 450%. On kill Impale forward for 500% damage.
-        (Sidestep give invulnerability) (Sidestep also ignores gravity) (Lunge does not pierce, but causes you to lighlty bounce off simlar to Alt Utility / Thunder gauntlet from Loader)
+ - 4/s Cooldown - Sidestep and gain a stack of **Opportunist**. then Lunge forward towards your crosshair for 450%. On kill Impale forward for 500% damage.
+        (Sidestep gives invulnerability) 
+        (Sidestep also ignores gravity) 
+        (Lunge does not pierce, but causes you to lighlty bounce off simlar to Alt Utility / Thunder gauntlet from Loader unless it kills procing Impale)
+        (The first part of this works almost identically to "Pathfider's" secondary skill)
 
 **Alt Secondary** Thunderleap - **Unlock Condition** : Hit 15-20 ungrounded enemies in a single "Impale" attack
- - 4/s Cooldown - **Prepare** Blast upwards, gaining a stack of **Opportunist**, and causing a 350% (1.0 Proc) blast. Then lunge forward towards your crosshair for 450% (1.0 Proc)
-        (Blast up give invulnerability) (Blast is about 6-8 meters, will have to test size)
+ - 4/s Cooldown - Blast upwards, gaining a stack of **Opportunist**, and causing a 350% (1.0 Proc) blast. Then lunge forward towards your crosshair causing a shockwave for 450% (1.0 Proc)
+        (Blast up gives invulnerability) 
+        (Blast is about 6-8 meters, will have to test the aoe sizes to comfortable levels)
 
 **Utility** Skewer
- - 5.5/s Cooldown - Charge up a **Piercing** Stab for 600%-2500%. Damage increases by 25% Per enemy hit after the first 
+ - 6/s Cooldown - Charge up a **Piercing** Stab for 600%-2500%. Damage increases by 25% Per enemy hit after the first 
+    (Damage increase numbers can be played around with til its comfortable)
 
 **Alt Utilty** Riposte - **Unlock Condition** : Block 10 hits in 1 second via any means
- - 6/s Cooldown - Briefly Guard while charging up a **Piercing** Stab for 700%-2800%. Damage Scales based on damaged blocked, up to 70% of your HP blocked.
-        (Attack releases after 2-4? seconds of being held. Will have to test timing)
+ - 7/s Cooldown - Briefly Guard while charging up a **Piercing** Stab for 700%-2800%. Damage Scales based on damaged blocked, up to 70% of your max HP blocked.
+        (Attack releases after 2-4? seconds of being held. Will have to test how long it can be held for)
 
 **Special** - G303 Unstable Pylon
- - 5.5/s Cooldown - **Stunning**. Toss out a unstable pylon which explodes nearby enemies Dealing 360% and pulling all damaged enemies to the center of the blast.
-        (Detonation, and Blast radius will have to be tested)
+ - 5.5/s Cooldown - **Stunning**. Toss out a unstable pylon which explodes nearby enemies or after a brief delay Dealing 360% and pulling all damaged enemies to the center of the blast.
+        (Detonation zone, and Blast radius will have to be tested)
+        (causes lightning to strike enemies when pulling them in. Think how loader pylon shoots periodically, but a single burst)
 
     **Scepter** - G404 Sub-Zero Pylon
  - Lower cooldown to 4.5/s , freezes enemies instead of stunning
 
-**Alt Special** - Critical Overlaod
- - 5/s-6/s Cooldown - Hold to overheat your suit for up to 5 seconds revealing critical weakpoints, heavily slowing your fall speed, and replacing your primary attack attack with **Exhaust**. Critical kills while overheated reduce secondary skill cooldown by 0.5/s - 1/s.
+**Alt Special** - Critical Overlaod **Unlock Condition** : Apply 20 burn stacks to a single target
+ - 5/s-6/s Cooldown - Hold to overheat your suit for up to 5 seconds revealing critical weakpoints, heavily slowing your fall speed, and replacing your primary attack attack with **Exhaust**. Critical hits while overheated reduce secondary skill cooldown by 0.5/s - 1/s.
 
     **Scepter** - Go for the Eyes
- - Half of the cooldown, double the up time. 3/s cooldown, can stay overheated for 10 seconds
+ - Lower cooldown to 4/s, double the up time. 3/s cooldown, can stay overheated for 10 seconds
 
 **Alt Special Primary Replacement** - Exhaust
- - Rapidly stab forward with residual flames for 240x3% damage, can hit critical weakpoints.
+ - Rapidly stab forward with residual flames for 240x3% damage and applying burn. gain barrier on hit, can hit critical weakpoints.
     (Increases range to be either 1/2 or 2/3 seeker primary fire range)
+    (Character animation is a single stab, but the VFX animation would be a volley of 3 )
  
 
     Lore - 
@@ -225,46 +219,49 @@ Scrapper Character Info
         E N T R Y #5
 
             .
-            -"What did you want to see me about"
+            -"Would you like to pick up where we last left off?"
             .
             "Damm Doc I don't know......"
-            "It's something I havent really though about it since I joined onto the Contact Light you know?"
-            "But if I had to say anything, I guess im feeling regrets about my life. see always wanted to be a Fencer, and compete in those
+            .
+            -"I wont pressure you into talking, but our last session was really productive"
+            .
+            "It's something I havent really though about since I joined onto the Contact Light you know?"
+            "But if I had to say anything, I guess im feeling some regrets about my life. see always wanted to be a Fencer, and compete in those
             old competitions, Hell I even got Training lessons, but uh....It didn't really work out"
             .
-            -"My that is a tough thing to deal with, especially with your posistion in the company, what made you want to dream
+            -"Regrets are natural, everyone has them but im suprised, especially with your posistion in the company, what made you want to dream
             of such a career in the first place?"
             .
             "Is that even really important doc?"
             .
-            -"That is up to you, I just want to make sure you are hapy here aboard the contact light, and talking like this certainly
+            -"That is up to you, I just want to make sure you are happy during this voyage, and talking like this certainly
             helps the others, but if you don't want to talk about it you don't have to.
             .
             "........Fine, but don't end up calling me a sissy or nothin got it."
             .
-            -"This is a safe space, I wouldnt dream of such a thing."
+            -"I wouldnt dream of such a thing."
             .
-            "Sure whatever you say Doc."
-            "I guess I wanted to become a fencer when watching some old tapes with my Ma, the way they moved, so gracefully and 
-            carefully, then they went in for the kill so fluidly, It was beautiful yknow... wished I could be like that someday.
+            "Sure, whatever you say Doc."
+            "I guess I wanted to become a fencer when watching some old tapes with my Ma, the way they moved, so gracefull, then they went in for 
+             the kill so fluidly, It was beautiful to watch yknow... wished I could be like that someday.
             I always watched the videos wishing I could move around like that, but even at those practice classes I was never 
-            really that good, always beaten out by those more talented or dedicated, but still it was fun for a hobby I guess"
+            really that good, always beaten out by those graceful types, more talented or dedicated, but still it was fun for a hobby I guess"
             .
             -"Was that class a fond memory of yours?"
             .
-            "Heh, yeah it was a nice time, but the more I grew up the more muscle I put on, and the less viable it became for a job, 
+            "Heh, yeah it was a nice time, made a few friends, but the more I grew up the more muscle I put on, and the less viable it became for a job, 
             so I settled down here I guess."
             .
-            -"From what I hear there are still a handful of private competitions on Earth, we could give you some vacation time and you could
+            -"From what I hear there are still a handful of private tutors on Earth, we could give you some vacation time and you could
             apply try it out once more?"
             .
-            "Heh... I appriciate the offer, I really do, but just talking to you here has made me feel a whole lot better about it."
+            "Heh... I appriciate the offer, I really do, but just talking to you is enough to make me feel better bout it."
             . 
             "I do kinda regret not becoming a fencer but I think i've come to terms that it was never more than just a Dream"
             .
             .
             .
-            "Just a stupid dream."
+            "Just a childish dream."
 
         - E N D  O F  L O G
 
